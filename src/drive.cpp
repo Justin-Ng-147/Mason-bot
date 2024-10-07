@@ -13,10 +13,10 @@ lemlib::Drivetrain drivetrain(&left,
                               13, //track width
                               lemlib::Omniwheel::NEW_325, //wheel type
                               450, //rpm
-                              8); //horizontal drift
+                              2); //horizontal drift
 
-lemlib::TrackingWheel horizontal_tracking_wheel(&horizontal_enc,lemlib::Omniwheel::NEW_2, -3.75);
-lemlib::TrackingWheel vertical_tracking_wheel(&vertical_enc,lemlib::Omniwheel::NEW_2, .75);
+lemlib::TrackingWheel horizontal_tracking_wheel(&horizontal_enc,lemlib::Omniwheel::NEW_2, -3.25);
+lemlib::TrackingWheel vertical_tracking_wheel(&vertical_enc,lemlib::Omniwheel::NEW_2, 1.25);
 
 lemlib::OdomSensors sensors(&vertical_tracking_wheel,nullptr,&horizontal_tracking_wheel,nullptr,&imu);
 

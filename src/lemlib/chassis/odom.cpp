@@ -116,8 +116,8 @@ void lemlib::update() {
         heading -= (deltaVertical1 - deltaVertical2) /
                    (odomSensors.vertical1->getOffset() - odomSensors.vertical2->getOffset());
     // else, if the inertial sensor exists, use it
-    // else if (odomSensors.imu != nullptr) heading += deltaImu;
-    else if (odomSensors.imu != nullptr) heading = degToRad(odomSensors.imu->get_heading());
+    else if (odomSensors.imu != nullptr) heading += deltaImu;
+    // else if (odomSensors.imu != nullptr) heading = degToRad(odomSensors.imu->get_heading());
     // else, use the the substituted tracking wheels
     else
         heading -= (deltaVertical1 - deltaVertical2) /
