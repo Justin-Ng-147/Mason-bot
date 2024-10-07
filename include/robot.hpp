@@ -3,5 +3,6 @@
 
 extern pros::MotorGroup intake;
 extern pros::ADIDigitalOut mogo;
+extern pros::ADIDigitalOut pto;
 
 #endif

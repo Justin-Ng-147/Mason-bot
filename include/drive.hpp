@@ -10,7 +10,7 @@
 
 #define IMUPORT 15
 #define VERTICALENCODERPORT 20
-#define HORIZONTALENCODERPORT 19
+#define HORIZONTALENCODERPORT 14
 
 extern lemlib::Chassis chassis;
 
