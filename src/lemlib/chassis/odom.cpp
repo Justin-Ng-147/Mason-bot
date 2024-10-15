@@ -91,7 +91,7 @@ void lemlib::update() {
     float deltaVertical2 = vertical2Raw - prevVertical2;
     float deltaHorizontal1 = horizontal1Raw - prevHorizontal1;
     float deltaHorizontal2 = horizontal2Raw - prevHorizontal2;
-    float deltaImu = imuRaw - prevImu;
+    float deltaImu = (imuRaw - prevImu) * (360.0/363.0);
 
     // update the previous sensor values
     prevVertical1 = vertical1Raw;
