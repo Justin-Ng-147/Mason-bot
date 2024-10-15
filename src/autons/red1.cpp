@@ -62,9 +62,46 @@ void red1(){
     mogo.set_value(false);
     chassis.turnToPoint(32,18,4000,{.forwards=false});
     start_pose = chassis.getPose();
-    chassis.moveToPoint(32,18,4000,{.forwards=false,.maxSpeed=60});
-    while(start_pose.distance(chassis.getPose()) < 50) pros::delay(10);
+    chassis.moveToPoint(32,18,4000,{.forwards=false,.minSpeed=60,.earlyExitRange=35});
+    chassis.moveToPoint(32,18,4000,{.forwards=false,.maxSpeed=45});
+    while(start_pose.distance(chassis.getPose()) < 80) pros::delay(10);
     mogo.set_value(true);
 
+    //get 1st ring
+    chassis.turnToPoint(30,44,4000,{.minSpeed=10,.earlyExitRange=5});
+    intake.move(127);
+    chassis.moveToPoint(30,44,4000,{},false);
+    intake.move(0);
+
+    //get 2nd ring
+    chassis.turnToPoint(53,44,4000,{.minSpeed=10,.earlyExitRange=5});
+    intake.move(127);
+    chassis.moveToPoint(53,44,4000,{},false);
+    intake.move(0);
+    
+    //get 3rd ring
+    chassis.turnToPoint(66,69,4000,{.minSpeed=10,.earlyExitRange=5});
+    intake.move(127);
+    chassis.moveToPoint(66,69,4000,{},false);
+    intake.move(0);
+
+    //get 4th and 5th ring
+    // chassis.turnToPoint(-46,4,4000,{.minSpeed=10,.earlyExitRange=5});
+    chassis.swingToPoint(53,6,DriveSide::LEFT,4000);
+    intake.move(127);
+    chassis.moveToPoint(53,6,4000,{.minSpeed=60,.earlyExitRange=20});
+    chassis.moveToPoint(53,6,4000,{.maxSpeed=40},false);
+    intake.move(0);
+
+    //get 6th ring
+    intake.move(127);
+    chassis.moveToPose(66,25,-10,4000,{.lead=.8},false);
+    intake.move(0);
+
+    //score mogo
+    chassis.moveDistance(15,1000,{.forwards=false},false);
+    mogo.set_value(false);
+    pros::delay(500);
+    chassis.moveDistance(15,4000);
 
 }
