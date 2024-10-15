@@ -29,6 +29,9 @@ void initialize() {
     pros::delay(100);
     chassis.setPose(0,0,0);
 
+	mogo.set_value(true);
+	pto.set_value(true);
+
 	if(testing){
 		pros::Task screen_task([&]() {
 			while (true) {
@@ -103,11 +106,40 @@ void autonomous() {
 void opcontrol() {
 	pros::Controller master(pros::E_CONTROLLER_MASTER);
 
+	bool pto_flag = false;
+	bool pto_pressed = true;
+	bool mogo_flag = false;
+	bool mogo_pressed = true;
+
 	while (true) {
 		// Arcade control scheme
 		int dir = master.get_analog(ANALOG_LEFT_Y);    // Gets amount forward/backward from left joystick
 		int turn = master.get_analog(ANALOG_RIGHT_X);  // Gets the turn left/right from right joystick
 		chassis.arcade(dir,turn);
+
+		if(master.get_digital(DIGITAL_R1)){
+			intake.move(127);
+		}
+		else if(master.get_digital(DIGITAL_R2)){
+			intake.move(-127);
+		}
+		else{
+			intake.move(0);
+		}
+
+		if(master.get_digital(DIGITAL_A) && !pto_pressed){
+			pto_flag = !pto_flag;
+			pto.set_value(pto_flag);
+			pto_pressed = true;
+		}
+		else if(master.get_digital(DIGITAL_A) != 1 && pto_pressed){
+			pto_pressed = false;
+		}
+
+		if(master.get_digital(DIGITAL_X)){
+			mogo_flag = !mogo_flag;
+			pto.set_value(mogo_flag);
+		}
 
 		pros::delay(20);                               // Run for 20 ms then update
 	}
