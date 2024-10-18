@@ -113,9 +113,9 @@ void red1(){
 
     //12 120
     //get mogo
-    chassis.turnToPoint(12,125,2000,{.forwards=false});
+    chassis.turnToPoint(10,125,2000,{.forwards=false});
     start_pose = chassis.getPose();
-    chassis.moveToPoint(12,125,4000,{.forwards=false,.maxSpeed=45});
+    chassis.moveToPoint(10,125,4000,{.forwards=false,.maxSpeed=45});
     while(start_pose.distance(chassis.getPose()) < 33) pros::delay(10);
     mogo.set_value(true);
 
