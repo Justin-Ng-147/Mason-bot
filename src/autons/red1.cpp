@@ -150,18 +150,19 @@ void red1(){
     
     //get 6th ring
     chassis.turnToPoint(65,125,4000);
+    swiper.set_value(true);
     intake.move(127);
     chassis.moveToPoint(65,125,4000,{},false);
     
     
 
     //66 127
-    chassis.turnToPoint(66,127,4000,{.forwards=false},false);
-    chassis.moveDistance(20,1000,{},false);
-    pros::delay(500);
+    chassis.turnToPoint(66,130,4000,{.forwards=false},false);
+    // chassis.moveDistance(20,1000,{},false);
+    // pros::delay(500);
     mogo.set_value(false);
     intake.move(0);
-    chassis.moveDistance(50,1500,{.forwards=false},false);
+    chassis.moveDistance(30,1500,{.forwards=false},false);
     pros::delay(500);
     chassis.moveDistance(10,4000);
 
