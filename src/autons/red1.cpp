@@ -50,10 +50,11 @@ void red1(){
     //get 6th ring
     intake.move(127);
     chassis.moveToPose(-60,25,10,4000,{.lead=.5},false);
-    intake.move(0);
+    
 
     //score mogo
     chassis.moveDistance(15,1000,{.forwards=false},false);
+    intake.move(0);
     mogo.set_value(false);
     pros::delay(500);
     chassis.moveDistance(12,4000);
@@ -96,10 +97,11 @@ void red1(){
     //get 6th ring
     intake.move(127);
     chassis.moveToPose(64,25,-15,4000,{.lead=.5},false);
-    intake.move(0);
+    
 
     //score mogo
     chassis.moveDistance(15,1000,{.forwards=false},false);
+    intake.move(0);
     mogo.set_value(false);
     pros::delay(500);
     chassis.moveDistance(10,4000);
@@ -164,7 +166,7 @@ void red1(){
     intake.move(0);
     chassis.moveDistance(30,1500,{.forwards=false},false);
     pros::delay(500);
-    chassis.moveDistance(10,4000);
+    chassis.moveDistance(10,1000);
 
 
 }
