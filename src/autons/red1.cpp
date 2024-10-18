@@ -159,7 +159,7 @@ void red1(){
     
 
     //66 127
-    chassis.turnToPoint(66,130,4000,{.forwards=false},false);
+    chassis.turnToPoint(66,130,4000,{.forwards=false,.direction= AngularDirection::CCW_COUNTERCLOCKWISE},false);
     // chassis.moveDistance(20,1000,{},false);
     // pros::delay(500);
     mogo.set_value(false);
