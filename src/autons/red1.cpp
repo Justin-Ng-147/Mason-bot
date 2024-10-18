@@ -158,9 +158,11 @@ void red1(){
 
     //66 127
     chassis.turnToPoint(66,127,4000,{.forwards=false},false);
+    chassis.moveDistance(20,1000,{},false);
+    pros::delay(500);
     mogo.set_value(false);
     intake.move(0);
-    chassis.moveDistance(30,1500,{.forwards=false},false);
+    chassis.moveDistance(50,1500,{.forwards=false},false);
     pros::delay(500);
     chassis.moveDistance(10,4000);
 
