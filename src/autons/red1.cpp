@@ -179,6 +179,7 @@ void red1(){
 
     // hang
     // -8.5 83
+    hang.set_value(true);
     chassis.turnToPoint(-8.5,83,1000);
     chassis.moveDistance(50,2000);
 
