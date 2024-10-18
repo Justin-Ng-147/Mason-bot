@@ -68,9 +68,9 @@ void red1(){
     mogo.set_value(true);
 
     //get 1st ring
-    chassis.turnToPoint(28,44,4000);
+    chassis.turnToPoint(29,44,4000);
     intake.move(127);
-    chassis.moveToPoint(28,44,4000,{},false);
+    chassis.moveToPoint(29,44,4000,{},false);
     intake.move(0);
 
     //get 2nd ring
@@ -149,17 +149,17 @@ void red1(){
     intake.move(127);
     chassis.moveToPoint(56,90,4000,{},false);
     
-
-    chassis.turnToPoint(55,120,4000);
+    //get 6th ring
+    chassis.turnToPoint(65,125,4000);
     intake.move(127);
-    chassis.moveToPoint(55,120,4000,{},false);
-    chassis.moveDistance(10,1000,{.forwards=false},false);
+    chassis.moveToPoint(65,125,4000,{},false);
+    
     
 
     //66 127
     chassis.turnToPoint(66,127,4000,{.forwards=false},false);
-    intake.move(0);
     mogo.set_value(false);
+    intake.move(0);
     chassis.moveDistance(30,1500,{.forwards=false},false);
     pros::delay(500);
     chassis.moveDistance(10,4000);
