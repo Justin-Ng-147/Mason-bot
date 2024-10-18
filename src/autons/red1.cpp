@@ -69,9 +69,9 @@ void red1(){
     mogo.set_value(true);
 
     //get 1st ring
-    chassis.turnToPoint(29,44,4000);
+    chassis.turnToPoint(26,44,4000);
     intake.move(127);
-    chassis.moveToPoint(29,44,4000,{},false);
+    chassis.moveToPoint(26,44,4000,{},false);
     intake.move(0);
 
     //get 2nd ring
