@@ -136,9 +136,8 @@ void red1(){
     //get 4th ring
     // 180 4 124
     chassis.moveToPoint(0,123,4000,{.forwards=false},false);
-    intake.move(0);
     // 34 89 
-    chassis.turnToPoint(34,89,4000);
+    chassis.turnToPoint(34,89,2000);
     intake.move(127);
     chassis.moveToPoint(34,89,4000,{},false);
     intake.move(0);
