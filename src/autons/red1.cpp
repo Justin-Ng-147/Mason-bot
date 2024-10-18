@@ -170,8 +170,16 @@ void red1(){
     chassis.moveDistance(10,1000);
 
     //score 4th mogo
-    chassis.moveToPoint(-55,132,3000);
     intake.move(127);
+    chassis.moveToPoint(-55,132,3000,{},false);
+    intake.move(0);
+    chassis.moveDistance(10,1000,{.forwards=false});
+    
+    
 
+    // hang
+    // -8.5 83
+    chassis.turnToPoint(-8.5,83,1000);
+    chassis.moveDistance(50,2000);
 
 }
