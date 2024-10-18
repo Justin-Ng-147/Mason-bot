@@ -41,15 +41,15 @@ void red1(){
 
     //get 4th and 5th ring
     // chassis.turnToPoint(-46,4,4000,{.minSpeed=10,.earlyExitRange=5});
-    chassis.swingToPoint(-46,4,DriveSide::RIGHT,4000);
+    chassis.swingToPoint(-47,4,DriveSide::RIGHT,4000);
     intake.move(127);
-    chassis.moveToPoint(-46,5,4000,{.minSpeed=60,.earlyExitRange=20});
-    chassis.moveToPoint(-46,5,4000,{.maxSpeed=40},false);
+    chassis.moveToPoint(-47,5,4000,{.minSpeed=60,.earlyExitRange=20});
+    chassis.moveToPoint(-47,5,4000,{.maxSpeed=40},false);
     intake.move(0);
 
     //get 6th ring
     intake.move(127);
-    chassis.moveToPose(-60,25,8,4000,{.lead=.8},false);
+    chassis.moveToPose(-60,25,10,4000,{.lead=.5},false);
     intake.move(0);
 
     //score mogo
@@ -80,9 +80,9 @@ void red1(){
     intake.move(0);
     
     //get 3rd ring
-    chassis.turnToPoint(64,69,4000);
+    chassis.turnToPoint(63,69,4000);
     intake.move(127);
-    chassis.moveToPoint(64,69,4000,{},false);
+    chassis.moveToPoint(63,69,4000,{},false);
     intake.move(0);
 
     //get 4th and 5th ring
@@ -107,7 +107,7 @@ void red1(){
     // -20 87
     //get 1st ring
     chassis.turnToPoint(-20,87,4000);
-    intake.move(127);
+    intake.move(100);
     chassis.moveToPoint(-20,87,4000,{},false);
     intake.move(0);
 
@@ -148,19 +148,19 @@ void red1(){
     chassis.turnToPoint(56,90,4000);
     intake.move(127);
     chassis.moveToPoint(56,90,4000,{},false);
-    intake.move(0);
+    
 
-    chassis.turnToPoint(55,118,4000);
+    chassis.turnToPoint(55,120,4000);
     intake.move(127);
-    chassis.moveToPoint(55,118,4000,{},false);
+    chassis.moveToPoint(55,120,4000,{},false);
     chassis.moveDistance(10,1000,{.forwards=false},false);
     
 
     //66 127
-    chassis.turnToPoint(66,127,4000,{.forwards=false});
+    chassis.turnToPoint(66,127,4000,{.forwards=false},false);
     intake.move(0);
-    chassis.moveDistance(50,3000,{.forwards=false},false);
     mogo.set_value(false);
+    chassis.moveDistance(30,1500,{.forwards=false},false);
     pros::delay(500);
     chassis.moveDistance(10,4000);
 
