@@ -41,10 +41,10 @@ void red1(){
 
     //get 4th and 5th ring
     // chassis.turnToPoint(-46,4,4000,{.minSpeed=10,.earlyExitRange=5});
-    chassis.swingToPoint(-47,4,DriveSide::RIGHT,4000,{.maxSpeed=75});
+    chassis.swingToPoint(-48,5,DriveSide::RIGHT,4000,{.maxSpeed=75});
     intake.move(127);
-    chassis.moveToPoint(-47,5,4000,{.minSpeed=60,.earlyExitRange=20});
-    chassis.moveToPoint(-47,5,4000,{.maxSpeed=40},false);
+    chassis.moveToPoint(-48,5,4000,{.minSpeed=60,.earlyExitRange=20});
+    chassis.moveToPoint(-48,5,4000,{.maxSpeed=40},false);
     intake.move(0);
 
     //get 6th ring
