@@ -4,6 +4,7 @@
 pros::MotorGroup intake({7,-8});
 pros::ADIDigitalOut mogo('A');
 pros::ADIDigitalOut pto('D');
+pros::ADIDigitalOut swiper('C');
 // pros::Vision vision(11);
 
 
