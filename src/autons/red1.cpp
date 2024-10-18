@@ -164,6 +164,7 @@ void red1(){
     // pros::delay(500);
     mogo.set_value(false);
     intake.move(0);
+    swiper.set_value(false);
     chassis.moveDistance(30,1500,{.forwards=false},false);
     pros::delay(500);
     chassis.moveDistance(10,1000);
