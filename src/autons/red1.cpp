@@ -159,7 +159,7 @@ void red1(){
     
     //score 3rd mogo
     //66 127
-    chassis.turnToPoint(66,125,4000,{.forwards=false,.direction= AngularDirection::CCW_COUNTERCLOCKWISE},false);
+    chassis.turnToHeading(225,4000,{.direction=AngularDirection::CW_CLOCKWISE},false);
     // chassis.moveDistance(20,1000,{},false);
     // pros::delay(500);
     mogo.set_value(false);
@@ -171,7 +171,7 @@ void red1(){
 
     //score 4th mogo
     intake.move(127);
-    chassis.moveToPoint(-55,132,3000,{},false);
+    chassis.moveToPoint(-57,132,3000,{},false);
     intake.move(0);
     chassis.moveDistance(10,1000,{.forwards=false});
     
@@ -180,7 +180,7 @@ void red1(){
     // hang
     // -8.5 83
     hang.set_value(true);
-    chassis.turnToPoint(-8.5,83,1000);
-    chassis.moveDistance(50,2000);
+    chassis.turnToPoint(-8,82,1000);
+    chassis.moveDistance(70,3000,{.maxSpeed=80});
 
 }
