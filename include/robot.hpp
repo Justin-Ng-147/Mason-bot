@@ -8,5 +8,6 @@ extern pros::ADIDigitalOut swiper;
 extern pros::ADIDigitalOut hang;
 extern pros::Vision vision;
 extern pros::Distance distance;
+extern pros::ADIDigitalOut sort_thrower;
 
 #endif

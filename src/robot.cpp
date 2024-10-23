@@ -6,6 +6,7 @@ pros::ADIDigitalOut mogo('A');
 pros::ADIDigitalOut pto('D');
 pros::ADIDigitalOut swiper('C');
 pros::ADIDigitalOut hang('B');
+pros::ADIDigitalOut sort_thrower('G');
 
 
 pros::Vision vision(19);
