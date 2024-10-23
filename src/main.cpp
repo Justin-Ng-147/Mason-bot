@@ -104,6 +104,9 @@ void autonomous() {
  * task, not resume it from where it left off.
  */
 void opcontrol() {
+
+	sort();
+
 	pros::Controller master(pros::E_CONTROLLER_MASTER);
 
 	bool pto_flag = false;

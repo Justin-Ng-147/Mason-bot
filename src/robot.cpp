@@ -6,7 +6,10 @@ pros::ADIDigitalOut mogo('A');
 pros::ADIDigitalOut pto('D');
 pros::ADIDigitalOut swiper('C');
 pros::ADIDigitalOut hang('B');
-// pros::Vision vision(11);
+
+
+pros::Vision vision(19);
+pros::Distance distance(12);
 
 
 // red (1,252,215,220,7,.34)

@@ -6,5 +6,7 @@ extern pros::ADIDigitalOut mogo;
 extern pros::ADIDigitalOut pto;
 extern pros::ADIDigitalOut swiper;
 extern pros::ADIDigitalOut hang;
+extern pros::Vision vision;
+extern pros::Distance distance;
 
 #endif
