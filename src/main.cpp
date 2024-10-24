@@ -113,7 +113,7 @@ void opcontrol() {
 
 	bool pto_flag = false;
 	bool pto_pressed = true;
-	bool mogo_flag = false;
+	bool mogo_flag = true;
 	bool mogo_pressed = true;
 
 	while (true) {

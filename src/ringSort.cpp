@@ -26,7 +26,7 @@ void setup(){
 int ring_tossed(double start){
   double dif = fabs(intake.get_position())-fabs(start);
   // printf("%f\n",dif);
-  if(dif > 1.8) return 2;
+  if(dif > 1.5) return 2;
   else if(dif > 0) return 1;
   else return 0;
 }
@@ -50,16 +50,29 @@ void sort(){
           if(colors == 1){
             // printf("found\n");
             while(vision.get_by_sig(0,1).width>100) pros::delay(10);
+            if(!sort){
+                sort_thrower.set_value(false);
+                sort = true;
+                }
             double start = intake.get_position();
             // printf("sorting\n");
             int flag = 0;
             while (flag != 2)
             {
-              flag = ring_tossed(start);
-              if(flag == 1 && !sort){
+              if(!sort){
                 sort_thrower.set_value(false);
                 sort = true;
+                }
+              
+              if(vision.get_by_sig(0,1).width>100 && distance.get_distance()<150){
+                  start = intake.get_position();
               }
+
+              flag = ring_tossed(start);
+              // if(flag == 1 && !sort){
+              //   sort_thrower.set_value(false);
+              //   sort = true;
+              // }
               pros::delay(10);
             }
             sort_thrower.set_value(true);
