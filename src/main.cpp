@@ -32,6 +32,8 @@ void initialize() {
 	mogo.set_value(true);
 	pto.set_value(true);
 
+	// sort();
+
 	if(testing){
 		pros::Task screen_task([&]() {
 			while (true) {
@@ -139,9 +141,13 @@ void opcontrol() {
 			pto_pressed = false;
 		}
 
-		if(master.get_digital(DIGITAL_X)){
+		if(master.get_digital(DIGITAL_X) && !mogo_pressed){
 			mogo_flag = !mogo_flag;
-			pto.set_value(mogo_flag);
+			mogo.set_value(mogo_flag);
+			mogo_pressed = true;
+		}
+		else if(master.get_digital(DIGITAL_X) != 1 && mogo_pressed){
+			mogo_pressed = false;
 		}
 
 		pros::delay(20);                               // Run for 20 ms then update
