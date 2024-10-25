@@ -17,7 +17,7 @@ int convert_bit(int input){
 
 void chooser(int& status){
     bool set_text = false;
-    int selected;
+    int selected = 0;
 
     while (true)
     {
@@ -88,6 +88,19 @@ void chooser(int& status){
                 continue;
             }
         }
+        else if(status == 3){
+            if(!set_text){
+                pros::lcd::set_text(1, "    skills   ");
+                set_text = true;
+            }
+            if(selected != 0){
+                set_text=false;
+                if(selected == 100) return;
+                else status += selected;
+                pros::delay(500);
+                continue;
+            }
+        }
         else status = 0;
 
         selected = 0;
@@ -109,6 +122,9 @@ void run_auton(int selected){
         break;
     case 2:
         red2();
+        break;
+    case 3:
+        skills();
         break;
     
     default:

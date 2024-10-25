@@ -5,6 +5,7 @@
 #define BLUE1 -1
 #define RED1 1
 #define RED2 2
+#define SKILLS 3
 
 void chooser(int& status);
 
