@@ -1,14 +1,8 @@
 #include "main.h"
 
-// void red1(){
-//     // chassis.moveDistance()
-// }
-
-/*
-skills run
-*/
-void red1(){
-    //score red stake
+void skills(){
+    
+     //score red stake
     intake.move(127);
     pros::delay(1000);
     intake.move(0);

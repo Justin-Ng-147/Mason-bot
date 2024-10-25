@@ -10,7 +10,7 @@ false: display competition screen to choose different autons
 bool testing = true; 
 
 int auton_status = 0;
-int test_auton = RED1;
+int test_auton = SKILLS;
 
 
 
@@ -31,6 +31,8 @@ void initialize() {
 
 	mogo.set_value(true);
 	pto.set_value(true);
+
+	sort();
 
 	if(testing){
 		pros::Task screen_task([&]() {
@@ -108,15 +110,19 @@ void opcontrol() {
 
 	bool pto_flag = false;
 	bool pto_pressed = true;
-	bool mogo_flag = false;
+	bool mogo_flag = true;
 	bool mogo_pressed = true;
 
 	while (true) {
+		#pragma region arcade
 		// Arcade control scheme
 		int dir = master.get_analog(ANALOG_LEFT_Y);    // Gets amount forward/backward from left joystick
 		int turn = master.get_analog(ANALOG_RIGHT_X);  // Gets the turn left/right from right joystick
-		chassis.arcade(dir,turn);
+		left.move(dir+turn);
+		right.move(dir-turn);
+		#pragma endregion arcade
 
+		#pragma region intake
 		if(master.get_digital(DIGITAL_R1)){
 			intake.move(127);
 		}
@@ -126,7 +132,9 @@ void opcontrol() {
 		else{
 			intake.move(0);
 		}
+		#pragma endregion intake
 
+		#pragma region pto
 		if(master.get_digital(DIGITAL_A) && !pto_pressed){
 			pto_flag = !pto_flag;
 			pto.set_value(pto_flag);
@@ -135,11 +143,23 @@ void opcontrol() {
 		else if(master.get_digital(DIGITAL_A) != 1 && pto_pressed){
 			pto_pressed = false;
 		}
+		#pragma endregion pto
 
-		if(master.get_digital(DIGITAL_X)){
+		#pragma region mogo
+		if(master.get_digital(DIGITAL_X) && !mogo_pressed){
 			mogo_flag = !mogo_flag;
-			pto.set_value(mogo_flag);
+			mogo.set_value(mogo_flag);
+			mogo_pressed = true;
 		}
+		else if(master.get_digital(DIGITAL_X) != 1 && mogo_pressed){
+			mogo_pressed = false;
+		}
+		else if(mogo_distance.get_distance()<60 && !mogo_flag && !mogo_pressed)
+		{
+			mogo.set_value(true);
+			mogo_flag = true;
+		}
+		#pragma endregion mogo
 
 		pros::delay(20);                               // Run for 20 ms then update
 	}

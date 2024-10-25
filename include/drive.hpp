@@ -13,5 +13,7 @@
 #define HORIZONTALENCODERPORT 14
 
 extern lemlib::Chassis chassis;
+extern pros::MotorGroup left;
+extern pros::MotorGroup right;
 
 #endif
