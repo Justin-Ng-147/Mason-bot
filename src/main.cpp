@@ -120,7 +120,8 @@ void opcontrol() {
 		// Arcade control scheme
 		int dir = master.get_analog(ANALOG_LEFT_Y);    // Gets amount forward/backward from left joystick
 		int turn = master.get_analog(ANALOG_RIGHT_X);  // Gets the turn left/right from right joystick
-		chassis.arcade(dir,turn);
+		// chassis.arcade(dir,turn);
+		
 
 		if(master.get_digital(DIGITAL_R1)){
 			intake.move(127);
