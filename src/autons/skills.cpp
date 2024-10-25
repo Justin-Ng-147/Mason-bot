@@ -173,6 +173,15 @@ void skills(){
     pros::delay(500);
     chassis.moveDistance(10,1000);
 
+    //get last mogo
+    chassis.moveToPoint(15,115,4000,{.minSpeed=60,.earlyExitRange=10});
+    chassis.moveToPoint(-24,132,4000,{.forwards=false});
+    while(mogo_distance.get_distance()>60 && chassis.isInMotion()) pros::delay(10);
+    pros::delay(100);
+    mogo.set_value(true);
+    pros::delay(100);
+    chassis.cancelMotion();
+
     // //score 4th mogo
     // intake.move(127);
     // chassis.moveToPoint(-57,132,3000,{},false);
