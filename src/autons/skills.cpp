@@ -61,8 +61,9 @@ void skills(){
     start_pose = chassis.getPose();
     chassis.moveToPoint(32,16,4000,{.forwards=false,.minSpeed=60,.earlyExitRange=40});
     chassis.moveToPoint(32,16,4000,{.forwards=false,.maxSpeed=40});
-    while(start_pose.distance(chassis.getPose()) < 78) pros::delay(10);
+    while(mogo_distance.get_distance()>60 && chassis.isInMotion()) pros::delay(10);
     mogo.set_value(true);
+    chassis.cancelMotion();
 
     //get 1st ring
     chassis.turnToPoint(26,44,4000);
@@ -114,8 +115,9 @@ void skills(){
     chassis.turnToPoint(10,125,2000,{.forwards=false});
     start_pose = chassis.getPose();
     chassis.moveToPoint(10,125,4000,{.forwards=false,.maxSpeed=45});
-    while(start_pose.distance(chassis.getPose()) < 33) pros::delay(10);
+    while(mogo_distance.get_distance()>60 && chassis.isInMotion()) pros::delay(10);
     mogo.set_value(true);
+    chassis.cancelMotion();
 
     //-20,87
     //get 2nd ring
