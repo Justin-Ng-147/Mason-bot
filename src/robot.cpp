@@ -11,6 +11,7 @@ pros::ADIDigitalOut sort_thrower('G');
 
 pros::Vision vision(19);
 pros::Distance distance(12);
+pros::Distance mogo_distance(17);
 
 
 // red (1,252,215,220,7,.34)
