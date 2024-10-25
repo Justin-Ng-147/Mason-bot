@@ -163,7 +163,7 @@ void skills(){
     
     //score 3rd mogo
     //66 127
-    chassis.turnToHeading(225,4000,{.direction=AngularDirection::CW_CLOCKWISE},false);
+    chassis.turnToHeading(225,4000,{.direction=AngularDirection::CCW_COUNTERCLOCKWISE},false);
     // chassis.moveDistance(20,1000,{},false);
     // pros::delay(500);
     mogo.set_value(false);
