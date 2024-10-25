@@ -32,7 +32,8 @@ void initialize() {
 	mogo.set_value(true);
 	pto.set_value(true);
 
-	sort();
+	// sort();
+	sort_thrower.set_value(true);
 
 	if(testing){
 		pros::Task screen_task([&]() {
