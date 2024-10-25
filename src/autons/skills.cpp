@@ -12,8 +12,10 @@ void skills(){
     chassis.swingToPoint(-22,13,DriveSide::RIGHT,4000,{.forwards=false});
     lemlib::Pose start_pose = chassis.getPose();
     chassis.moveDistance(30,4000,{.forwards=false,.maxSpeed=45});
-    while(start_pose.distance(chassis.getPose()) < 25) pros::delay(10);
+    // while(start_pose.distance(chassis.getPose()) < 25) pros::delay(10);
+    while(mogo_distance.get_distance()>60 && chassis.isInMotion()) pros::delay(10);
     mogo.set_value(true);
+    chassis.cancelMotion();
 
     //get 1st ring
     chassis.turnToPoint(-25,40,4000);
