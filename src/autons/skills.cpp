@@ -163,7 +163,9 @@ void skills(){
     
     //score 3rd mogo
     //66 127
-    chassis.turnToHeading(225,4000,{.direction=AngularDirection::CCW_COUNTERCLOCKWISE},false);
+
+    chassis.turnToHeading(-65,4000,{.direction=AngularDirection::CCW_COUNTERCLOCKWISE,.minSpeed=60,.earlyExitRange = 10});
+    chassis.turnToHeading(-135,4000,{.direction=AngularDirection::CCW_COUNTERCLOCKWISE},false);
     // chassis.moveDistance(20,1000,{},false);
     // pros::delay(500);
     mogo.set_value(false);
@@ -174,26 +176,27 @@ void skills(){
     chassis.moveDistance(10,1000);
 
     //get last mogo
-    chassis.moveToPoint(15,115,4000,{.minSpeed=60,.earlyExitRange=10});
-    chassis.moveToPoint(-24,132,4000,{.forwards=false});
-    while(mogo_distance.get_distance()>60 && chassis.isInMotion()) pros::delay(10);
-    pros::delay(100);
-    mogo.set_value(true);
-    pros::delay(100);
-    chassis.cancelMotion();
+    chassis.moveToPoint(15,115,4000,{.minSpeed=100,.earlyExitRange=10});
+    chassis.moveToPoint(-20,132,4000,{.minSpeed=100,.earlyExitRange=10});
+    // while(mogo_distance.get_distance()>60 && chassis.isInMotion()) pros::delay(10);
+    // pros::delay(100);
+    // mogo.set_value(true);
+    // pros::delay(100);
+    // chassis.cancelMotion();
 
     // //score 4th mogo
     // intake.move(127);
-    // chassis.moveToPoint(-57,132,3000,{},false);
-    // intake.move(0);
-    // chassis.moveDistance(10,1000,{.forwards=false});
+    chassis.moveToPoint(-60,340,2000,{},false);
+    intake.move(0);
+    chassis.moveDistance(10,1000,{.forwards=false});
     
     
 
     // // hang
     // // -8.5 83
-    // hang.set_value(true);
-    // chassis.turnToPoint(-8,82,1000);
-    // chassis.moveDistance(70,3000,{.maxSpeed=80});
+    hang.set_value(true);
+    chassis.turnToPoint(-5,82,1000);
+    chassis.moveDistance(70,3000,{.maxSpeed=80});
+    chassis.moveDistance(60,200,{.forwards = false});
 
 }
