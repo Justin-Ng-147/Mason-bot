@@ -13,7 +13,7 @@ void skills(){
     lemlib::Pose start_pose = chassis.getPose();
     chassis.moveDistance(30,4000,{.forwards=false,.maxSpeed=45});
     // while(start_pose.distance(chassis.getPose()) < 25) pros::delay(10);
-    while(mogo_distance.get_distance()>60 && chassis.isInMotion()) pros::delay(10);
+    while(!mogo_seated() && chassis.isInMotion()) pros::delay(10);
     pros::delay(100);
     mogo.set_value(true);
     pros::delay(100);
@@ -63,7 +63,7 @@ void skills(){
     start_pose = chassis.getPose();
     chassis.moveToPoint(32,16,4000,{.forwards=false,.minSpeed=60,.earlyExitRange=40});
     chassis.moveToPoint(32,16,4000,{.forwards=false,.maxSpeed=40});
-    while(mogo_distance.get_distance()>60 && chassis.isInMotion()) pros::delay(10);
+    while(!mogo_seated() && chassis.isInMotion()) pros::delay(10);
     pros::delay(100);
     mogo.set_value(true);
     pros::delay(100);
@@ -119,7 +119,7 @@ void skills(){
     chassis.turnToPoint(10,125,2000,{.forwards=false});
     start_pose = chassis.getPose();
     chassis.moveToPoint(10,125,4000,{.forwards=false,.maxSpeed=45});
-    while(mogo_distance.get_distance()>60 && chassis.isInMotion()) pros::delay(10);
+    while(!mogo_seated() && chassis.isInMotion()) pros::delay(10);
     pros::delay(100);
     mogo.set_value(true);
     pros::delay(100);
@@ -164,8 +164,8 @@ void skills(){
     //score 3rd mogo
     //66 127
 
-    chassis.turnToHeading(-65,4000,{.direction=AngularDirection::CCW_COUNTERCLOCKWISE,.minSpeed=60,.earlyExitRange = 10});
-    chassis.turnToHeading(-135,4000,{.direction=AngularDirection::CCW_COUNTERCLOCKWISE},false);
+    // chassis.turnToHeading(-65,4000,{.direction=AngularDirection::CCW_COUNTERCLOCKWISE,.minSpeed=60,.earlyExitRange = 10});
+    chassis.turnToHeading(225,4000,{.direction=AngularDirection::CCW_COUNTERCLOCKWISE},false);
     // chassis.moveDistance(20,1000,{},false);
     // pros::delay(500);
     mogo.set_value(false);
