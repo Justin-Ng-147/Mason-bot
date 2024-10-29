@@ -10,5 +10,7 @@ extern pros::Vision vision;
 extern pros::Distance distance;
 extern pros::ADIDigitalOut sort_thrower;
 extern pros::Distance mogo_distance;
+extern pros::ADIDigitalOut deploy;
+extern pros::ADIDigitalOut claw;
 
 #endif
