@@ -33,8 +33,8 @@ void initialize() {
 	mogo.set_value(true);
 	pto.set_value(true);
 
-	// sort();
-	sort_thrower.set_value(true);
+	sort(BLUECOLOR);
+	// sort_thrower.set_value(true);
 
 	if(testing){
 		pros::Task screen_task([&]() {
@@ -159,7 +159,7 @@ void opcontrol() {
 		else if(master.get_digital(DIGITAL_X) != 1 && mogo_pressed){
 			mogo_pressed = false;
 		}
-		else if(mogo_distance.get_distance()<60 && !mogo_flag && !mogo_pressed)
+		else if(mogo_seated() && !mogo_flag && !mogo_pressed)
 		{
 			mogo.set_value(true);
 			mogo_flag = true;

@@ -6,7 +6,7 @@ pros::vision_signature_s_t RED_SIG =
     pros::Vision::signature_from_utility(1, 11049, 12603, 11826,-1625, -703, -1164,5, 0);
 
 pros::vision_signature_s_t BLUE_SIG =
-    pros::Vision::signature_from_utility(2, 11049, 12603, 11826,-1625, -703, -1164,5, 0);
+    pros::Vision::signature_from_utility(2, -3785, -3395, -3590, 5827, 7261, 6544, 6.000, 0);
     
 
 void setup(){
@@ -31,7 +31,7 @@ int ring_tossed(double start){
   else return 0;
 }
 
-void sort(){
+void sort(int color){
   if (sort_task == nullptr) {
     sort_task = new pros::Task{ [=]{
       // int count = 0;
@@ -40,7 +40,7 @@ void sort(){
 
       setup();
       while(true){
-        pros::vision_object_s_t rtn = vision.get_by_sig(0,1);
+        pros::vision_object_s_t rtn = vision.get_by_sig(0,color);
 
         if(rtn.width>100 && colors == 0 && distance.get_distance()<150){
           colors = 1;
@@ -49,7 +49,7 @@ void sort(){
         // if(count == 1){
           if(colors == 1){
             // printf("found\n");
-            while(vision.get_by_sig(0,1).width>100) pros::delay(10);
+            while(vision.get_by_sig(0,color).width>100) pros::delay(10);
             if(!sort){
                 sort_thrower.set_value(false);
                 sort = true;
@@ -64,7 +64,7 @@ void sort(){
                 sort = true;
                 }
               
-              if(vision.get_by_sig(0,1).width>100 && distance.get_distance()<150){
+              if(vision.get_by_sig(0,color).width>100 && distance.get_distance()<150){
                   start = intake.get_position();
               }
 
@@ -90,4 +90,8 @@ void sort(){
       }
     }};
   }
+}
+
+bool mogo_seated(){
+  return mogo_distance.get_distance()<60;
 }
