@@ -10,7 +10,7 @@ false: display competition screen to choose different autons
 bool testing = true; 
 
 int auton_status = 0;
-int test_auton = RED1;
+int test_auton = RED2;
 
 
 
@@ -27,7 +27,8 @@ void initialize() {
 	// chassis = init_drive();
 	chassis.calibrate();
     pros::delay(100);
-    chassis.setPose(0,0,0);
+    // chassis.setPose(0,0,0);
+	chassis.setPose(0,0,9);
 
 	mogo.set_value(true);
 	pto.set_value(true);
@@ -114,6 +115,9 @@ void opcontrol() {
 	bool mogo_flag = true;
 	bool mogo_pressed = true;
 
+	bool swiper_flag = false;
+	bool swiper_pressed = true;
+
 	while (true) {
 		#pragma region arcade
 		// Arcade control scheme
@@ -123,7 +127,7 @@ void opcontrol() {
 		right.move(dir-turn);
 		#pragma endregion arcade
 
-		#pragma region intake
+		#pragma region intake r1
 		if(master.get_digital(DIGITAL_R1)){
 			intake.move(127);
 		}
@@ -135,7 +139,7 @@ void opcontrol() {
 		}
 		#pragma endregion intake
 
-		#pragma region pto
+		#pragma region pto a
 		if(master.get_digital(DIGITAL_A) && !pto_pressed){
 			pto_flag = !pto_flag;
 			pto.set_value(pto_flag);
@@ -146,7 +150,7 @@ void opcontrol() {
 		}
 		#pragma endregion pto
 
-		#pragma region mogo
+		#pragma region mogo x
 		if(master.get_digital(DIGITAL_X) && !mogo_pressed){
 			mogo_flag = !mogo_flag;
 			mogo.set_value(mogo_flag);
@@ -162,6 +166,16 @@ void opcontrol() {
 		}
 		#pragma endregion mogo
 
+		#pragma region swiper b
+		if(master.get_digital(DIGITAL_B) && !swiper_pressed){
+			swiper_flag = !swiper_flag;
+			swiper.set_value(swiper_flag);
+			swiper_pressed = true;
+		}
+		else if(master.get_digital(DIGITAL_B) != 1 && swiper_pressed){
+			swiper_pressed = false;
+		}
+		#pragma endregion swiper
 		pros::delay(20);                               // Run for 20 ms then update
 	}
 }
