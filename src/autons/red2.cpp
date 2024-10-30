@@ -2,6 +2,7 @@
 
 void red2(){
     //get contested mogo
+    chassis.setPose(0,0,9);
     mogo.set_value(false);
     chassis.moveToPoint(6,40,4000,{.minSpeed=20,.earlyExitRange=5},false);
     swiper.set_value(true);
