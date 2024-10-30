@@ -7,8 +7,8 @@ pros::ADIDigitalOut pto('D');
 pros::ADIDigitalOut swiper('C');
 pros::ADIDigitalOut hang('B');
 pros::ADIDigitalOut sort_thrower('G');
-pros::ADIDigitalOut deploy('E');
-pros::ADIDigitalOut claw('F');
+pros::ADIDigitalOut deploy('F');
+pros::ADIDigitalOut claw('E');
 
 
 

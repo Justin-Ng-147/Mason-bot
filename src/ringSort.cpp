@@ -26,7 +26,7 @@ void setup(){
 int ring_tossed(double start){
   double dif = fabs(intake.get_position())-fabs(start);
   // printf("%f\n",dif);
-  if(dif > 1.5) return 2;
+  if(dif > 1.4) return 2;
   else if(dif > 0) return 1;
   else return 0;
 }
@@ -49,7 +49,8 @@ void sort(int color){
         // if(count == 1){
           if(colors == 1){
             // printf("found\n");
-            while(vision.get_by_sig(0,color).width>100) pros::delay(10);
+            // while(vision.get_by_sig(0,color).width>100) pros::delay(10);
+            while(distance.get_distance()<150) pros::delay(10);
             if(!sort){
                 sort_thrower.set_value(false);
                 sort = true;
