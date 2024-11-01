@@ -26,8 +26,10 @@ void red2(){
     chassis.cancelMotion();
 
     //20 36
+    
+    chassis.moveToPoint(15,32,2000);
+    pros::delay(200);
     intake.move(127);
-    chassis.moveToPoint(15,32,2000,{},false);
     // intake.move(0);
 
     //start
