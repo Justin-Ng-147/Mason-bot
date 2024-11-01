@@ -10,7 +10,7 @@ false: display competition screen to choose different autons
 bool testing = true; 
 
 int auton_status = 0;
-int test_auton = RED1;
+int test_auton = BLUE2;
 
 
 
@@ -28,12 +28,12 @@ void initialize() {
 	chassis.calibrate();
     pros::delay(100);
     // chassis.setPose(0,0,0);
-	// chassis.setPose(0,0,147);
+	chassis.setPose(0,0,-12);
 
 	mogo.set_value(true);
 	pto.set_value(false);
 
-	sort(BLUECOLOR);
+	sort(REDCOLOR);
 	// sort_thrower.set_value(true);
 
 	if(testing){

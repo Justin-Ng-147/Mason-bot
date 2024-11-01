@@ -50,7 +50,7 @@ void sort(int color){
           if(colors == 1){
             // printf("found\n");
             // while(vision.get_by_sig(0,color).width>100) pros::delay(10);
-            while(vision.get_by_sig(0,color).width>100) pros::delay(10);
+            while(vision.get_by_sig(0,color).width>100) pros::delay(5);
             if(!sort){
                 sort_thrower.set_value(false);
                 sort = true;

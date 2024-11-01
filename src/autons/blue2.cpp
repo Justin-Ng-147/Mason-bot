@@ -43,12 +43,12 @@ void blue2(){
 
 
     //-31, -2
-    chassis.turnToPoint(-32,-2,2000,{},false);
+    chassis.turnToPoint(-32,-1,2000,{},false);
     swiper.set_value(true);
-    chassis.moveToPoint(-32,-2,2000);
+    chassis.moveToPoint(-32,-1,2000);
 
     // intake.move(0);
-    chassis.turnToHeading(140,3000,{.direction=AngularDirection::CCW_COUNTERCLOCKWISE, .minSpeed=127, .earlyExitRange = 3},false);
+    chassis.turnToHeading(145,3000,{.direction=AngularDirection::CCW_COUNTERCLOCKWISE, .minSpeed=127, .earlyExitRange = 3},false);
     left.move(127);
     right.move(-127);
     pros::delay(50);
@@ -57,14 +57,10 @@ void blue2(){
     swiper.set_value(false);
     intake.move(127);
     chassis.moveDistance(12,2000,{.maxSpeed=30,.minSpeed=30,.earlyExitRange=3});
-    chassis.turnToPoint(18,-15,3000);
-    chassis.moveDistance(6,1000,{.forwards=false,.minSpeed=30,.earlyExitRange=3});
+    chassis.turnToPoint(18,-12,3000);
+    // chassis.moveDistance(6,1000,{.forwards=false,.minSpeed=30,.earlyExitRange=3});
     chassis.moveDistance(40,10000,{.maxSpeed=30,.minSpeed=30,.earlyExitRange=3},false);
-    // // chassis.waitUntil(20);
-    // // chassis.cancelMotion();
-    // // chassis.moveDistance(10,1000,{.forwards=false,.minSpeed = 30,.earlyExitRange=4});
-    // // chassis.moveDistance(20,10000,{.maxSpeed=30});
-    // // mogo.set_value(false);
+    pros::delay(1000);    
 
 
     //touch hang

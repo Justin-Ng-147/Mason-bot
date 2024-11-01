@@ -26,7 +26,7 @@ void red2(){
     chassis.cancelMotion();
 
     //20 36
-    
+    //intake ring
     chassis.moveToPoint(15,32,2000);
     pros::delay(200);
     intake.move(127);
@@ -72,7 +72,7 @@ void red2(){
     chassis.moveDistance(12,2000,{.maxSpeed=30,.minSpeed=30,.earlyExitRange=3});
     chassis.turnToPoint(32,28,3000);
     chassis.moveDistance(6,1000,{.forwards=false,.minSpeed=30,.earlyExitRange=3});
-    chassis.moveDistance(40,10000,{.maxSpeed=30,.minSpeed=30,.earlyExitRange=3},false);
+    chassis.moveDistance(42,10000,{.maxSpeed=30,.minSpeed=30,.earlyExitRange=3},false);
 
     
 
