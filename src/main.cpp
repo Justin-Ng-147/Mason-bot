@@ -28,10 +28,10 @@ void initialize() {
 	chassis.calibrate();
     pros::delay(100);
     // chassis.setPose(0,0,0);
-	chassis.setPose(0,0,147);
+	// chassis.setPose(0,0,147);
 
 	mogo.set_value(true);
-	pto.set_value(true);
+	pto.set_value(false);
 
 	sort(BLUECOLOR);
 	// sort_thrower.set_value(true);
@@ -110,7 +110,7 @@ void autonomous() {
 void opcontrol() {
 	pros::Controller master(pros::E_CONTROLLER_MASTER);
 
-	bool pto_flag = false;
+	bool pto_flag = true;
 	bool pto_pressed = true;
 	bool mogo_flag = true;
 	bool mogo_pressed = true;

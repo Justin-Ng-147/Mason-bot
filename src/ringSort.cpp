@@ -50,7 +50,7 @@ void sort(int color){
           if(colors == 1){
             // printf("found\n");
             // while(vision.get_by_sig(0,color).width>100) pros::delay(10);
-            while(distance.get_distance()<150) pros::delay(10);
+            while(vision.get_by_sig(0,color).width>100) pros::delay(10);
             if(!sort){
                 sort_thrower.set_value(false);
                 sort = true;
@@ -94,5 +94,5 @@ void sort(int color){
 }
 
 bool mogo_seated(){
-  return mogo_distance.get_distance()<60;
+  return mogo_distance.get_distance()<45;
 }

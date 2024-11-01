@@ -2,24 +2,24 @@
 
 void red1(){
     //setup
-    chassis.setPose(0,0,147);
+    chassis.setPose(0,0,145);
     intake.set_encoder_units_all(MOTOR_ENCODER_ROTATIONS);
     mogo.set_value(false);
 
     //score ring
-    pto.set_value(false);
+    pto.set_value(true);
     chassis.moveDistance(10,1000,{},false);
     deploy.set_value(true);
     claw.set_value(true);
     pros::delay(200);
 
     // get mogo
-    chassis.moveToPoint(-13, 31,4000,{.forwards =false,.maxSpeed=50});
+    chassis.moveToPoint(-13, 31,4000,{.forwards = false,.maxSpeed=50});
     intake.move(-127);
     pros::delay(300);
     intake.move(0);
     deploy.set_value(false);
-    pto.set_value(true);
+    pto.set_value(false);
 
     while(!mogo_seated() && chassis.isInMotion()) pros::delay(10);
     chassis.cancelMotion();
@@ -29,15 +29,17 @@ void red1(){
     
 
     //get 2 rings
-    chassis.swingToPoint(-30,44,DriveSide::LEFT,4000,{.maxSpeed=80});
+    chassis.swingToPoint(-30,44,DriveSide::LEFT,2000,{.maxSpeed=80});
     intake.move(127);
-    chassis.moveToPoint(-30,44,4000);
-    chassis.turnToHeading(271,4000);
-    chassis.moveDistance(15,4000,{},false);
+    chassis.moveToPoint(-30,44,2000);
+    chassis.turnToHeading(271,1000);
+    chassis.moveDistance(15,2000,{},false);
     // chassis.moveDistance(15,2000);
 
-    chassis.turnToPoint(-30,11,4000,{},false);
-    intake.move(127);
+    chassis.turnToPoint(-30,11,2000,{},false);
+    chassis.moveDistance(10,2000);
+    pros::delay(1000);
+    // intake.move(127);
     chassis.moveToPoint(-30,11,4000);
     // intake.move(0);
 
