@@ -23,7 +23,20 @@ void chooser(int& status){
     {
         selected = convert_bit(pros::lcd::read_buttons());
         // printf("%d , %d\n",pros::lcd::read_buttons(),status);
-        if(status == -2){
+        if(status == -3){
+            if(!set_text){
+                pros::lcd::set_text(1, "    blue 3   ");
+                set_text = true;
+            }
+            if(selected != 0){
+                set_text=false;
+                if(selected == 100) return;
+                else status += selected;
+                pros::delay(500);
+                continue;
+            }
+        }
+        else if(status == -2){
             if(!set_text){
                 pros::lcd::set_text(1, "    blue 2   ");
                 set_text = true;
@@ -56,8 +69,7 @@ void chooser(int& status){
             }
             if(selected != 0){
                 set_text=false;
-                if(selected == 100);
-                else status += selected;
+                if(selected != 100) status += selected;
                 pros::delay(500);
                 continue;
             }
@@ -90,6 +102,19 @@ void chooser(int& status){
         }
         else if(status == 3){
             if(!set_text){
+                pros::lcd::set_text(1, "    red 3   ");
+                set_text = true;
+            }
+            if(selected != 0){
+                set_text=false;
+                if(selected == 100) return;
+                else status += selected;
+                pros::delay(500);
+                continue;
+            }
+        }
+        else if(status == 4){
+            if(!set_text){
                 pros::lcd::set_text(1, "    skills   ");
                 set_text = true;
             }
@@ -111,6 +136,9 @@ void chooser(int& status){
 void run_auton(int selected){
     switch (selected)
     {
+    case -3:
+        blue2();
+        break;
     case -2:
         blue2();
         break;
@@ -124,6 +152,9 @@ void run_auton(int selected){
         red2();
         break;
     case 3:
+        red3();
+        break;
+    case 4:
         skills();
         break;
     

@@ -3,8 +3,10 @@
 
 void blue1();
 void blue2();
+void blue3();
 void red1();
 void red2();
+void red3();
 void skills();
 
 #endif
