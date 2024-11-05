@@ -2,7 +2,7 @@
 
 void red1(){
     //setup
-    chassis.setPose(0,0,145);
+    chassis.setPose(0,0,144);
     intake.set_encoder_units_all(MOTOR_ENCODER_ROTATIONS);
     mogo.set_value(false);
 
@@ -53,8 +53,8 @@ void red1(){
 
     // /22.5 30
 
-    chassis.turnToPoint(25,30,2000,{.minSpeed=5,.earlyExitRange=3});
-    chassis.moveToPoint(25,30,2000);
+    chassis.turnToPoint(25,35,2000,{.minSpeed=5,.earlyExitRange=3});
+    chassis.moveToPoint(25,35,2000);
 
     // // -54 -6
     // chassis.turnToPoint(-44,-5,4000);
