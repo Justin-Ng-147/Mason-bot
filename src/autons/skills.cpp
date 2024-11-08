@@ -176,27 +176,28 @@ void skills(){
     chassis.moveDistance(10,1000);
 
     //get last mogo
-    chassis.moveToPoint(15,115,4000,{.minSpeed=100,.earlyExitRange=10});
-    chassis.moveToPoint(-20,132,4000,{.minSpeed=100,.earlyExitRange=10});
-    // while(mogo_distance.get_distance()>60 && chassis.isInMotion()) pros::delay(10);
-    // pros::delay(100);
-    // mogo.set_value(true);
-    // pros::delay(100);
-    // chassis.cancelMotion();
+    chassis.moveToPoint(15,115,4000,{.minSpeed=5,.earlyExitRange=3});
+    chassis.turnToPoint(-20,132,2000,{.forwards=false,.minSpeed=5,.earlyExitRange=3});
+    chassis.moveToPoint(-20,132,4000,{.forwards=false,.minSpeed=5,.earlyExitRange=3});
+    while(mogo_distance.get_distance()>60 && chassis.isInMotion()) pros::delay(10);
+    pros::delay(100);
+    mogo.set_value(true);
+    pros::delay(100);
+    chassis.cancelMotion();
 
     // //score 4th mogo
     // intake.move(127);
     chassis.moveToPoint(-60,340,2000,{},false);
     intake.move(0);
-    chassis.moveDistance(10,1000,{.forwards=false});
+    // chassis.moveDistance(10,1000,{.forwards=false});
     
     
 
     // // hang
     // // -8.5 83
-    hang.set_value(true);
-    chassis.turnToPoint(-5,82,1000);
-    chassis.moveDistance(70,3000,{.maxSpeed=80});
-    chassis.moveDistance(60,200,{.forwards = false});
+    // hang.set_value(true);
+    // chassis.turnToPoint(-5,82,1000);
+    // chassis.moveDistance(70,3000,{.maxSpeed=80});
+    // chassis.moveDistance(60,200,{.forwards = false});
 
 }
