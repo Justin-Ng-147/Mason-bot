@@ -15,7 +15,7 @@ void setup(){
     intake.set_encoder_units_all(pros::E_MOTOR_ENCODER_ROTATIONS);
     vision.get_object_count();
     pros::delay(100);
-    sort_thrower.set_value(true);
+    // sort_thrower.set_value(true);
 }
 
 /*
@@ -52,7 +52,7 @@ void sort(int color){
             // while(vision.get_by_sig(0,color).width>100) pros::delay(10);
             while(vision.get_by_sig(0,color).width>100) pros::delay(5);
             if(!sort){
-                sort_thrower.set_value(false);
+                sort_thrower.set_value(true);
                 sort = true;
                 }
             double start = intake.get_position();
@@ -61,7 +61,7 @@ void sort(int color){
             while (flag != 2)
             {
               if(!sort){
-                sort_thrower.set_value(false);
+                sort_thrower.set_value(true);
                 sort = true;
                 }
               
@@ -76,7 +76,7 @@ void sort(int color){
               // }
               pros::delay(10);
             }
-            sort_thrower.set_value(true);
+            sort_thrower.set_value(false);
             sort = false;
           }
           // else{
