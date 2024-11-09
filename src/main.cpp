@@ -10,7 +10,7 @@ false: display competition screen to choose different autons
 bool testing = false; 
 
 int auton_status = 0;
-int test_auton = RED1;
+int test_auton = SKILLS;
 
 
 
@@ -27,7 +27,7 @@ void initialize() {
 	// chassis = init_drive();
 	chassis.calibrate();
     pros::delay(100);
-    // chassis.setPose(0,0,0);
+    chassis.setPose(0,0,0);
 	// chassis.setPose(0,0,-12);
 
 	mogo.set_value(true);
@@ -36,7 +36,7 @@ void initialize() {
 	// sort_thrower.set_value(true);
 
 	if(testing){
-		sort(REDCOLOR);
+		sort(BLUECOLOR);
 		pros::Task screen_task([&]() {
 			while (true) {
 				// print robot location to the brain screen
