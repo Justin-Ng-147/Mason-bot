@@ -1,5 +1,7 @@
 #include "main.h"
 
+
+// red - qual
 void red1(){
     //setup
     chassis.setPose(0,0,146);
@@ -56,7 +58,9 @@ void red1(){
     // chassis.cancelMotion();
     // intake.move(0);
 
+
     // /22.5 30
+    // move to post
     intake.move(0);
     chassis.turnToPoint(25,35,2000,{.minSpeed=5,.earlyExitRange=3},false);
     intake.move(127);

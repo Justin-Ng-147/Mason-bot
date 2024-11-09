@@ -25,7 +25,7 @@ void chooser(int& status){
         // printf("%d , %d\n",pros::lcd::read_buttons(),status);
         if(status == -3){
             if(!set_text){
-                pros::lcd::set_text(1, "    blue 3   ");
+                pros::lcd::set_text(1, "    blue F   ");
                 set_text = true;
             }
             if(selected != 0){
@@ -38,7 +38,7 @@ void chooser(int& status){
         }
         else if(status == -2){
             if(!set_text){
-                pros::lcd::set_text(1, "    blue 2   ");
+                pros::lcd::set_text(1, "    blue +   ");
                 set_text = true;
             }
             if(selected != 0){
@@ -51,7 +51,7 @@ void chooser(int& status){
         }
         else if(status == -1){
             if(!set_text){
-                pros::lcd::set_text(1, "    blue 1   ");
+                pros::lcd::set_text(1, "    blue -   ");
                 set_text = true;
             }
             if(selected != 0){
@@ -76,7 +76,7 @@ void chooser(int& status){
         }
         else if(status == 1){
             if(!set_text){
-                pros::lcd::set_text(1, "    red 1   ");
+                pros::lcd::set_text(1, "    red -   ");
                 set_text = true;
             }
             if(selected != 0){
@@ -89,7 +89,7 @@ void chooser(int& status){
         }
         else if(status == 2){
             if(!set_text){
-                pros::lcd::set_text(1, "    red 2   ");
+                pros::lcd::set_text(1, "    red +   ");
                 set_text = true;
             }
             if(selected != 0){
@@ -102,7 +102,7 @@ void chooser(int& status){
         }
         else if(status == 3){
             if(!set_text){
-                pros::lcd::set_text(1, "    red 3   ");
+                pros::lcd::set_text(1, "    red F   ");
                 set_text = true;
             }
             if(selected != 0){

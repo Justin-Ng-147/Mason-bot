@@ -12,7 +12,7 @@ void skills(){
     chassis.swingToPoint(-22,13,DriveSide::RIGHT,2000,{.forwards=false,.minSpeed=5,.earlyExitRange=5});
     chassis.turnToPoint(-22,13,1000,{.forwards=false});
     lemlib::Pose start_pose = chassis.getPose();
-    chassis.moveDistance(30,3000,{.forwards=false,.maxSpeed=45});
+    chassis.moveDistance(30,3000,{.forwards=false,.maxSpeed=50});
     // while(start_pose.distance(chassis.getPose()) < 25) pros::delay(10);
     while(!mogo_seated() && chassis.isInMotion()) pros::delay(10);
     pros::delay(100);
@@ -21,7 +21,7 @@ void skills(){
     chassis.cancelMotion();
 
     //get 1st ring
-    chassis.turnToPoint(-25,40,2000,{.minSpeed=5,.earlyExitRange=3});
+    chassis.turnToPoint(-25,40,2000,{.minSpeed=5,.earlyExitRange=3},false);
     intake.move(127);
     chassis.moveToPoint(-25,40,2000,{.minSpeed=5,.earlyExitRange=3},false);
     intake.move(0);
@@ -53,9 +53,10 @@ void skills(){
 
     //score mogo
     chassis.moveDistance(15,1000,{.forwards=false},false);
-    intake.move(0);
+    intake.move(-127);
     mogo.set_value(false);
     pros::delay(500);
+    intake.move(0);
     chassis.moveDistance(12,1000,{.minSpeed=5,.earlyExitRange=3});
 
     //get new mogo
@@ -71,9 +72,9 @@ void skills(){
     chassis.cancelMotion();
 
     //get 1st ring
-    chassis.turnToPoint(26,44,2000,{.minSpeed=5,.earlyExitRange=3});
+    chassis.turnToPoint(26,40,2000,{.minSpeed=5,.earlyExitRange=3},false);
     intake.move(127);
-    chassis.moveToPoint(26,44,2000,{.minSpeed=5,.earlyExitRange=3},false);
+    chassis.moveToPoint(26,40,2000,{.minSpeed=5,.earlyExitRange=3},false);
     intake.move(0);
 
     //get 2nd ring
@@ -103,23 +104,24 @@ void skills(){
 
     //score mogo
     chassis.moveDistance(15,1000,{.forwards=false},false);
-    intake.move(0);
+    intake.move(-127);
     mogo.set_value(false);
     pros::delay(500);
-    chassis.moveDistance(10,1000,{.minSpeed=5,.earlyExitRange=3});
+    intake.move(0);
+    chassis.moveDistance(7,1000,{.minSpeed=5,.earlyExitRange=3});
 
     // -20 87
     //get 1st ring
-    chassis.turnToPoint(-20,87,2000);
+    chassis.turnToPoint(-21,87,2000);
     intake.move(100);
-    chassis.moveToPoint(-20,87,2000,{},false);
+    chassis.moveToPoint(-21,87,4000,{},false);
     intake.move(0);
 
     //12 120
     //get mogo
-    chassis.turnToPoint(10,125,2000,{.forwards=false});
+    chassis.turnToPoint(10,124,1000,{.forwards=false});
     start_pose = chassis.getPose();
-    chassis.moveToPoint(10,125,4000,{.forwards=false,.maxSpeed=45});
+    chassis.moveToPoint(10,124,4000,{.forwards=false,.maxSpeed=60});
     while(!mogo_seated() && chassis.isInMotion()) pros::delay(10);
     pros::delay(100);
     mogo.set_value(true);
@@ -128,59 +130,60 @@ void skills(){
 
     //-20,87
     //get 2nd ring
-    chassis.turnToPoint(-20,87,4000);
+    chassis.turnToPoint(-25,85,2000,{.minSpeed=5,.earlyExitRange=3},false);
     intake.move(127);
-    chassis.moveToPoint(-20,87,4000,{},false);
+    chassis.moveToPoint(-25,85,2000,{},false);
     intake.move(0);
 
     //-42 93
     //get 3rd ring
-    chassis.turnToPoint(-42,90,4000);
+    chassis.turnToPoint(-44,86,4000,{.minSpeed=5,.earlyExitRange=3});
     intake.move(127);
-    chassis.moveToPoint(-42,90,4000,{},false);
+    chassis.moveToPoint(-44,86,2000,{},false);
     
 
     //get 4th ring
     // 180 4 124
     chassis.moveToPoint(0,123,4000,{.forwards=false},false);
     // 34 89 
-    chassis.turnToPoint(34,89,2000);
+    chassis.turnToPoint(34,89,2000,{.minSpeed=5,.earlyExitRange=3});
     intake.move(127);
     chassis.moveToPoint(34,89,4000,{},false);
     intake.move(0);
 
     //get 5th ring
     // 56 89
-    chassis.turnToPoint(56,90,4000);
+    chassis.turnToPoint(56,90,4000,{.minSpeed=5,.earlyExitRange=3});
     intake.move(127);
     chassis.moveToPoint(56,90,4000,{},false);
     
     //get 6th ring
-    chassis.turnToPoint(65,125,4000);
+    chassis.turnToPoint(65,125,4000,{.minSpeed=5,.earlyExitRange=3});
     swiper.set_value(true);
     intake.move(127);
-    chassis.moveToPoint(65,125,4000,{},false);
+    chassis.moveToPoint(65,125,4000);
     
     
     //score 3rd mogo
     //66 127
 
     // chassis.turnToHeading(-65,4000,{.direction=AngularDirection::CCW_COUNTERCLOCKWISE,.minSpeed=60,.earlyExitRange = 10});
-    chassis.turnToPoint(0,55,2000,{.direction=lemlib::AngularDirection::CCW_COUNTERCLOCKWISE},false);
+    chassis.turnToPoint(0,55,3000,{.direction=lemlib::AngularDirection::CCW_COUNTERCLOCKWISE},false);
     
     // chassis.moveDistance(20,1000,{},false);
     // pros::delay(500);
     mogo.set_value(false);
-    intake.move(0);
+    intake.move(-127);
     swiper.set_value(false);
     chassis.moveDistance(30,1000,{.forwards=false},false);
     pros::delay(500);
+    intake.move(0);
     chassis.moveDistance(10,1000);
 
     //get last mogo
     chassis.moveToPoint(15,115,4000,{.minSpeed=5,.earlyExitRange=3});
-    chassis.turnToPoint(-20,132,2000,{.forwards=false});
-    chassis.moveToPoint(-20,132,4000,{.forwards=false});
+    chassis.turnToPoint(-25,125,2000,{.forwards=false});
+    chassis.moveToPoint(-25,125,4000,{.forwards=false,.maxSpeed=60});
     while(!mogo_seated() && chassis.isInMotion()) pros::delay(10);
     pros::delay(100);
     mogo.set_value(true);
@@ -188,10 +191,10 @@ void skills(){
     chassis.cancelMotion();
 
 
-    chassis.turnToPoint(-55,140,2000,{},false);
+    chassis.turnToPoint(-60,130,2000,{.minSpeed=5,.earlyExitRange=3},false);
     swiper.set_value(true);
-    chassis.moveToPoint(-55,140,4000);
-    chassis.turnToPoint(0,55,2000,{.direction=lemlib::AngularDirection::CCW_COUNTERCLOCKWISE},false);
+    chassis.moveToPoint(-60,130,2000);
+    chassis.turnToPoint(0,80,2000,{.direction=lemlib::AngularDirection::CCW_COUNTERCLOCKWISE},false);
     mogo.set_value(false);
     intake.move(0);
     swiper.set_value(false);
