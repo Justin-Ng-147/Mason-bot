@@ -137,7 +137,7 @@ void run_auton(int selected){
     switch (selected)
     {
     case -3:
-        blue2();
+        blue3();
         break;
     case -2:
         blue2();

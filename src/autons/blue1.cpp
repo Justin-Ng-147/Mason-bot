@@ -9,9 +9,9 @@ void blue1(){
     //score ring
     pto.set_value(true);
     chassis.moveDistance(11,1000,{},false);
-    deploy.set_value(true);
     claw.set_value(true);
     pros::delay(200);
+    deploy.set_value(true);
 
     // get mogo
     chassis.moveToPoint(15, 31,4000,{.forwards = false,.maxSpeed=60});
@@ -33,38 +33,54 @@ void blue1(){
     right.move(0);
     
 
-    //get 2 rings
-    chassis.swingToPoint(30,44,DriveSide::RIGHT,2000,{.maxSpeed=80});
+     //get 2 rings
+    chassis.swingToPoint(30,43,DriveSide::RIGHT,2000,{.maxSpeed=80});
     intake.move(127);
-    chassis.moveToPoint(30,44,2000);
-    chassis.turnToHeading(95,1000);
+    chassis.moveToPoint(30,43,2000);
+    chassis.turnToHeading(93,1000);
     chassis.moveDistance(15,2000);
     // chassis.moveDistance(15,2000);
 
     // intake.move(0);
+    chassis.turnToHeading(70,2000,{.minSpeed=5,.earlyExitRange=3});
+    chassis.moveDistance(10,1000,{.forwards=false,.minSpeed=5,.earlyExitRange=3});
     chassis.turnToPoint(30,11,2000,{.minSpeed=5,.earlyExitRange=3},false);
     // intake.move(127);
     // chassis.moveDistance(10,2000);
     // pros::delay(1000);
     // intake.move(127);
-    chassis.moveToPoint(30,11,2000);
+    chassis.moveToPoint(30,11,2000,{.minSpeed=5,.earlyExitRange=3});
+    pros::delay(500);
+    chassis.cancelMotion();
+    left.move(-127);
+    right.move(-127);
+    pros::delay(100);
+    left.move(0);
+    right.move(0);
+    pros::delay(500);
+    chassis.moveToPoint(30,11,2000,{.minSpeed=5,.earlyExitRange=3});
     // intake.move(0);
 
     //28 -1
     // intake.move(0);
-    chassis.turnToPoint(-28,-1,2000,{.minSpeed=5,.earlyExitRange=3},false);
+    chassis.turnToPoint(-32,-1,2000,{.minSpeed=5,.earlyExitRange=3});
     // intake.move(127);
-    chassis.moveToPoint(-28,-1,2000,{.minSpeed=127,.earlyExitRange = 40});
-    chassis.moveToPoint(-28,-1,4000,{.maxSpeed = 40},false);
+    chassis.moveToPoint(-32,-1,2000,{.minSpeed=127,.earlyExitRange = 40});
+    chassis.moveToPoint(-32,-1,4000,{.maxSpeed = 40},false);
     // while(!(vision.get_by_sig(0,REDCOLOR).width>100 && distance.get_distance()<150)) pros::delay(10);
     // chassis.cancelMotion();
     // intake.move(0);
 
-    // // /22.5 30
+    chassis.moveToPoint(7,-1,4000,{.forwards=false,.minSpeed=5,.earlyExitRange=3},false);
+    chassis.turnToPoint(7,38,2000,{.minSpeed=5,.earlyExitRange=3},false);
     intake.move(0);
-    chassis.turnToPoint(-25,35,2000,{},false);
-    intake.move(127);
-    chassis.moveToPoint(-25,35,2000);
+    chassis.moveToPoint(7,38,2000);
+
+    // // /22.5 30
+    // intake.move(0);
+    // chassis.turnToPoint(-25,35,2000,{},false);
+    // intake.move(127);
+    // chassis.moveToPoint(-25,35,2000);
 
     // // -54 -6
     // chassis.turnToPoint(-44,-5,4000);

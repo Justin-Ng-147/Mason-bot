@@ -45,7 +45,7 @@ void sort(int color){
         if(rtn.width>100 && colors == 0 && distance.get_distance()<150){
           colors = 1;
         }
-
+        // printf("found\n");
         // if(count == 1){
           if(colors == 1){
             // printf("found\n");

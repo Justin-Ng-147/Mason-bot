@@ -175,7 +175,7 @@ void skills(){
     mogo.set_value(false);
     intake.move(-127);
     swiper.set_value(false);
-    chassis.moveDistance(30,1000,{.forwards=false},false);
+    chassis.moveDistance(20,2000,{.forwards=false,.maxSpeed=80},false);
     pros::delay(500);
     intake.move(0);
     chassis.moveDistance(10,1000);
@@ -190,17 +190,32 @@ void skills(){
     pros::delay(100);
     chassis.cancelMotion();
 
-
-    chassis.turnToPoint(-60,130,2000,{.minSpeed=5,.earlyExitRange=3},false);
-    swiper.set_value(true);
-    chassis.moveToPoint(-60,130,2000);
-    chassis.turnToPoint(0,80,2000,{.direction=lemlib::AngularDirection::CCW_COUNTERCLOCKWISE},false);
-    mogo.set_value(false);
-    intake.move(0);
-    swiper.set_value(false);
-    chassis.moveDistance(30,1000,{.forwards=false},false);
-    pros::delay(500);
-    chassis.moveDistance(10,1000);
+    if(mogo_seated()){
+        chassis.turnToPoint(-60,130,2000,{.minSpeed=5,.earlyExitRange=3},false);
+        swiper.set_value(true);
+        chassis.moveToPoint(-60,130,2000);
+        chassis.turnToPoint(0,80,2000,{.direction=lemlib::AngularDirection::CCW_COUNTERCLOCKWISE},false);
+        mogo.set_value(false);
+        intake.move(0);
+        swiper.set_value(false);
+        chassis.moveDistance(30,1000,{.forwards=false},false);
+        pros::delay(500);
+        chassis.moveDistance(10,1000);
+    }
+    else{
+        chassis.turnToPoint(-60,130,2000,{.minSpeed=5,.earlyExitRange=3},false);
+        intake.move(0);
+        // swiper.set_value(true);
+        chassis.moveToPoint(-60,130,2000);
+        // chassis.turnToPoint(0,80,2000,{.direction=lemlib::AngularDirection::CCW_COUNTERCLOCKWISE},false);
+        // mogo.set_value(false);
+        // intake.move(0);
+        // swiper.set_value(false);
+        chassis.moveDistance(10,1000,{.forwards=false});
+        chassis.moveDistance(20,1000,{.maxSpeed=60},false);
+        pros::delay(500);
+        chassis.moveDistance(10,1000,{.forwards=false});
+    }
 
     // //score 4th mogo
     // intake.move(127);

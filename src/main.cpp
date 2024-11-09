@@ -10,7 +10,7 @@ false: display competition screen to choose different autons
 bool testing = false; 
 
 int auton_status = 0;
-int test_auton = SKILLS;
+int test_auton = RED1;
 
 
 
@@ -36,7 +36,8 @@ void initialize() {
 	// sort_thrower.set_value(true);
 
 	if(testing){
-		sort(BLUECOLOR);
+		if (test_auton < 0) sort(REDCOLOR);
+		else sort(BLUECOLOR);
 		pros::Task screen_task([&]() {
 			while (true) {
 				// print robot location to the brain screen
@@ -63,10 +64,10 @@ void initialize() {
  * the robot is enabled, this task will exit.
  */
 void disabled() {
-	if(!testing){
-		chooser(auton_status);
-		pros::lcd::set_text(1, "auton chosen");
-	}
+	// if(!testing){
+	// 	chooser(auton_status);
+	// 	pros::lcd::set_text(1, "auton chosen");
+	// }
 }
 
 /**

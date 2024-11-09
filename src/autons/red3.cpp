@@ -1,7 +1,7 @@
 #include "main.h"
 
 void red3(){
-    //setup
+     //setup
     chassis.setPose(0,0,146);
     intake.set_encoder_units_all(MOTOR_ENCODER_ROTATIONS);
     mogo.set_value(false);
@@ -9,9 +9,9 @@ void red3(){
     //score ring
     pto.set_value(true);
     chassis.moveDistance(11,1000,{},false);
-    deploy.set_value(true);
     claw.set_value(true);
     pros::delay(200);
+    deploy.set_value(true);
 
     // get mogo
     chassis.moveToPoint(-13, 31,4000,{.forwards = false,.maxSpeed=60});
@@ -37,21 +37,34 @@ void red3(){
     chassis.swingToPoint(-30,44,DriveSide::LEFT,2000,{.maxSpeed=80});
     intake.move(127);
     chassis.moveToPoint(-30,44,2000);
-    chassis.turnToHeading(265,1000);
+    chassis.turnToHeading(267,1000);
     chassis.moveDistance(15,2000,{},false);
     // chassis.moveDistance(15,2000);
+
+    chassis.turnToHeading(290,1000,{.minSpeed=5,.earlyExitRange=3});
+    chassis.moveDistance(10,1000,{.forwards=false,.minSpeed=5,.earlyExitRange=3});
+    chassis.turnToPoint(-30,11,2000,{.minSpeed=5,.earlyExitRange=3});
 
     chassis.turnToPoint(-30,11,2000,{.minSpeed=5,.earlyExitRange=3});
     // chassis.moveDistance(10,2000);
     // pros::delay(1000);
     // intake.move(127);
-    chassis.moveToPoint(-30,11,4000);
+    chassis.moveToPoint(-30,11,4000,{.minSpeed=5,.earlyExitRange=3});
+    pros::delay(500);
+    chassis.cancelMotion();
+    left.move(-127);
+    right.move(-127);
+    pros::delay(100);
+    left.move(0);
+    right.move(0);
+    pros::delay(500);
+    chassis.moveToPoint(-30,11,4000,{.minSpeed=5,.earlyExitRange=3});
     // intake.move(0);
 
     //28 -1
-    chassis.turnToPoint(28,-1,2000,{.minSpeed=5,.earlyExitRange=3});
-    chassis.moveToPoint(28,-1,2000,{.minSpeed=127,.earlyExitRange = 40});
-    chassis.moveToPoint(28,-1,4000,{.maxSpeed = 40},false);
+    chassis.turnToPoint(32,-1,2000,{.minSpeed=5,.earlyExitRange=3});
+    chassis.moveToPoint(32,-1,2000,{.minSpeed=127,.earlyExitRange = 40});
+    chassis.moveToPoint(32,-1,4000,{.maxSpeed = 40},false);
     // while(!(vision.get_by_sig(0,REDCOLOR).width>100 && distance.get_distance()<150)) pros::delay(10);
     // chassis.cancelMotion();
     // intake.move(0);
