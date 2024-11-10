@@ -144,7 +144,7 @@ void skills(){
 
     //get 4th ring
     // 180 4 124
-    chassis.moveToPoint(0,123,4000,{.forwards=false},false);
+    chassis.moveToPoint(0,123,4000,{.forwards=false,.minSpeed=5,.earlyExitRange=3},false);
     // 34 89 
     chassis.turnToPoint(34,89,2000,{.minSpeed=5,.earlyExitRange=3});
     intake.move(127);
@@ -200,7 +200,7 @@ void skills(){
         swiper.set_value(false);
         chassis.moveDistance(30,1000,{.forwards=false},false);
         pros::delay(500);
-        chassis.moveDistance(10,1000);
+        chassis.moveDistance(10,1000,{.minSpeed=5,.earlyExitRange=3});
     }
     else{
         chassis.turnToPoint(-60,130,2000,{.minSpeed=5,.earlyExitRange=3},false);
@@ -211,10 +211,10 @@ void skills(){
         // mogo.set_value(false);
         // intake.move(0);
         // swiper.set_value(false);
-        chassis.moveDistance(10,1000,{.forwards=false});
+        chassis.moveDistance(10,1000,{.forwards=false,.minSpeed=5,.earlyExitRange=3});
         chassis.moveDistance(20,1000,{.maxSpeed=60},false);
         pros::delay(500);
-        chassis.moveDistance(10,1000,{.forwards=false});
+        chassis.moveDistance(10,1000,{.forwards=false,.minSpeed=5,.earlyExitRange=3});
     }
 
     // //score 4th mogo
