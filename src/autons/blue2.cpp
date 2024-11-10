@@ -195,16 +195,16 @@ void blue2(){
     // chassis.turnToHeading(0,1000,{.minSpeed = 10,.earlyExitRange=3});
     // chassis.moveDistance(15,2000);
 
-    // chassis.turnToPoint(-14,38,2000,{},false);
-    // intake.move(127);
-    // chassis.moveToPoint(-14,38,2000);
-    // chassis.turnToHeading(180,2000);
-    //  if(mogo_seated()){
-    //     pros::delay(50);
-    //     mogo.set_value(true);
-    //     pros::delay(50);
-    //     // chassis.cancelMotion();
-    // }
+    chassis.turnToPoint(-14,38,2000,{},false);
+    intake.move(127);
+    chassis.moveToPoint(-14,38,2000);
+    chassis.turnToHeading(180,2000);
+     if(mogo_seated()){
+        pros::delay(50);
+        mogo.set_value(true);
+        pros::delay(50);
+        // chassis.cancelMotion();
+    }
 
 
 

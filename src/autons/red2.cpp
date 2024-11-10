@@ -178,19 +178,19 @@ void red2(){
     // mogo.set_value(false);
 
     //get other mogo
-    // chassis.turnToPoint(20,38,2000,{},false);
-    // intake.move(127);
-    // chassis.moveToPoint(20,38,2000);
-    // chassis.turnToHeading(180,1000);
-    // if(mogo_seated()){
-    //     pros::delay(50);
-    //     mogo.set_value(true);
-    //     pros::delay(50);
-    //     // chassis.cancelMotion();
-    // }
+    chassis.turnToPoint(20,38,2000,{},false);
+    intake.move(127);
+    chassis.moveToPoint(20,38,2000);
+    chassis.turnToHeading(180,1000);
+    if(mogo_seated()){
+        pros::delay(50);
+        mogo.set_value(true);
+        pros::delay(50);
+        // chassis.cancelMotion();
+    }
 
-    chassis.turnToPoint(-23,39,2000,{.minSpeed=30,.earlyExitRange=3},false);
-    intake.move(0);
-    chassis.moveToPoint(-23,39,2000);
+    // chassis.turnToPoint(-23,39,2000,{.minSpeed=30,.earlyExitRange=3},false);
+    // intake.move(0);
+    // chassis.moveToPoint(-23,39,2000);
 }
 
