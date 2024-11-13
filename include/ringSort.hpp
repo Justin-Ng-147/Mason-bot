@@ -8,6 +8,7 @@
     bool mogo_seated();
     void init_intake();
     void set_intake_speed(int speed);
+    void fast_move(float x, float y, int timeout,bool async = true);
 
     extern pros::Task* intake_task;
 

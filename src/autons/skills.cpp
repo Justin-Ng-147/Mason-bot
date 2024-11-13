@@ -2,10 +2,7 @@
 
 
 
-void fast_move(float x, float y, int timeout,bool async = true){
-    chassis.moveToPoint(x,y,timeout,{.minSpeed=5, .earlyExitRange=10});
-    chassis.moveToPoint(x,y,timeout,{.maxSpeed = 40, .minSpeed = 5, .earlyExitRange = 3},async);
-}
+
 
 void skills(){
     init_intake();
