@@ -72,21 +72,21 @@ void skills(){
     set_intake_speed(127);
     // chassis.moveToPoint(-25,40,2000,{.minSpeed=5,.earlyExitRange=3},false);
     fast_move(-25,40,2000,false);
-    set_intake_speed(0);
+    // set_intake_speed(0);
 
     //get 2nd ring
     chassis.turnToPoint(-48,37,2000,{.minSpeed=5,.earlyExitRange=3});
     set_intake_speed(127);
     // chassis.moveToPoint(-48,37,2000,{.minSpeed=5,.earlyExitRange=3},false);
     fast_move(-48,37,2000,false);
-    set_intake_speed(0);
+    // set_intake_speed(0);
     
     //get 3rd ring
     chassis.turnToPoint(-60,62,2000,{.minSpeed=5,.earlyExitRange=3});
     set_intake_speed(127);
     // chassis.moveToPoint(-60,62,2000,{},false);
     fast_move(-60,62,2000,false);
-    set_intake_speed(0);
+    // set_intake_speed(0);
 
     //get 4th and 5th ring
     // chassis.turnToPoint(-46,4,4000,{.minSpeed=10,.earlyExitRange=5});
@@ -94,7 +94,7 @@ void skills(){
     set_intake_speed(127);
     chassis.moveToPoint(-48,5,2000,{.minSpeed=60,.earlyExitRange=20});
     chassis.moveToPoint(-48,5,2000,{.maxSpeed=40},false);
-    set_intake_speed(0);
+    // set_intake_speed(0);
 
     //get 6th ring
     set_intake_speed(127);
@@ -126,21 +126,21 @@ void skills(){
     set_intake_speed(127);
     // chassis.moveToPoint(26,40,2000,{.minSpeed=5,.earlyExitRange=3},false);
     fast_move(26,40,2000,false);
-    set_intake_speed(0);
+    // set_intake_speed(0);
 
     //get 2nd ring
     chassis.turnToPoint(50,44,2000,{.minSpeed=5,.earlyExitRange=3});
     set_intake_speed(127);
     // chassis.moveToPoint(48,44,2000,{.minSpeed=5,.earlyExitRange=3},false);
     fast_move(50,44,2000,false);
-    set_intake_speed(0);
+    // set_intake_speed(0);
     
     //get 3rd ring
     chassis.turnToPoint(63,69,2000,{.minSpeed=5,.earlyExitRange=3});
     set_intake_speed(127);
     // chassis.moveToPoint(63,69,2000,{},false);
     fast_move(63,69,2000,false);
-    set_intake_speed(0);
+    // set_intake_speed(0);
 
     //get 4th and 5th ring
     // chassis.turnToPoint(-46,4,4000,{.minSpeed=10,.earlyExitRange=5});
@@ -148,7 +148,7 @@ void skills(){
     set_intake_speed(127);
     chassis.moveToPoint(54,6,2000,{.minSpeed=60,.earlyExitRange=20});
     chassis.moveToPoint(54,6,2000,{.maxSpeed=40},false);
-    set_intake_speed(0);
+    // set_intake_speed(0);
 
     //get 6th ring
     set_intake_speed(127);
@@ -188,7 +188,7 @@ void skills(){
     set_intake_speed(127);
     // chassis.moveToPoint(-25,85,2000,{},false);
     fast_move(-25,85,2000,false);
-    set_intake_speed(0);
+    // set_intake_speed(0);
 
     //-42 93
     //get 3rd ring
