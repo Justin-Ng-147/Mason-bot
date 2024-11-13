@@ -10,7 +10,7 @@ false: display competition screen to choose different autons
 bool testing = true; 
 
 int auton_status = 0;
-int test_auton = SKILLS;
+int test_auton = RED3;
 
 
 
@@ -27,7 +27,7 @@ void initialize() {
 	// chassis = init_drive();
 	chassis.calibrate();
     pros::delay(100);
-    chassis.setPose(0,0,0);
+    chassis.setPose(0,0,-146);
 	// chassis.setPose(0,0,-12);
 
 	mogo.set_value(true);
