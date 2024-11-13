@@ -96,3 +96,43 @@ void sort(int color){
 bool mogo_seated(){
   return mogo_distance.get_distance()<45;
 }
+
+
+pros::Mutex intake_mutex;
+int intake_speed = 0;
+pros::Task* intake_task = nullptr;
+
+void init_intake(){
+    if (intake_task == nullptr) {
+        intake_task = new pros::Task{[=]{
+            int prev_speed = 0;
+            while(true){
+                intake_mutex.lock();
+                int speed = intake_speed;
+                intake_mutex.unlock();
+
+                intake.move(speed);
+                if(speed != prev_speed) pros::delay(100);
+                prev_speed= speed;
+                
+                if(speed > 0 && intake.get_efficiency() < 5){
+                    intake.move(-127);
+                    pros::delay(500);
+                    intake.move(0);
+                    prev_speed = 0;
+                }
+                pros::delay(10);
+            }
+        }};
+    }
+}
+
+void set_intake_speed(int speed){
+    pros::Task intake_task2{[=]{
+        intake_mutex.lock();
+        intake_speed = speed;
+        intake_mutex.unlock();
+    }};
+    // intake_task2.remove();
+    // delete &intake_task2;
+}

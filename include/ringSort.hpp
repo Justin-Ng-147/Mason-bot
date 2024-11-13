@@ -6,5 +6,9 @@
 
     void sort(int color);
     bool mogo_seated();
+    void init_intake();
+    void set_intake_speed(int speed);
+
+    extern pros::Task* intake_task;
 
 #endif
