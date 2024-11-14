@@ -117,7 +117,6 @@ void red3(){
     //score ring
     // pto.set_value(true);
     chassis.moveDistance(11,1000,{},false);
-    // claw.set_value(true);
     deploy.set_value(true);
     claw.set_value(true);
     pros::delay(200);
