@@ -7,6 +7,8 @@ void blue3();
 void red1();
 void red2();
 void red3();
+void red4();
+void red5();
 void skills();
 
 #endif

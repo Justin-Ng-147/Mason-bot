@@ -7,7 +7,9 @@
 #define RED1 1
 #define RED2 2
 #define RED3 3
-#define SKILLS 4
+#define RED4 4
+#define RED5 5
+#define SKILLS 6
 
 void chooser(int& status);
 
