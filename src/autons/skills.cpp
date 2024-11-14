@@ -5,7 +5,7 @@
 
 
 void skills(){
-    init_intake();
+    // init_intake();
     left.set_brake_mode_all(pros::motor_brake_mode_e::E_MOTOR_BRAKE_BRAKE);
     right.set_brake_mode_all(pros::motor_brake_mode_e::E_MOTOR_BRAKE_BRAKE);
     
