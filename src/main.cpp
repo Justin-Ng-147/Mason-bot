@@ -30,6 +30,7 @@ void initialize() {
     chassis.setPose(0,0,-146);
 	// chassis.setPose(0,0,-12);
 
+	init_intake();
 	mogo.set_value(true);
 	pto.set_value(false);
 
@@ -137,13 +138,16 @@ void opcontrol() {
 
 		#pragma region intake r1
 		if(master.get_digital(DIGITAL_R1)){
-			intake.move(127);
+			// intake.move(127);
+			set_intake_speed(127);
 		}
 		else if(master.get_digital(DIGITAL_R2)){
-			intake.move(-127);
+			// intake.move(-127);
+			set_intake_speed(-127);
 		}
 		else{
-			intake.move(0);
+			// intake.move(0);
+			set_intake_speed(0);
 		}
 		#pragma endregion intake
 
