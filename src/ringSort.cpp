@@ -26,7 +26,7 @@ void setup(){
 int ring_tossed(double start){
   double dif = fabs(intake.get_position())-fabs(start);
   // printf("%f\n",dif);
-  if(dif > 1.4) return 2;
+  if(dif > 1.3) return 2;
   else if(dif > 0) return 1;
   else return 0;
 }
@@ -115,7 +115,7 @@ void init_intake(){
                 if(speed != prev_speed) pros::delay(100);
                 prev_speed= speed;
                 
-                if(speed > 0 && intake.get_efficiency() < 5){
+                if(speed > 0 && intake.get_efficiency() < 3){
                     intake.move(-127);
                     pros::delay(500);
                     intake.move(0);
@@ -138,6 +138,6 @@ void set_intake_speed(int speed){
 }
 
 void fast_move(float x, float y, int timeout,bool async = true){
-    chassis.moveToPoint(x,y,timeout,{.minSpeed=5, .earlyExitRange=10});
+    chassis.moveToPoint(x,y,timeout,{.minSpeed=5, .earlyExitRange=15});
     chassis.moveToPoint(x,y,timeout,{.maxSpeed = 40, .minSpeed = 5, .earlyExitRange = 3},async);
 }
