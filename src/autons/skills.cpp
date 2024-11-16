@@ -97,10 +97,10 @@ void skills(){
     // set_intake_speed(0);
     
     //get 3rd ring
-    chassis.turnToPoint(65,69,2000,{.minSpeed=5,.earlyExitRange=3});
+    chassis.turnToPoint(66,68,2000,{.minSpeed=5,.earlyExitRange=3});
     set_intake_speed(127);
     // chassis.moveToPoint(63,69,2000,{},false);
-    fast_move(65,69,2000,false);
+    fast_move(66,68,2000,false);
     // set_intake_speed(0);
 
     //get 4th and 5th ring
@@ -179,10 +179,10 @@ void skills(){
     fast_move(56,95,2000,false);
     
     //get 6th ring
-    chassis.turnToPoint(66,125,2000,{.minSpeed=5,.earlyExitRange=3});
+    chassis.turnToPoint(68,125,2000,{.minSpeed=5,.earlyExitRange=3});
     swiper.set_value(true);
     set_intake_speed(127);
-    chassis.moveToPoint(66,125,2000);
+    chassis.moveToPoint(68,125,2000);
     // while(!(vision.get_by_sig(0,REDCOLOR).width>100 && distance.get_distance()<150)&&chassis.isInMotion()) pros::delay(10);
     // set_intake_speed(0);
     
@@ -203,61 +203,72 @@ void skills(){
     chassis.moveDistance(20,1000,{.forwards=false,.maxSpeed=70},false);
     pros::delay(500);
     set_intake_speed(0);
-    chassis.moveDistance(10,1000,{.minSpeed=5,.earlyExitRange=3});
+    chassis.moveDistance(20,1000,{.minSpeed=5,.earlyExitRange=3});
 
 
 
 
     //get last mogo
+    // set_intake_speed(127);
+    // chassis.moveToPoint(15,115,4000,{},false);
+    // set_intake_speed(0);
+    // chassis.turnToPoint(-25,128,2000,{.forwards=false});
+    // chassis.moveToPoint(-25,128,2000,{.forwards=false,.maxSpeed=60});
+    // while(!mogo_seated() && chassis.isInMotion()) pros::delay(10);
+    // pros::delay(100);
+    // mogo.set_value(true);
+    // pros::delay(100);
+    // chassis.cancelMotion();
+
+    // set_intake_speed(127);
+
+    // if(mogo_seated()){
+    //     chassis.turnToPoint(-60,130,2000,{.minSpeed=5,.earlyExitRange=3},false);
+    //     swiper.set_value(true);
+    //     chassis.moveToPoint(-60,130,2000);
+    //     chassis.turnToPoint(0,80,2000,{.direction=lemlib::AngularDirection::CCW_COUNTERCLOCKWISE,.minSpeed=5,.earlyExitRange=3},false);
+    //     left.brake();
+    //     right.brake();
+    //     mogo.set_value(false);
+    //     set_intake_speed(0);
+    //     swiper.set_value(false);
+    //     chassis.moveDistance(30,1000,{.forwards=false},false);
+    //     // pros::delay(500);
+    //     chassis.moveDistance(10,1000,{.minSpeed=5,.earlyExitRange=3});
+    // }
+    // else{
+    //     // chassis.swingToPoint(-60,130,lemlib::DriveSide::LEFT,2000,{.direction=lemlib::AngularDirection::CCW_COUNTERCLOCKWISE,.minSpeed=5,.earlyExitRange=3},false);
+    //     chassis.turnToPoint(-60,130,2000,{.direction=lemlib::AngularDirection::CCW_COUNTERCLOCKWISE,.minSpeed=5,.earlyExitRange=3},false);
+    //     set_intake_speed(0);
+    //     // swiper.set_value(true);
+    //     chassis.moveToPoint(-60,130,2000);
+    //     // chassis.turnToPoint(0,80,2000,{.direction=lemlib::AngularDirection::CCW_COUNTERCLOCKWISE},false);
+    //     // mogo.set_value(false);
+    //     // set_intake_speed(0);
+    //     // swiper.set_value(false);
+    //     chassis.moveDistance(10,1000,{.forwards=false,.minSpeed=5,.earlyExitRange=3});
+    //     chassis.moveDistance(20,1000,{.maxSpeed=60},false);
+    //     // pros::delay(500);
+    //     chassis.moveDistance(10,1000,{.forwards=false,.minSpeed=5,.earlyExitRange=3});
+    // }
+
+    chassis.turnToPoint(-20,122,2000,{.minSpeed=5,.earlyExitRange=3});
     set_intake_speed(127);
-    chassis.moveToPoint(15,115,4000,{},false);
+    // intake.move(127);
+    chassis.moveToPoint(-20,122,2000,{},false);
     set_intake_speed(0);
-    chassis.turnToPoint(-25,128,2000,{.forwards=false});
-    chassis.moveToPoint(-25,128,2000,{.forwards=false,.maxSpeed=60});
-    while(!mogo_seated() && chassis.isInMotion()) pros::delay(10);
-    pros::delay(100);
-    mogo.set_value(true);
-    pros::delay(100);
-    chassis.cancelMotion();
-
-    set_intake_speed(127);
-
-    if(mogo_seated()){
-        chassis.turnToPoint(-60,130,2000,{.minSpeed=5,.earlyExitRange=3},false);
-        swiper.set_value(true);
-        chassis.moveToPoint(-60,130,2000);
-        chassis.turnToPoint(0,80,2000,{.direction=lemlib::AngularDirection::CCW_COUNTERCLOCKWISE,.minSpeed=5,.earlyExitRange=3},false);
-        left.brake();
-        right.brake();
-        mogo.set_value(false);
-        set_intake_speed(0);
-        swiper.set_value(false);
-        chassis.moveDistance(30,1000,{.forwards=false},false);
-        // pros::delay(500);
-        chassis.moveDistance(10,1000,{.minSpeed=5,.earlyExitRange=3});
-    }
-    else{
-        // chassis.swingToPoint(-60,130,lemlib::DriveSide::LEFT,2000,{.direction=lemlib::AngularDirection::CCW_COUNTERCLOCKWISE,.minSpeed=5,.earlyExitRange=3},false);
-        chassis.turnToPoint(-60,130,2000,{.direction=lemlib::AngularDirection::CCW_COUNTERCLOCKWISE,.minSpeed=5,.earlyExitRange=3},false);
-        set_intake_speed(0);
-        // swiper.set_value(true);
-        chassis.moveToPoint(-60,130,2000);
-        // chassis.turnToPoint(0,80,2000,{.direction=lemlib::AngularDirection::CCW_COUNTERCLOCKWISE},false);
-        // mogo.set_value(false);
-        // set_intake_speed(0);
-        // swiper.set_value(false);
-        chassis.moveDistance(10,1000,{.forwards=false,.minSpeed=5,.earlyExitRange=3});
-        chassis.moveDistance(20,1000,{.maxSpeed=60},false);
-        // pros::delay(500);
-        chassis.moveDistance(10,1000,{.forwards=false,.minSpeed=5,.earlyExitRange=3});
-    }
+    // intake.move(0);
+    chassis.turnToHeading(-80, 1000,{.minSpeed=5,.earlyExitRange=3});
+    chassis.moveDistance(35,2000);
+    chassis.moveDistance(10,1000,{.forwards=false});
 
     hang.set_value(true);
     chassis.turnToPoint(-4.5,79,2000,{.minSpeed=5,.earlyExitRange=3});
-    chassis.moveToPoint(-4.5,79,2000,{.minSpeed=5,.earlyExitRange=30},false);
+    chassis.moveToPoint(-4.5,79,2000,{.minSpeed=5,.earlyExitRange=25});
     set_intake_speed(0);
+    chassis.turnToHeading(135,1000);
     chassis.moveDistance(50,1000,{.maxSpeed=60});
-    chassis.moveDistance(10,200,{.forwards=false});
+    // chassis.moveDistance(10,200,{.forwards=false,.maxSpeed=40});
     // intake_task->remove();
 }
 
