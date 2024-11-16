@@ -137,9 +137,11 @@ void blue2(){
 
     // chassis.moveToPoint(-7,40,4000,{.minSpeed=20,.earlyExitRange=20},false);
     chassis.moveToPoint(-14,38,4000,{.minSpeed=20,.earlyExitRange=8});
-    intake.move(-127);
+    // intake.move(-127);
+    set_intake_speed(-127);
     pros::delay(100);
-    intake.move(0);
+    // intake.move(0);
+    set_intake_speed(0);
     while(chassis.isInMotion()) pros::delay(10);
     swiper.set_value(true);
     left.move(-127);
@@ -150,10 +152,11 @@ void blue2(){
     
 
     //get mogo
-    chassis.turnToPoint(12,27,2000,{.forwards=false},false);
+    chassis.turnToPoint(12,27,1000,{.forwards=false},false);
     
     // chassis.moveToPoint(-12,28,2000,{.forwards=false});
     chassis.moveDistance(40,3000,{.forwards=false,.maxSpeed=60});
+    chassis.waitUntil(10);
     swiper.set_value(false);
     while(!mogo_seated() && chassis.isInMotion()) pros::delay(10);
     pros::delay(50);
@@ -162,9 +165,11 @@ void blue2(){
     chassis.cancelMotion();
 
     //20 36
+    chassis.moveToPoint(-10,30,2000,{.minSpeed=5,.earlyExitRange=3});
     chassis.moveToPoint(-20,40,2000);
-    pros::delay(200);
-    intake.move(127);
+    // pros::delay(200);
+    // intake.move(127);
+    set_intake_speed(127);
     // intake.move(0);
 
 
@@ -196,7 +201,7 @@ void blue2(){
     // chassis.moveDistance(15,2000);
 
     chassis.turnToPoint(-14,38,2000,{},false);
-    intake.move(127);
+    // intake.move(127);
     chassis.moveToPoint(-14,38,2000);
     chassis.turnToHeading(180,2000);
      if(mogo_seated()){

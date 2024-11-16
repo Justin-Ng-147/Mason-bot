@@ -115,6 +115,7 @@ void red2(){
     
     // chassis.moveToPoint(-12,28,2000,{.forwards=false});
     chassis.moveDistance(40,3000,{.forwards=false,.maxSpeed=60});
+    // chassis.waitUntil(15);
     swiper.set_value(false);
     while(!mogo_seated() && chassis.isInMotion()) pros::delay(10);
     pros::delay(100);
@@ -124,9 +125,11 @@ void red2(){
 
     //20 36
     //intake ring
-    chassis.moveToPoint(15,32,2000);
-    pros::delay(200);
-    intake.move(127);
+    // chassis.moveToPoint(-10,30,2000,{.minSpeed=5,.earlyExitRange=3});
+    chassis.moveToPoint(18,32,2000);
+    set_intake_speed(127);
+    // pros::delay(200);
+    // intake.move(127);
     // intake.move(0);
 
     //start
@@ -156,8 +159,9 @@ void red2(){
     chassis.moveToPoint(-4,-5,2000,{.forwards=false},false);
     chassis.turnToPoint(22,-12,2000,{},false);
     swiper.set_value(true);
-    chassis.moveToPoint(22,-12,2000,{},false);
-    intake.move(0);
+    chassis.moveToPoint(22,-12,2000);
+    // intake.move(0);
+    set_intake_speed(0);
     chassis.turnToHeading(45,3000,{.direction=AngularDirection::CCW_COUNTERCLOCKWISE, .minSpeed=127, .earlyExitRange = 3},false);
     left.move(127);
     right.move(-127);
@@ -178,8 +182,9 @@ void red2(){
     // mogo.set_value(false);
 
     //get other mogo
-    chassis.turnToPoint(20,38,2000,{},false);
-    intake.move(127);
+    chassis.turnToPoint(20,38,2000,{});
+    // intake.move(127);
+    set_intake_speed(127);
     chassis.moveToPoint(20,38,2000);
     chassis.turnToHeading(180,1000);
     if(mogo_seated()){

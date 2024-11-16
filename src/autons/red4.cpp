@@ -10,14 +10,15 @@ void red4(){
     mogo.set_value(false);
 
     //score ring
-    // pto.set_value(true);
-    chassis.moveDistance(10,1000,{},false);
+    pto.set_value(true);
+    chassis.moveDistance(11,1000,{},false);
     deploy.set_value(true);
     claw.set_value(true);
     pros::delay(200);
 
     // get mogo
     chassis.moveToPoint(-13, 31,4000,{.forwards = false,.maxSpeed=60});
+    pto.set_value(false);
     while(!mogo_seated() && chassis.isInMotion()) pros::delay(10);
     pros::delay(50);
     mogo.set_value(true);

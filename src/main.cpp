@@ -7,10 +7,10 @@
 true: display odometry data and will run the test auton
 false: display competition screen to choose different autons
 */
-bool testing = true; 
+bool testing = false;
 
 int auton_status = 0;
-int test_auton = RED3;
+int test_auton = RED2;
 
 
 
@@ -27,7 +27,8 @@ void initialize() {
 	// chassis = init_drive();
 	chassis.calibrate();
     pros::delay(100);
-    chassis.setPose(0,0,-146);
+    // chassis.setPose(0,0,146);
+	chassis.setPose(0,0,0);
 	// chassis.setPose(0,0,-12);
 
 	init_intake();
@@ -171,11 +172,11 @@ void opcontrol() {
 		else if(master.get_digital(DIGITAL_L1) != 1 && mogo_pressed){
 			mogo_pressed = false;
 		}
-		else if(mogo_seated() && !mogo_flag && !mogo_pressed)
-		{
-			mogo.set_value(true);
-			mogo_flag = true;
-		}
+		// else if(mogo_seated() && !mogo_flag && !mogo_pressed)
+		// {
+		// 	mogo.set_value(true);
+		// 	mogo_flag = true;
+		// }
 
 		if(master.get_digital(DIGITAL_Y) && !hang_pressed){
 			hang_flag = !hang_flag;
