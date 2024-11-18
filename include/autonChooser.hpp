@@ -1,7 +1,8 @@
 #ifndef _AUTONCHOOSER_HPP_
 #define _AUTONCHOOSER_HPP_
 
-#define BLUE -3
+#define BLUE4 -4
+#define BLUE3 -3
 #define BLUE2 -2
 #define BLUE1 -1
 #define RED1 1

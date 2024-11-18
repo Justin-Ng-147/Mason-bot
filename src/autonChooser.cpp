@@ -23,7 +23,20 @@ void chooser(int& status){
     {
         selected = convert_bit(pros::lcd::read_buttons());
         // printf("%d , %d\n",pros::lcd::read_buttons(),status);
-        if(status == -3){
+        if(status == -4){
+            if(!set_text){
+                pros::lcd::set_text(1, "    blue 4   ");
+                set_text = true;
+            }
+            if(selected != 0){
+                set_text=false;
+                if(selected == 100) return;
+                else status += selected;
+                pros::delay(500);
+                continue;
+            }
+        }
+        else if(status == -3){
             if(!set_text){
                 pros::lcd::set_text(1, "    blue F   ");
                 set_text = true;
@@ -162,6 +175,9 @@ void chooser(int& status){
 void run_auton(int selected){
     switch (selected)
     {
+    case -4:
+        blue4();
+        break;
     case -3:
         blue3();
         break;
