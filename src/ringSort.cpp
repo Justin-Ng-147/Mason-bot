@@ -94,7 +94,7 @@ void sort(int color){
 }
 
 bool mogo_seated(){
-  return mogo_distance.get_distance()<45;
+  return mogo_distance.get_distance()<40;
 }
 
 
@@ -115,7 +115,7 @@ void init_intake(){
                 if(speed != prev_speed) pros::delay(100);
                 prev_speed= speed;
                 
-                if(speed > 0 && intake.get_efficiency() < 3){
+                if(speed > 0 && intake.get_efficiency() < 1){
                     intake.move(-127);
                     pros::delay(500);
                     intake.move(0);

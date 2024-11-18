@@ -7,7 +7,7 @@
 true: display odometry data and will run the test auton
 false: display competition screen to choose different autons
 */
-bool testing = false;
+bool testing = true;
 
 int auton_status = 0;
 int test_auton = BLUE4;
@@ -28,7 +28,7 @@ void initialize() {
 	chassis.calibrate();
     pros::delay(100);
     // chassis.setPose(0,0,146);
-	chassis.setPose(0,0,0);
+	chassis.setPose(0,0,-146);
 	// chassis.setPose(0,0,-12);
 
 	init_intake();
