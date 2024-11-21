@@ -54,7 +54,7 @@ void blue4(){
     fast_move(-20,8,2000,true);
     mogo.set_value(false);
     // chassis.moveToPoint(28,-1,4000,{.maxSpeed = 40});
-    while(!(vision.get_by_sig(0,REDCOLOR).width>100 && distance.get_distance()<150)&&chassis.isInMotion()) pros::delay(10);
+    while(!(vision.get_by_sig(0,BLUECOLOR).width>100 && distance.get_distance()<150)&&chassis.isInMotion()) pros::delay(10);
     set_intake_speed(0);
 
 

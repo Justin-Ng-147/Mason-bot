@@ -7,13 +7,13 @@ void red5(){
     mogo.set_value(false);
 
     //score ring
-    // pto.set_value(true);
+    pto.set_value(true);
     chassis.moveDistance(11,1000,{},false);
     deploy.set_value(true);
     claw.set_value(true);
     pros::delay(200);
 
-    // pto.set_value(false);
+    pto.set_value(false);
     chassis.moveToPoint(15, 31,4000,{.forwards = false,.maxSpeed=60});
     while(!mogo_seated() && chassis.isInMotion()) pros::delay(10);
     pros::delay(50);
@@ -32,31 +32,32 @@ void red5(){
     set_intake_speed(127);
     // chassis.moveToPoint(-23,-5,2000,{.minSpeed=5,.earlyExitRange=40});
     // chassis.moveToPoint(-23,-5,2000,{.maxSpeed=50,.minSpeed=5,.earlyExitRange=3},false);
-    chassis.moveToPoint(-10,12,2000,{},false);
+    chassis.moveToPoint(-10,12,2000);
     pros::Clock::time_point start_time =  pros::Clock::now();
-    while(!(vision.get_by_sig(0,BLUECOLOR).width>100 && distance.get_distance()<150) && ((pros::Clock::now()-start_time).count()<3000)) pros::delay(10);
+    while(!(vision.get_by_sig(0,REDCOLOR).width>100 && distance.get_distance()<150) && ((pros::Clock::now()-start_time).count()<2000)) pros::delay(10);
     pros::delay(500);
     
 
-    chassis.turnToPoint(44,32,2000,{.direction=lemlib::AngularDirection::CW_CLOCKWISE,.minSpeed=1,.earlyExitRange=3});
+    chassis.turnToPoint(39,28,2000,{.direction=lemlib::AngularDirection::CW_CLOCKWISE,.minSpeed=1,.earlyExitRange=3});
     // mogo.set_value(false);
     // set_intake_speed(127);
-    chassis.moveToPoint(44,32,2000);
-    // chassis.waitUntil(10);
+    chassis.moveToPoint(39,28,2000);
+    chassis.waitUntil(10);
     mogo.set_value(false);
     // fast_move(38,30,2000,false);
     while(!(vision.get_by_sig(0,REDCOLOR).width>100 && distance.get_distance()<150)&&chassis.isInMotion()) pros::delay(10);
     set_intake_speed(0);
     
     
-    chassis.turnToPoint(40,47,2000,{.forwards=false},false);
-    chassis.moveToPoint(40,47,4000,{.forwards = false,.maxSpeed=40});
+    chassis.turnToPoint(41.5,45,1000,{.forwards=false},false);
+    chassis.moveToPoint(41.5,45,4000,{.forwards = false,.maxSpeed=50});
     while(!mogo_seated() && chassis.isInMotion()) pros::delay(10);
     pros::delay(50);
     mogo.set_value(true);
     pros::delay(50);
     chassis.cancelMotion();
 
+    chassis.moveDistance(5,1000,{.minSpeed=127,.earlyExitRange=3});
     chassis.turnToPoint(38,0,2000,{.minSpeed=5,.earlyExitRange=3});
     set_intake_speed(127);
     chassis.moveToPoint(38,0,2000);
@@ -77,7 +78,7 @@ void red5(){
     chassis.moveDistance(15,1000);
     while(!(vision.get_by_sig(0,REDCOLOR).width>100 && distance.get_distance()<150)&&chassis.isInMotion()) pros::delay(10);
     chassis.cancelMotion();
-    chassis.moveToPoint(1,44,4000,{.forwards=false},false);
+    chassis.moveToPoint(4,42,4000,{.forwards=false},false);
     set_intake_speed(0);
     // chassis.turnToHeading(0,1000);
     // chassis.moveDistance(6,1000,{.forwards=false,.minSpeed=30,.earlyExitRange=3});

@@ -7,13 +7,13 @@ void blue5(){
     mogo.set_value(false);
 
     //score ring
-    // pto.set_value(true);
+    pto.set_value(true);
     chassis.moveDistance(11,1000,{},false);
     deploy.set_value(true);
     claw.set_value(true);
     pros::delay(200);
 
-    // pto.set_value(false);
+    pto.set_value(false);
     chassis.moveToPoint(-15, 31,4000,{.forwards = false,.maxSpeed=70});
     while(!mogo_seated() && chassis.isInMotion()) pros::delay(10);
     pros::delay(50);
@@ -35,7 +35,7 @@ void blue5(){
     chassis.moveToPoint(12,12,2000);
     // fast_move(10,12,2000,false);
     pros::Clock::time_point start_time2 =  pros::Clock::now();
-    while(!(vision.get_by_sig(0,BLUECOLOR).width>100 && distance.get_distance()<150) && ((pros::Clock::now()-start_time2).count()<3000)) pros::delay(10);
+    while(!(vision.get_by_sig(0,BLUECOLOR).width>100 && distance.get_distance()<150) && ((pros::Clock::now()-start_time2).count()<2000)) pros::delay(10);
     pros::delay(500);
 
     
@@ -73,7 +73,7 @@ void blue5(){
     set_intake_speed(127);
     swiper.set_value(false);
     chassis.moveDistance(15,1000);
-    while(!(vision.get_by_sig(0,REDCOLOR).width>100 && distance.get_distance()<150)&&chassis.isInMotion()) pros::delay(10);
+    while(!(vision.get_by_sig(0,BLUECOLOR).width>100 && distance.get_distance()<150)&&chassis.isInMotion()) pros::delay(10);
     chassis.cancelMotion();
     chassis.moveToPoint(0,38,4000,{},false);
     set_intake_speed(0);
