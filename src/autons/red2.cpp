@@ -101,7 +101,7 @@ void red2(){
     //get contested mogo
     chassis.setPose(0,0,12);
     mogo.set_value(false);
-    chassis.moveToPoint(6,40,4000,{.minSpeed=20,.earlyExitRange=5},false);
+    chassis.moveToPoint(6,40,4000,{.minSpeed=5,.earlyExitRange=5},false);
     swiper.set_value(true);
     left.move(-127);
     right.move(-127);
@@ -111,7 +111,7 @@ void red2(){
     
 
     //get mogo
-    chassis.turnToPoint(-12,28,2000,{.forwards=false},false);
+    chassis.turnToPoint(-12,28,1000,{.forwards=false},false);
     
     // chassis.moveToPoint(-12,28,2000,{.forwards=false});
     chassis.moveDistance(40,3000,{.forwards=false,.maxSpeed=60});
@@ -132,26 +132,6 @@ void red2(){
     // intake.move(127);
     // intake.move(0);
 
-    //start
-    // chassis.turnToPoint(5,-3,2000,{.forwards=false,.minSpeed = 10,.earlyExitRange=5});
-    // chassis.moveToPoint(5,-3,2000,{.forwards=false},false);
-    // chassis.turnToPoint(22,-9,2000,{},false);
-    // swiper.set_value(true);
-    // chassis.moveToPoint(22,-9,2000,{},false);
-    // intake.move(0);
-    // chassis.turnToHeading(35,3000,{.direction=AngularDirection::CCW_COUNTERCLOCKWISE, .minSpeed=127, .earlyExitRange = 3},false);
-    // left.move(127);
-    // right.move(-127);
-    // pros::delay(50);
-    // left.move(0);
-    // right.move(0);
-    // swiper.set_value(false);
-    // intake.move(127);
-    // chassis.moveDistance(12,2000,{.maxSpeed=30,.minSpeed=30,.earlyExitRange=3});
-    // chassis.turnToPoint(32,28,3000);
-    // chassis.moveDistance(40,10000,{.maxSpeed=30,.minSpeed=30,.earlyExitRange=3},false);
-    //end
-
 
 
 
@@ -171,31 +151,18 @@ void red2(){
     swiper.set_value(false);
     // //get one ring
     // intake.move(127);
-    // chassis.moveDistance(12,2000,{.maxSpeed=30},false);
-    // pros::delay(1000);
-    mogo.set_value(false);
-
-    
-
-    // chassis.moveDistance(15,2000,{.forwards=false},false);
-    // pros::delay(500);
+    set_intake_speed(127);
+    chassis.moveDistance(12,2000,{.maxSpeed=30},false);
+    pros::delay(1000);
     // mogo.set_value(false);
 
-    //get other mogo
-    chassis.turnToPoint(20,38,2000,{});
-    // intake.move(127);
+    chassis.turnToPoint(32,28,3000);
+    set_intake_speed(0);
+//     chassis.moveDistance(6,1000,{.forwards=false,.minSpeed=30,.earlyExitRange=3});
+    chassis.moveDistance(30,10000,{},false);
     set_intake_speed(127);
-    chassis.moveToPoint(20,38,2000);
-    chassis.turnToHeading(180,1000);
-    if(mogo_seated()){
-        pros::delay(50);
-        mogo.set_value(true);
-        pros::delay(50);
-        // chassis.cancelMotion();
-    }
+    chassis.moveDistance(10,1000,{.forwards=false});
+    mogo.set_value(false);
 
-    // chassis.turnToPoint(-23,39,2000,{.minSpeed=30,.earlyExitRange=3},false);
-    // intake.move(0);
-    // chassis.moveToPoint(-23,39,2000);
 }
 
