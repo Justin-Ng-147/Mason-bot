@@ -1,9 +1,9 @@
 #include "main.h"
 
 
-// red - qual
+// ordinary red -
 void red1(){
-    //setup
+   // setup
     chassis.setPose(0,0,146);
     intake.set_encoder_units_all(MOTOR_ENCODER_ROTATIONS);
     left.set_brake_mode_all(pros::motor_brake_mode_e::E_MOTOR_BRAKE_BRAKE);
@@ -14,8 +14,8 @@ void red1(){
     pto.set_value(true);
     chassis.moveDistance(11,1000,{},false);
     deploy.set_value(true);
-    pros::delay(200);
     claw.set_value(true);
+    pros::delay(200);
 
     // get mogo
     chassis.moveToPoint(-13, 31,4000,{.forwards = false,.maxSpeed=60});
@@ -23,6 +23,7 @@ void red1(){
     while(!mogo_seated() && chassis.isInMotion()) pros::delay(10);
     pros::delay(50);
     mogo.set_value(true);
+    // pros::delay(50);
     chassis.cancelMotion();
     left.brake();
     right.brake();
@@ -33,64 +34,39 @@ void red1(){
     //get 2 rings
     set_intake_speed(127);
     chassis.swingToPoint(-30,44,DriveSide::LEFT,2000,{.maxSpeed=80, .minSpeed=5, .earlyExitRange = 10});
-    chassis.turnToPoint(-30,44,1000);
-    chassis.moveToPoint(-30,44,2000);
-    chassis.turnToHeading(267,1000,{.minSpeed=5,.earlyExitRange=3});
-    chassis.moveDistance(18,1000,{.minSpeed=5,.earlyExitRange=3});
+    chassis.turnToPoint(-30,44,1000,{.minSpeed=5,.earlyExitRange=3});
+    chassis.moveToPoint(-30,44,1000);
+    chassis.turnToPoint(-46,44,1000,{.minSpeed=50,.earlyExitRange=3});
+    chassis.moveToPoint(-46,44,1000,{.minSpeed=5,.earlyExitRange=3});
+    // chassis.turnToHeading(267,1000,{.minSpeed=5,.earlyExitRange=3});
+    // chassis.moveDistance(18,1000);
     // chassis.moveDistance(15,2000);
 
-    chassis.turnToHeading(290,1000,{.minSpeed=5,.earlyExitRange=3});
-    chassis.moveDistance(10,1000,{.forwards=false,.minSpeed=5,.earlyExitRange=3});
-    chassis.turnToPoint(-35,20,2000,{.minSpeed=5,.earlyExitRange=3});
+    chassis.turnToHeading(280,1000,{.minSpeed=5,.earlyExitRange=3});
+    chassis.moveDistance(30,1000,{.forwards=false,.minSpeed=5,.earlyExitRange=3});
+    chassis.turnToPoint(-37,30,1000,{.minSpeed=20,.earlyExitRange=5});
 
     // chassis.turnToPoint(-30,11,2000,{.minSpeed=5,.earlyExitRange=3});
     // chassis.moveDistance(10,2000);
     // pros::delay(1000);
     // intake.move(127);
-    fast_move(-35,20,2000,true);
+    // chassis.moveToPoint(-30,11,4000,{.minSpeed=5,.earlyExitRange=3});
+    // pros::delay(500);
+    // chassis.cancelMotion();
+    // left.
+    // pros::delay(500);
+    // chassis.moveToPoint(-30,11,4000,{.minSpeed=5,.earlyExitRange=3});
+    fast_move(-37,30,2000,true);
+
+
 
     //28 -1
-    chassis.turnToPoint(32,-1,2000,{.minSpeed=5,.earlyExitRange=3});
-    chassis.moveToPoint(32,-1,2000,{.minSpeed=127,.earlyExitRange = 45});
-    chassis.moveToPoint(32,-1,4000,{.maxSpeed = 40,.minSpeed=5,.earlyExitRange=3},false);
-    // while(!(vision.get_by_sig(0,REDCOLOR).width>100 && distance.get_distance()<150)) pros::delay(10);
-    // chassis.cancelMotion();
-    // intake.move(0);
+    chassis.turnToPoint(20,12,1000,{.minSpeed=5,.earlyExitRange=3});
+    fast_move(20,12,2000,true);
 
-
-    // /22.5 30
-    // move to post
-    chassis.moveToPoint(-2,-1,4000,{.forwards=false,.minSpeed=5,.earlyExitRange=3},false);
-    chassis.turnToPoint(-2,38,2000,{.minSpeed=5,.earlyExitRange=3});
-    // intake.move(0);
-    set_intake_speed(0);
-    chassis.moveToPoint(-2,38,2000);
-
-    // // -54 -6
-    // chassis.turnToPoint(-44,-5,4000);
-    // chassis.moveDistance(44,1000);
-    // chassis.moveDistance(20,2000,{.forwards=false});
-
-    // //26 1.5
-    // chassis.moveToPoint(35,6,4000,{.minSpeed=127,.earlyExitRange = 40});
-    // chassis.moveToPoint(35,6,4000,{.maxSpeed = 40},false);
-    // intake.move(0);
-    // // while(!(vision.get_by_sig(0,1).width < 100 && ringdistancesensor.get_distance()<75)) pros::delay(100);
-    // // chassis.cancelMotion();
-
-    // // chassis.moveToPoint(72,-10,4000,{.forwards = false},false);
-    // // intake.move(0);
-    // // mobo.set_value(false);
-    // // chassis.moveDistance(10,1500);
-    
-    // swiper.set_value(true);
-    // chassis.turnToPoint(69,-8,2000);
-    // chassis.moveToPoint(69,-8,2000);
-    // chassis.turnToHeading(-45,1000,{.direction=AngularDirection::CCW_COUNTERCLOCKWISE},false);
-    // chassis.moveDistance(20,1000,{.forwards=false},false);
-    // mogo.set_value(false);
-    // pros::delay(200);
-    // chassis.moveDistance(10,1000);
+    chassis.moveToPoint(-16,10,2000,{.forwards=false,.minSpeed=5,.earlyExitRange=3});
+    chassis.turnToPoint(-2,36,1000,{.minSpeed=5,.earlyExitRange=3});
+    fast_move(-3,35,2000,true);
 }
 
 // void red1(){
