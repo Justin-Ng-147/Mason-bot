@@ -45,7 +45,7 @@ void lemlib::Chassis::turnToHeading(float theta, int timeout, TurnToHeadingParam
         // check if settling
         const float rawDeltaTheta = angleError(targetTheta, pose.theta, false);
         if (prevRawDeltaTheta == std::nullopt) prevRawDeltaTheta = rawDeltaTheta;
-        if (sgn(rawDeltaTheta) != sgn(prevRawDeltaTheta)) settling = true;
+        if ((sgn(rawDeltaTheta) != sgn(prevRawDeltaTheta)) && rawDeltaTheta < 15) settling = true;
         prevRawDeltaTheta = rawDeltaTheta;
 
         // calculate deltaTheta

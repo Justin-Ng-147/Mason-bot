@@ -48,7 +48,7 @@ void lemlib::Chassis::turnToPoint(float x, float y, int timeout, TurnToPointPara
         // check if settling
         const float rawDeltaTheta = angleError(targetTheta, pose.theta, false);
         if (prevRawDeltaTheta == std::nullopt) prevRawDeltaTheta = rawDeltaTheta;
-        if (sgn(rawDeltaTheta) != sgn(prevRawDeltaTheta)) settling = true;
+        if ((sgn(rawDeltaTheta) != sgn(prevRawDeltaTheta)) && rawDeltaTheta < 15) settling = true;
         prevRawDeltaTheta = rawDeltaTheta;
 
         // calculate deltaTheta

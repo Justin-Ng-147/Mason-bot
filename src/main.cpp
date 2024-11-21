@@ -7,10 +7,10 @@
 true: display odometry data and will run the test auton
 false: display competition screen to choose different autons
 */
-bool testing = true; 
+bool testing = false;
 
 int auton_status = 0;
-int test_auton = SKILLS;
+int test_auton = BLUE4;
 
 
 
@@ -27,14 +27,18 @@ void initialize() {
 	// chassis = init_drive();
 	chassis.calibrate();
     pros::delay(100);
-    chassis.setPose(0,0,0);
+    // chassis.setPose(0,0,146);
+	chassis.setPose(0,0,0);
+	// chassis.setPose(0,0,-12);
 
 	mogo.set_value(true);
-	pto.set_value(true);
+	pto.set_value(false);
 
-	sort();
+	// sort_thrower.set_value(true);
 
 	if(testing){
+		if (test_auton < 0) sort(REDCOLOR);
+		else sort(BLUECOLOR);
 		pros::Task screen_task([&]() {
 			while (true) {
 				// print robot location to the brain screen
@@ -48,6 +52,8 @@ void initialize() {
 	}
 	else{
 		chooser(auton_status);
+		if (auton_status < 0) sort(REDCOLOR);
+		else sort(BLUECOLOR);
 		pros::lcd::set_text(1, "auton chosen");
 	}
 
@@ -59,10 +65,10 @@ void initialize() {
  * the robot is enabled, this task will exit.
  */
 void disabled() {
-	if(!testing){
-		chooser(auton_status);
-		pros::lcd::set_text(1, "auton chosen");
-	}
+	// if(!testing){
+	// 	chooser(auton_status);
+	// 	pros::lcd::set_text(1, "auton chosen");
+	// }
 }
 
 /**
@@ -88,6 +94,7 @@ void competition_initialize() {}
  * from where it left off.
  */
 void autonomous() {
+	init_intake();
 	if(testing) run_auton(test_auton);
 	else run_auton(auton_status);
 }
@@ -106,12 +113,25 @@ void autonomous() {
  * task, not resume it from where it left off.
  */
 void opcontrol() {
+	// intake_task->remove();
 	pros::Controller master(pros::E_CONTROLLER_MASTER);
 
-	bool pto_flag = false;
+	bool pto_flag = true;
 	bool pto_pressed = true;
 	bool mogo_flag = true;
 	bool mogo_pressed = true;
+	bool claw_flag = true;
+	bool claw_pressed = true;
+	bool hang_flag = true;
+	bool hang_pressed = true;
+	bool deploy_flag = true;
+	bool deploy_pressed = true;
+	bool swiper_flag = false;
+	bool swiper_pressed = true;
+
+	if (intake_task != nullptr) {
+		intake_task->notify();
+	}
 
 	while (true) {
 		#pragma region arcade
@@ -122,44 +142,88 @@ void opcontrol() {
 		right.move(dir-turn);
 		#pragma endregion arcade
 
-		#pragma region intake
+		#pragma region intake r1
 		if(master.get_digital(DIGITAL_R1)){
 			intake.move(127);
+			// set_intake_speed(127);
 		}
 		else if(master.get_digital(DIGITAL_R2)){
 			intake.move(-127);
+			// set_intake_speed(-127);
 		}
 		else{
 			intake.move(0);
+			// set_intake_speed(0);
 		}
 		#pragma endregion intake
 
-		#pragma region pto
-		if(master.get_digital(DIGITAL_A) && !pto_pressed){
+		#pragma region pto a
+		if(master.get_digital(DIGITAL_L2) && !pto_pressed){
 			pto_flag = !pto_flag;
 			pto.set_value(pto_flag);
 			pto_pressed = true;
 		}
-		else if(master.get_digital(DIGITAL_A) != 1 && pto_pressed){
+		else if(master.get_digital(DIGITAL_L2) != 1 && pto_pressed){
 			pto_pressed = false;
 		}
 		#pragma endregion pto
 
-		#pragma region mogo
-		if(master.get_digital(DIGITAL_X) && !mogo_pressed){
+		#pragma region mogo x
+		if(master.get_digital(DIGITAL_L1) && !mogo_pressed){
 			mogo_flag = !mogo_flag;
 			mogo.set_value(mogo_flag);
 			mogo_pressed = true;
 		}
-		else if(master.get_digital(DIGITAL_X) != 1 && mogo_pressed){
+		else if(master.get_digital(DIGITAL_L1) != 1 && mogo_pressed){
 			mogo_pressed = false;
 		}
-		else if(mogo_distance.get_distance()<60 && !mogo_flag && !mogo_pressed)
-		{
-			mogo.set_value(true);
-			mogo_flag = true;
+		// else if(mogo_seated() && !mogo_flag && !mogo_pressed)
+		// {
+		// 	mogo.set_value(true);
+		// 	mogo_flag = true;
+		// }
+
+		if(master.get_digital(DIGITAL_Y) && !hang_pressed){
+			hang_flag = !hang_flag;
+			hang.set_value(hang_flag);
+			hang_pressed = true;
 		}
+		else if(master.get_digital(DIGITAL_Y) != 1 && hang_pressed){
+			hang_pressed = false;
+		}
+		
 		#pragma endregion mogo
+
+		#pragma region swiper b
+		if(master.get_digital(DIGITAL_B) && !swiper_pressed){
+			swiper_flag = !swiper_flag;
+			swiper.set_value(swiper_flag);
+			swiper_pressed = true;
+		}
+		else if(master.get_digital(DIGITAL_B) != 1 && swiper_pressed){
+			swiper_pressed = false;
+		}
+
+		if(master.get_digital(DIGITAL_RIGHT) && !claw_pressed){
+			claw_flag = !claw_flag;
+			claw.set_value(claw_flag);
+			claw_pressed = true;
+		}
+		else if(master.get_digital(DIGITAL_RIGHT) != 1 && claw_pressed){
+			claw_pressed = false;
+		}
+
+		if(master.get_digital(DIGITAL_DOWN) && !deploy_pressed){
+			deploy_flag = !deploy_flag;
+			deploy.set_value(deploy_flag);
+			deploy_pressed = true;
+		}
+		else if(master.get_digital(DIGITAL_DOWN) != 1 && deploy_pressed){
+			deploy_pressed = false;
+		}
+		
+		#pragma endregion swiper
+
 
 		pros::delay(20);                               // Run for 20 ms then update
 	}

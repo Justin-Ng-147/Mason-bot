@@ -6,7 +6,7 @@ pros::vision_signature_s_t RED_SIG =
     pros::Vision::signature_from_utility(1, 11049, 12603, 11826,-1625, -703, -1164,5, 0);
 
 pros::vision_signature_s_t BLUE_SIG =
-    pros::Vision::signature_from_utility(2, 11049, 12603, 11826,-1625, -703, -1164,5, 0);
+    pros::Vision::signature_from_utility(2, -3785, -3395, -3590, 5827, 7261, 6544, 6.000, 0);
     
 
 void setup(){
@@ -15,7 +15,7 @@ void setup(){
     intake.set_encoder_units_all(pros::E_MOTOR_ENCODER_ROTATIONS);
     vision.get_object_count();
     pros::delay(100);
-    sort_thrower.set_value(true);
+    // sort_thrower.set_value(true);
 }
 
 /*
@@ -26,12 +26,12 @@ void setup(){
 int ring_tossed(double start){
   double dif = fabs(intake.get_position())-fabs(start);
   // printf("%f\n",dif);
-  if(dif > 1.5) return 2;
+  if(dif > 1.2) return 2;
   else if(dif > 0) return 1;
   else return 0;
 }
 
-void sort(){
+void sort(int color){
   if (sort_task == nullptr) {
     sort_task = new pros::Task{ [=]{
       // int count = 0;
@@ -40,18 +40,19 @@ void sort(){
 
       setup();
       while(true){
-        pros::vision_object_s_t rtn = vision.get_by_sig(0,1);
+        pros::vision_object_s_t rtn = vision.get_by_sig(0,color);
 
         if(rtn.width>100 && colors == 0 && distance.get_distance()<150){
           colors = 1;
         }
-
+        // printf("found\n");
         // if(count == 1){
           if(colors == 1){
             // printf("found\n");
-            while(vision.get_by_sig(0,1).width>100) pros::delay(10);
+            // while(vision.get_by_sig(0,color).width>100) pros::delay(10);
+            while(vision.get_by_sig(0,color).width>100) pros::delay(5);
             if(!sort){
-                sort_thrower.set_value(false);
+                sort_thrower.set_value(true);
                 sort = true;
                 }
             double start = intake.get_position();
@@ -60,11 +61,11 @@ void sort(){
             while (flag != 2)
             {
               if(!sort){
-                sort_thrower.set_value(false);
+                sort_thrower.set_value(true);
                 sort = true;
                 }
               
-              if(vision.get_by_sig(0,1).width>100 && distance.get_distance()<150){
+              if(vision.get_by_sig(0,color).width>100 && distance.get_distance()<150){
                   start = intake.get_position();
               }
 
@@ -75,7 +76,7 @@ void sort(){
               // }
               pros::delay(10);
             }
-            sort_thrower.set_value(true);
+            sort_thrower.set_value(false);
             sort = false;
           }
           // else{
@@ -90,4 +91,60 @@ void sort(){
       }
     }};
   }
+}
+
+bool mogo_seated(){
+  return mogo_distance.get_distance()<40;
+}
+
+
+pros::Mutex intake_mutex;
+int intake_speed = 0;
+bool antijam = true;
+pros::Task* intake_task = nullptr;
+
+void init_intake(){
+    if (intake_task == nullptr) {
+        intake_task = new pros::Task{[=]{
+            int count = 0;
+            int prev_speed = 0;
+            while(!pros::Task::notify_take(true, 10)){
+                intake_mutex.lock();
+                int speed = intake_speed;
+                bool antijam_temp = antijam;
+                intake_mutex.unlock();
+
+                intake.move(speed);
+                if(speed != prev_speed) pros::delay(100);
+                prev_speed= speed;
+                
+                if(speed > 0 && intake.get_efficiency() < 1 && antijam_temp){
+                    count += 1;
+                }
+                if(count>30&& antijam_temp){
+                  intake.move(-127);
+                  pros::delay(500);
+                  intake.move(0);
+                  prev_speed = 0;
+                  count = 0;
+                }
+            }
+        }};
+    }
+}
+
+void set_intake_speed(int speed,bool jam){
+    pros::Task intake_task2{[=]{
+        intake_mutex.lock();
+        intake_speed = speed;
+        antijam = jam;
+        intake_mutex.unlock();
+    }};
+    // intake_task2.remove();
+    // delete &intake_task2;
+}
+
+void fast_move(float x, float y, int timeout,bool async = true){
+    chassis.moveToPoint(x,y,timeout,{.minSpeed=5, .earlyExitRange=10});
+    chassis.moveToPoint(x,y,timeout,{.maxSpeed = 30, .minSpeed = 5, .earlyExitRange = 3},async);
 }

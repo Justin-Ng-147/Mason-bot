@@ -23,9 +23,35 @@ void chooser(int& status){
     {
         selected = convert_bit(pros::lcd::read_buttons());
         // printf("%d , %d\n",pros::lcd::read_buttons(),status);
-        if(status == -2){
+        if(status == -4){
             if(!set_text){
-                pros::lcd::set_text(1, "    blue 2   ");
+                pros::lcd::set_text(1, "    blue + 3 goal   ");
+                set_text = true;
+            }
+            if(selected != 0){
+                set_text=false;
+                if(selected == 100) return;
+                else status += selected;
+                pros::delay(500);
+                continue;
+            }
+        }
+        else if(status == -3){
+            if(!set_text){
+                pros::lcd::set_text(1, "    blue - 3 goal   ");
+                set_text = true;
+            }
+            if(selected != 0){
+                set_text=false;
+                if(selected == 100) return;
+                else status += selected;
+                pros::delay(500);
+                continue;
+            }
+        }
+        else if(status == -2){
+            if(!set_text){
+                pros::lcd::set_text(1, "    blue finals   ");
                 set_text = true;
             }
             if(selected != 0){
@@ -38,7 +64,7 @@ void chooser(int& status){
         }
         else if(status == -1){
             if(!set_text){
-                pros::lcd::set_text(1, "    blue 1   ");
+                pros::lcd::set_text(1, "    blue - ordinary   ");
                 set_text = true;
             }
             if(selected != 0){
@@ -56,15 +82,14 @@ void chooser(int& status){
             }
             if(selected != 0){
                 set_text=false;
-                if(selected == 100);
-                else status += selected;
+                if(selected != 100) status += selected;
                 pros::delay(500);
                 continue;
             }
         }
         else if(status == 1){
             if(!set_text){
-                pros::lcd::set_text(1, "    red 1   ");
+                pros::lcd::set_text(1, "    red - ordinary  ");
                 set_text = true;
             }
             if(selected != 0){
@@ -77,7 +102,7 @@ void chooser(int& status){
         }
         else if(status == 2){
             if(!set_text){
-                pros::lcd::set_text(1, "    red 2   ");
+                pros::lcd::set_text(1, "    red finals   ");
                 set_text = true;
             }
             if(selected != 0){
@@ -89,6 +114,32 @@ void chooser(int& status){
             }
         }
         else if(status == 3){
+            if(!set_text){
+                pros::lcd::set_text(1, "    red - 3 goal   ");
+                set_text = true;
+            }
+            if(selected != 0){
+                set_text=false;
+                if(selected == 100) return;
+                else status += selected;
+                pros::delay(500);
+                continue;
+            }
+        }
+        else if(status == 4){
+            if(!set_text){
+                pros::lcd::set_text(1, "    red + 3 goal   ");
+                set_text = true;
+            }
+            if(selected != 0){
+                set_text=false;
+                if(selected == 100) return;
+                else status += selected;
+                pros::delay(500);
+                continue;
+            }
+        }
+        else if(status == 5){
             if(!set_text){
                 pros::lcd::set_text(1, "    skills   ");
                 set_text = true;
@@ -111,8 +162,14 @@ void chooser(int& status){
 void run_auton(int selected){
     switch (selected)
     {
+    case -4:
+        blue5();
+        break;
+    case -3:
+        blue4();
+        break;
     case -2:
-        blue2();
+        blue3();
         break;
     case -1:
         blue1();
@@ -121,12 +178,17 @@ void run_auton(int selected){
         red1();
         break;
     case 2:
-        red2();
+        red3();
         break;
     case 3:
+        red4();
+        break;
+    case 4:
+        red5();
+        break;
+    case 5:
         skills();
         break;
-    
     default:
         break;
     }
