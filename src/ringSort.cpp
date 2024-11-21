@@ -26,7 +26,7 @@ void setup(){
 int ring_tossed(double start){
   double dif = fabs(intake.get_position())-fabs(start);
   // printf("%f\n",dif);
-  if(dif > 1.3) return 2;
+  if(dif > 1.2) return 2;
   else if(dif > 0) return 1;
   else return 0;
 }
@@ -100,37 +100,44 @@ bool mogo_seated(){
 
 pros::Mutex intake_mutex;
 int intake_speed = 0;
+bool antijam = true;
 pros::Task* intake_task = nullptr;
 
 void init_intake(){
     if (intake_task == nullptr) {
         intake_task = new pros::Task{[=]{
+            int count = 0;
             int prev_speed = 0;
-            while(true){
+            while(!pros::Task::notify_take(true, 10)){
                 intake_mutex.lock();
                 int speed = intake_speed;
+                bool antijam_temp = antijam;
                 intake_mutex.unlock();
 
                 intake.move(speed);
                 if(speed != prev_speed) pros::delay(100);
                 prev_speed= speed;
                 
-                if(speed > 0 && intake.get_efficiency() < 1){
-                    intake.move(-127);
-                    pros::delay(500);
-                    intake.move(0);
-                    prev_speed = 0;
+                if(speed > 0 && intake.get_efficiency() < 1 && antijam_temp){
+                    count += 1;
                 }
-                pros::delay(10);
+                if(count>30&& antijam_temp){
+                  intake.move(-127);
+                  pros::delay(500);
+                  intake.move(0);
+                  prev_speed = 0;
+                  count = 0;
+                }
             }
         }};
     }
 }
 
-void set_intake_speed(int speed){
+void set_intake_speed(int speed,bool jam){
     pros::Task intake_task2{[=]{
         intake_mutex.lock();
         intake_speed = speed;
+        antijam = jam;
         intake_mutex.unlock();
     }};
     // intake_task2.remove();
@@ -139,5 +146,5 @@ void set_intake_speed(int speed){
 
 void fast_move(float x, float y, int timeout,bool async = true){
     chassis.moveToPoint(x,y,timeout,{.minSpeed=5, .earlyExitRange=10});
-    chassis.moveToPoint(x,y,timeout,{.maxSpeed = 40, .minSpeed = 5, .earlyExitRange = 3},async);
+    chassis.moveToPoint(x,y,timeout,{.maxSpeed = 30, .minSpeed = 5, .earlyExitRange = 3},async);
 }
