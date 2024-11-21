@@ -7,10 +7,10 @@
 true: display odometry data and will run the test auton
 false: display competition screen to choose different autons
 */
-bool testing = true;
+bool testing = false;
 
 int auton_status = 0;
-int test_auton = BLUE5;
+int test_auton = SKILLS;
 
 
 
@@ -28,10 +28,9 @@ void initialize() {
 	chassis.calibrate();
     pros::delay(100);
     // chassis.setPose(0,0,146);
-	chassis.setPose(0,0,-146);
+	chassis.setPose(0,0,0);
 	// chassis.setPose(0,0,-12);
 
-	init_intake();
 	mogo.set_value(true);
 	pto.set_value(false);
 
@@ -95,6 +94,7 @@ void competition_initialize() {}
  * from where it left off.
  */
 void autonomous() {
+	init_intake();
 	if(testing) run_auton(test_auton);
 	else run_auton(auton_status);
 }
@@ -113,6 +113,7 @@ void autonomous() {
  * task, not resume it from where it left off.
  */
 void opcontrol() {
+	// intake_task->remove();
 	pros::Controller master(pros::E_CONTROLLER_MASTER);
 
 	bool pto_flag = true;
@@ -128,6 +129,10 @@ void opcontrol() {
 	bool swiper_flag = false;
 	bool swiper_pressed = true;
 
+	if (intake_task != nullptr) {
+		intake_task->notify();
+	}
+
 	while (true) {
 		#pragma region arcade
 		// Arcade control scheme
@@ -139,16 +144,16 @@ void opcontrol() {
 
 		#pragma region intake r1
 		if(master.get_digital(DIGITAL_R1)){
-			// intake.move(127);
-			set_intake_speed(127);
+			intake.move(127);
+			// set_intake_speed(127);
 		}
 		else if(master.get_digital(DIGITAL_R2)){
-			// intake.move(-127);
-			set_intake_speed(-127);
+			intake.move(-127);
+			// set_intake_speed(-127);
 		}
 		else{
-			// intake.move(0);
-			set_intake_speed(0);
+			intake.move(0);
+			// set_intake_speed(0);
 		}
 		#pragma endregion intake
 
