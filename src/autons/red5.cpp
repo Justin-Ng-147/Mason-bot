@@ -34,8 +34,8 @@ void red5(){
     // chassis.moveToPoint(-23,-5,2000,{.maxSpeed=50,.minSpeed=5,.earlyExitRange=3},false);
     chassis.moveToPoint(-10,12,2000,{},false);
     pros::Clock::time_point start_time =  pros::Clock::now();
-    while(!(vision.get_by_sig(0,REDCOLOR).width>100 && distance.get_distance()<150) || (pros::Clock::now()-start_time).count()>1000) pros::delay(10);
-
+    while(!(vision.get_by_sig(0,BLUECOLOR).width>100 && distance.get_distance()<150) && ((pros::Clock::now()-start_time).count()<3000)) pros::delay(10);
+    pros::delay(500);
     
 
     chassis.turnToPoint(44,32,2000,{.direction=lemlib::AngularDirection::CW_CLOCKWISE,.minSpeed=1,.earlyExitRange=3});
