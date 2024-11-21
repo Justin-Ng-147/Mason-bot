@@ -35,23 +35,23 @@ void blue4(){
     chassis.swingToPoint(30,42,DriveSide::RIGHT,2000,{.maxSpeed=80, .minSpeed=5, .earlyExitRange = 10});
     chassis.turnToPoint(30,42,1000,{.minSpeed=5,.earlyExitRange=3});
     chassis.moveToPoint(30,42,1000,{});
-    chassis.turnToPoint(45,41,1000,{.minSpeed=40,.earlyExitRange=3});
-    chassis.moveToPoint(45,41,1000,{.minSpeed=5,.earlyExitRange=3});
+    chassis.turnToPoint(46,42,1000,{.minSpeed=40,.earlyExitRange=3});
+    chassis.moveToPoint(46,42,1000,{.minSpeed=5,.earlyExitRange=3});
     // chassis.turnToHeading(95,1000,{.minSpeed=5,.earlyExitRange=3});
     // chassis.moveDistance(18,1000,{.minSpeed=5,.earlyExitRange=3});
     // chassis.moveDistance(15,2000);
 
     chassis.turnToHeading(80,1000,{.minSpeed=5,.earlyExitRange=3});
     chassis.moveDistance(30,1000,{.forwards=false,.minSpeed=5,.earlyExitRange=3});
-    chassis.turnToPoint(37,25,1000,{.minSpeed=5,.earlyExitRange=3});
+    chassis.turnToPoint(37,25,1000,{.minSpeed=20,.earlyExitRange=3});
     fast_move(37,25,2000,true);
 
 
 
     //28 -1
-    chassis.turnToPoint(-20,10,1000,{.minSpeed=5,.earlyExitRange=3});
+    chassis.turnToPoint(-20,8,1000,{.minSpeed=5,.earlyExitRange=3});
     // chassis.moveToPoint(16,16,2000);
-    fast_move(-20,10,2000,true);
+    fast_move(-20,8,2000,true);
     mogo.set_value(false);
     // chassis.moveToPoint(28,-1,4000,{.maxSpeed = 40});
     while(!(vision.get_by_sig(0,REDCOLOR).width>100 && distance.get_distance()<150)&&chassis.isInMotion()) pros::delay(10);
@@ -68,7 +68,8 @@ void blue4(){
 
     chassis.turnToPoint(-65,28,2000,{.minSpeed=5,.earlyExitRange=3});
     set_intake_speed(127);
-    chassis.moveToPoint(-65,28,2000);
+    chassis.moveToPoint(-65,28,2000,{},false);
+    pros::delay(500);
 
     chassis.moveToPoint(-26,35,2000,{.forwards=false},false);
     set_intake_speed(0);
