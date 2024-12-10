@@ -1,7 +1,8 @@
 #include "main.h"
 
 
-pros::MotorGroup intake({7,-8});
+pros::Motor intake(7);
+pros::MotorGroup arm({8,-9});
 pros::ADIDigitalOut mogo('A');
 pros::ADIDigitalOut pto('D');
 pros::ADIDigitalOut swiper('C');
@@ -10,6 +11,8 @@ pros::ADIDigitalOut sort_thrower('G');
 pros::ADIDigitalOut deploy('F');
 pros::ADIDigitalOut claw('E');
 
+
+pros::Rotation arm_control(-19);
 
 
 pros::Vision vision(19);

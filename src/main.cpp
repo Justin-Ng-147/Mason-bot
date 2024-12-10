@@ -7,7 +7,7 @@
 true: display odometry data and will run the test auton
 false: display competition screen to choose different autons
 */
-bool testing = false;
+bool testing = true;
 
 int auton_status = 0;
 int test_auton = BLUE4;
@@ -45,6 +45,7 @@ void initialize() {
 				pros::lcd::print(1, "X: %f", chassis.getPose().x); // x
 				pros::lcd::print(2, "Y: %f", chassis.getPose().y); // y
 				pros::lcd::print(3, "Theta: %f", chassis.getPose().theta); // heading
+				pros::lcd::print(4, "angle: %d", arm_control.get_position()); // heading
 				// delay to save resources
 				pros::delay(20);
 			}
@@ -99,6 +100,86 @@ void autonomous() {
 	else run_auton(auton_status);
 }
 
+pros::Mutex arm_mutex;
+
+void arm_to_pos_2(){
+	  pros::Task arm_task{[=]{
+		arm_mutex.lock();
+		int target = 2900;
+		int pos = arm_control.get_position();
+		int error = target - pos;
+		int speed;
+		bool prevsgn = error>0;
+        while(true){
+			pos = arm_control.get_position();
+			error = target - pos;
+			speed = error *.05;
+			if(speed>127) speed = 127;
+			if(speed<-127) speed = -127;
+			arm.move(speed);
+			if(prevsgn != (error>0)) break;
+			prevsgn = (error>=0);
+			pros::delay(10);
+		}
+		arm.brake();
+		arm_mutex.unlock();
+    }};
+}
+
+void arm_to_pos_1(){
+	  pros::Task arm_task{[=]{
+		arm_mutex.lock();
+		int target = 15000;
+		int pos = arm_control.get_position();
+		int error = target - pos;
+		int speed;
+		bool prevsgn = error>0;
+        while(true){
+			pos = arm_control.get_position();
+			error = target - pos;
+			speed = error *.05;
+			if(speed>127) speed = 127;
+			if(speed<-127) speed = -127;
+			arm.move(speed);
+			if(prevsgn != (error>0)) break;
+			prevsgn = (error>=0);
+			pros::delay(10);
+		}
+		arm.brake();
+		arm_mutex.unlock();
+    }};
+}
+
+pros::Mutex target_mutex;
+int global_target = 0;
+
+void arm_to_pos_0(){
+	  pros::Task arm_task_0{[=]{
+		arm_mutex.lock();
+		int target;
+		int pos = arm_control.get_position();
+		int error = target - pos;
+		int speed;
+		bool prevsgn = error>0;
+        while(true){
+			target_mutex.lock();
+			target = global_target;
+			target_mutex.unlock();
+			pos = arm_control.get_position();
+			error = target - pos;
+			speed = error *.03;
+			if(speed>127) speed = 127;
+			if(speed<-127) speed = -127;
+			arm.move(speed);
+			// if(prevsgn != (error>0)) break;
+			prevsgn = (error>=0);
+			pros::delay(10);
+		}
+		arm.brake();
+		arm_mutex.unlock();
+    }};
+}
+
 /**
  * Runs the operator control code. This function will be started in its own task
  * with the default priority and stack size whenever the robot is enabled via
@@ -115,6 +196,9 @@ void autonomous() {
 void opcontrol() {
 	// intake_task->remove();
 	pros::Controller master(pros::E_CONTROLLER_MASTER);
+	arm.set_brake_mode(pros::motor_brake_mode_e::E_MOTOR_BRAKE_HOLD);
+	arm_control.set_position(0);
+	arm_to_pos_0();
 
 	bool pto_flag = true;
 	bool pto_pressed = true;
@@ -183,25 +267,61 @@ void opcontrol() {
 		// 	mogo_flag = true;
 		// }
 
-		if(master.get_digital(DIGITAL_Y) && !hang_pressed){
-			hang_flag = !hang_flag;
-			hang.set_value(hang_flag);
-			hang_pressed = true;
-		}
-		else if(master.get_digital(DIGITAL_Y) != 1 && hang_pressed){
-			hang_pressed = false;
-		}
+		// if(master.get_digital(DIGITAL_Y) && !hang_pressed){
+		// 	hang_flag = !hang_flag;
+		// 	hang.set_value(hang_flag);
+		// 	hang_pressed = true;
+		// }
+		// else if(master.get_digital(DIGITAL_Y) != 1 && hang_pressed){
+		// 	hang_pressed = false;
+		// }
 		
 		#pragma endregion mogo
 
 		#pragma region swiper b
+		// if(master.get_digital(DIGITAL_B) && !swiper_pressed){
+		// 	swiper_flag = !swiper_flag;
+		// 	swiper.set_value(swiper_flag);
+		// 	swiper_pressed = true;
+		// }
+		// else if(master.get_digital(DIGITAL_B) != 1 && swiper_pressed){
+		// 	swiper_pressed = false;
+		// }
 		if(master.get_digital(DIGITAL_B) && !swiper_pressed){
 			swiper_flag = !swiper_flag;
-			swiper.set_value(swiper_flag);
 			swiper_pressed = true;
+			if (arm_control.get_position()<5000){
+				// arm_to_pos_1();
+				target_mutex.lock();
+				global_target=15000;
+				target_mutex.unlock();
+			}
+			else{
+				target_mutex.lock();
+				global_target=10;
+				target_mutex.unlock();
+			}
 		}
 		else if(master.get_digital(DIGITAL_B) != 1 && swiper_pressed){
 			swiper_pressed = false;
+		}
+
+		if(master.get_digital(DIGITAL_Y) && !hang_pressed){
+			hang_flag = !hang_flag;
+			hang_pressed = true;
+			if (arm_control.get_position()<500){
+				target_mutex.lock();
+				global_target=4000;
+				target_mutex.unlock();
+			}
+			else{
+				target_mutex.lock();
+				global_target=10;
+				target_mutex.unlock();
+			}
+		}
+		else if(master.get_digital(DIGITAL_Y) != 1 && hang_pressed){
+			hang_pressed = false;
 		}
 
 		if(master.get_digital(DIGITAL_RIGHT) && !claw_pressed){

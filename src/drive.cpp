@@ -1,8 +1,8 @@
 #include "main.h"
 
 
-pros::MotorGroup left({-LEFTMOTOR1PORT,-LEFTMOTOR2PORT,-LEFTMOTOR3PORT},pros::MotorGearset::blue);
-pros::MotorGroup right({RIGHTMOTOR1PORT,RIGHTMOTOR2PORT,RIGHTMOTOR3PORT},pros::MotorGearset::blue);
+pros::MotorGroup left({LEFTMOTOR1PORT,-LEFTMOTOR2PORT,-LEFTMOTOR3PORT},pros::MotorGearset::blue);
+pros::MotorGroup right({-RIGHTMOTOR1PORT,RIGHTMOTOR2PORT,RIGHTMOTOR3PORT},pros::MotorGearset::blue);
 
 pros::Imu imu(IMUPORT);
 pros::Rotation vertical_enc(VERTICALENCODERPORT);
@@ -11,7 +11,7 @@ pros::Rotation horizontal_enc(-HORIZONTALENCODERPORT);
 lemlib::Drivetrain drivetrain(&left, 
                               &right,
                               13, //track width
-                              lemlib::Omniwheel::NEW_325, //wheel type
+                              lemlib::Omniwheel::NEW_275, //wheel type
                               450, //rpm
                               2); //horizontal drift
 
