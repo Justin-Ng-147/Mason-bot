@@ -96,12 +96,12 @@
 //     // chassis.moveToPoint(-23,39,2000);
 // }
 
-//finals no suck
+//finals + side
 void red2(){
     //get contested mogo
     chassis.setPose(0,0,12);
     mogo.set_value(false);
-    chassis.moveToPoint(6,40,4000,{.minSpeed=5,.earlyExitRange=5},false);
+    chassis.moveToPoint(6,40,4000,{.minSpeed=5},false);
     swiper.set_value(true);
     left.move(-127);
     right.move(-127);
@@ -135,9 +135,9 @@ void red2(){
 
 
 
-    chassis.turnToPoint(-4,-5,2000,{.forwards=false,.minSpeed = 10,.earlyExitRange=5});
+    chassis.turnToPoint(-4,-5,2000,{.forwards=false,.minSpeed = 5,.earlyExitRange=3});
     chassis.moveToPoint(-4,-5,2000,{.forwards=false},false);
-    chassis.turnToPoint(22,-12,2000,{},false);
+    chassis.turnToPoint(22,-12,2000,{.minSpeed = 5,.earlyExitRange=3},false);
     swiper.set_value(true);
     chassis.moveToPoint(22,-12,2000);
     // intake.move(0);
@@ -149,20 +149,36 @@ void red2(){
     left.move(0);
     right.move(0);
     swiper.set_value(false);
-    // //get one ring
-    // intake.move(127);
-    set_intake_speed(127);
-    chassis.moveDistance(12,2000,{.maxSpeed=30},false);
-    pros::delay(1000);
-    // mogo.set_value(false);
+    chassis.turnToHeading(105,3000,{.direction=AngularDirection::CW_CLOCKWISE},false);
+    swiper.set_value(true);
+    pros::delay(200);
+    chassis.turnToHeading(45,3000,{.direction=AngularDirection::CCW_COUNTERCLOCKWISE, .minSpeed=127, .earlyExitRange = 3},false);
+    left.move(127);
+    right.move(-127);
+    pros::delay(50);
+    left.move(0);
+    right.move(0);
+    swiper.set_value(false);
 
-    chassis.turnToPoint(32,28,3000);
-    set_intake_speed(0);
-//     chassis.moveDistance(6,1000,{.forwards=false,.minSpeed=30,.earlyExitRange=3});
-    chassis.moveDistance(30,10000,{},false);
+
     set_intake_speed(127);
-    chassis.moveDistance(10,1000,{.forwards=false});
+    chassis.moveDistance(12,2000,{.maxSpeed=30,.minSpeed=30,.earlyExitRange=3});
+    chassis.turnToPoint(32,28,3000);
+    chassis.moveDistance(40,10000,{.maxSpeed=30,.minSpeed=30,.earlyExitRange=3},false);
+
+    chassis.moveDistance(15,2000,{.forwards=false},false);
     mogo.set_value(false);
+    pros::delay(500);
+    
+
+    chassis.turnToPoint(20,40,2000,{.forwards=false});
+    chassis.moveToPoint(20,40,2000,{.forwards = false,.maxSpeed=60});
+    if(mogo_seated()){
+        pros::delay(50);
+        mogo.set_value(true);
+        pros::delay(50);
+        // chassis.cancelMotion();
+    }
 
 }
 

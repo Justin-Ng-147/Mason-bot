@@ -178,15 +178,18 @@ void run_auton(int selected){
         red1();
         break;
     case 2:
-        red3();
+        red2();
         break;
     case 3:
-        red4();
+        red3();
         break;
     case 4:
-        red5();
+        red4();
         break;
     case 5:
+        red5();
+        break;
+    case 6:
         skills();
         break;
     default:

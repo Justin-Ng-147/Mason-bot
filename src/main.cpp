@@ -7,10 +7,10 @@
 true: display odometry data and will run the test auton
 false: display competition screen to choose different autons
 */
-bool testing = false;
+bool testing = true;
 
 int auton_status = 0;
-int test_auton = 5;
+int test_auton = 2;
 
 
 
@@ -132,6 +132,9 @@ void opcontrol() {
 	if (intake_task != nullptr) {
 		intake_task->notify();
 	}
+
+	left.set_brake_mode_all(pros::motor_brake_mode_e::E_MOTOR_BRAKE_COAST);
+	right.set_brake_mode_all(pros::motor_brake_mode_e::E_MOTOR_BRAKE_COAST);
 
 	while (true) {
 		#pragma region arcade
