@@ -189,7 +189,7 @@ void lemlib::init() {
         trackingTask = new pros::Task {[=] {
             while (true) {
                 update();
-                pros::delay(10);
+                pros::delay(5);
             }
         }};
     }
