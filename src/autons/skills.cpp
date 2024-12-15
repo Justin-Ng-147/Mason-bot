@@ -270,7 +270,7 @@ void skills(){
     swiper.set_value(true);
     set_intake_speed(0);
     chassis.turnToHeading(135,1000);
-    chassis.moveDistance(50,1000,{.maxSpeed=70});
+    chassis.moveDistance(50,1500,{.maxSpeed=70});
     chassis.moveDistance(50,300,{.forwards=false,.maxSpeed=60});
 
 
