@@ -50,12 +50,12 @@ void blue3(){
 
     //with bar code
     chassis.turnToPoint(-20,8,1000,{.minSpeed=5,.earlyExitRange=3});
-    chassis.moveToPoint(-20,8,2000,{.minSpeed=5,.earlyExitRange=35});
-    chassis.moveToPoint(-20,8,2000,{.maxSpeed=30,.minSpeed=5,.earlyExitRange=25});
-    chassis.cancelMotion();
-    left.brake();
-    right.brake();
-    pros::delay(500);
+    // chassis.moveToPoint(-20,8,2000,{.minSpeed=5,.earlyExitRange=35});
+    // chassis.moveToPoint(-20,8,2000,{.maxSpeed=30,.minSpeed=5,.earlyExitRange=25});
+    // chassis.cancelMotion();
+    // left.brake();
+    // right.brake();
+    // pros::delay(500);
     fast_move(-20,8,2000,true);
 
     //no bar code

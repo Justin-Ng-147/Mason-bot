@@ -23,7 +23,7 @@ void chooser(int& status){
     {
         selected = convert_bit(pros::lcd::read_buttons());
         // printf("%d , %d\n",pros::lcd::read_buttons(),status);
-        if(status == -4){
+        if(status == -5){
             if(!set_text){
                 pros::lcd::set_text(1, "    blue + 3 goal   ");
                 set_text = true;
@@ -36,7 +36,7 @@ void chooser(int& status){
                 continue;
             }
         }
-        else if(status == -3){
+        else if(status == -4){
             if(!set_text){
                 pros::lcd::set_text(1, "    blue - 3 goal   ");
                 set_text = true;
@@ -49,9 +49,22 @@ void chooser(int& status){
                 continue;
             }
         }
+        else if(status == -3){
+            if(!set_text){
+                pros::lcd::set_text(1, "    blue finals -   ");
+                set_text = true;
+            }
+            if(selected != 0){
+                set_text=false;
+                if(selected == 100) return;
+                else status += selected;
+                pros::delay(500);
+                continue;
+            }
+        }
         else if(status == -2){
             if(!set_text){
-                pros::lcd::set_text(1, "    blue finals   ");
+                pros::lcd::set_text(1, "    blue finals +   ");
                 set_text = true;
             }
             if(selected != 0){
@@ -102,7 +115,7 @@ void chooser(int& status){
         }
         else if(status == 2){
             if(!set_text){
-                pros::lcd::set_text(1, "    red finals   ");
+                pros::lcd::set_text(1, "    red finals +   ");
                 set_text = true;
             }
             if(selected != 0){
@@ -115,7 +128,7 @@ void chooser(int& status){
         }
         else if(status == 3){
             if(!set_text){
-                pros::lcd::set_text(1, "    red - 3 goal   ");
+                pros::lcd::set_text(1, "    red finals -   ");
                 set_text = true;
             }
             if(selected != 0){
@@ -128,7 +141,7 @@ void chooser(int& status){
         }
         else if(status == 4){
             if(!set_text){
-                pros::lcd::set_text(1, "    red + 3 goal   ");
+                pros::lcd::set_text(1, "    red - 3 goal   ");
                 set_text = true;
             }
             if(selected != 0){
@@ -140,6 +153,19 @@ void chooser(int& status){
             }
         }
         else if(status == 5){
+            if(!set_text){
+                pros::lcd::set_text(1, "    red + 3 goal   ");
+                set_text = true;
+            }
+            if(selected != 0){
+                set_text=false;
+                if(selected == 100) return;
+                else status += selected;
+                pros::delay(500);
+                continue;
+            }
+        }
+        else if(status == 6){
             if(!set_text){
                 pros::lcd::set_text(1, "    skills   ");
                 set_text = true;
@@ -162,14 +188,17 @@ void chooser(int& status){
 void run_auton(int selected){
     switch (selected)
     {
-    case -4:
+    case -5:
         blue5();
         break;
-    case -3:
+    case -4:
         blue4();
         break;
-    case -2:
+    case -3:
         blue3();
+        break;
+    case -2:
+        blue2();
         break;
     case -1:
         blue1();
