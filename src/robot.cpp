@@ -1,7 +1,7 @@
 #include "main.h"
 
 
-pros::Motor intake(7);
+pros::MotorGroup intake({7,10});
 pros::MotorGroup arm({8,-9});
 pros::ADIDigitalOut mogo('A');
 pros::ADIDigitalOut pto('D');
@@ -15,9 +15,12 @@ pros::ADIDigitalOut claw('E');
 pros::Rotation arm_control(-19);
 
 
-pros::Vision vision(19);
-pros::Distance distance(12);
-pros::Distance mogo_distance(17);
+pros::Vision vision(14);
+pros::Distance distance(15);
+pros::Distance top_distance(16);
+pros::Distance mogo_distance(13);
+
+pros::Controller master(pros::E_CONTROLLER_MASTER);
 
 
 // red (1,252,215,220,7,.34)

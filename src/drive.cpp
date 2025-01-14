@@ -5,18 +5,18 @@ pros::MotorGroup left({LEFTMOTOR1PORT,-LEFTMOTOR2PORT,-LEFTMOTOR3PORT},pros::Mot
 pros::MotorGroup right({-RIGHTMOTOR1PORT,RIGHTMOTOR2PORT,RIGHTMOTOR3PORT},pros::MotorGearset::blue);
 
 pros::Imu imu(IMUPORT);
-pros::Rotation vertical_enc(VERTICALENCODERPORT);
+pros::Rotation vertical_enc(-VERTICALENCODERPORT);
 pros::Rotation horizontal_enc(-HORIZONTALENCODERPORT);
 
 lemlib::Drivetrain drivetrain(&left, 
                               &right,
-                              13, //track width
+                              12.625, //track width
                               lemlib::Omniwheel::NEW_275, //wheel type
                               450, //rpm
                               2); //horizontal drift
 
-lemlib::TrackingWheel horizontal_tracking_wheel(&horizontal_enc,lemlib::Omniwheel::NEW_2, -3.25); //3.625 3.25 2.75
-lemlib::TrackingWheel vertical_tracking_wheel(&vertical_enc,lemlib::Omniwheel::NEW_2, .75);
+lemlib::TrackingWheel horizontal_tracking_wheel(&horizontal_enc,lemlib::Omniwheel::NEW_2, -2.25); //3.625 3.25 2.75
+lemlib::TrackingWheel vertical_tracking_wheel(&vertical_enc,lemlib::Omniwheel::NEW_2, .0625);
 
 lemlib::OdomSensors sensors(&vertical_tracking_wheel,nullptr,&horizontal_tracking_wheel,nullptr,&imu);
 

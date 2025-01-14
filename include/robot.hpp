@@ -1,7 +1,7 @@
 #ifndef _ROBOT_HPP_
 #define _ROBOT_HPP_
 
-extern pros::Motor intake;
+extern pros::MotorGroup intake;
 extern pros::ADIDigitalOut mogo;
 extern pros::ADIDigitalOut pto;
 extern pros::ADIDigitalOut swiper;
@@ -15,5 +15,7 @@ extern pros::ADIDigitalOut claw;
 
 extern pros::MotorGroup arm;
 extern pros::Rotation arm_control;
+extern pros::Distance top_distance;
+extern pros::Controller master;
 
 #endif
