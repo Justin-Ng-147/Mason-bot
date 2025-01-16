@@ -19,6 +19,7 @@ pros::Vision vision(14);
 pros::Distance distance(15);
 pros::Distance top_distance(16);
 pros::Distance mogo_distance(13);
+pros::Distance ladybrown_dist(8);
 
 pros::Controller master(pros::E_CONTROLLER_MASTER);
 
