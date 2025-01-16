@@ -18,4 +18,6 @@ extern pros::Rotation arm_control;
 extern pros::Distance top_distance;
 extern pros::Controller master;
 
+extern pros::Distance ladybrown_dist;
+
 #endif
