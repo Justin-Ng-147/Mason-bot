@@ -54,13 +54,13 @@
 //     pros::delay(50);
 //     left.move(0);
 //     right.move(0);
-//     swiper.set_value(false);
-//     intake.move(127);
-//     chassis.moveDistance(12,2000,{.maxSpeed=30,.minSpeed=30,.earlyExitRange=3});
-//     chassis.turnToPoint(18,-12,3000);
-//     // chassis.moveDistance(6,1000,{.forwards=false,.minSpeed=30,.earlyExitRange=3});
-//     chassis.moveDistance(40,10000,{.maxSpeed=30,.minSpeed=30,.earlyExitRange=3},false);
-//     pros::delay(1000);    
+    // swiper.set_value(false);
+    // intake.move(127);
+    // chassis.moveDistance(12,2000,{.maxSpeed=30,.minSpeed=30,.earlyExitRange=3});
+    // chassis.turnToPoint(18,-12,3000);
+    // // chassis.moveDistance(6,1000,{.forwards=false,.minSpeed=30,.earlyExitRange=3});
+    // chassis.moveDistance(40,10000,{.maxSpeed=30,.minSpeed=30,.earlyExitRange=3},false);
+    // pros::delay(1000);    
 
 
 //     //touch hang
@@ -134,18 +134,14 @@ void blue2(){
     //set up
     chassis.setPose(0,0,-12);
     mogo.set_value(false);
+    left.set_brake_mode_all(pros::motor_brake_mode_e::E_MOTOR_BRAKE_BRAKE);
+    right.set_brake_mode_all(pros::motor_brake_mode_e::E_MOTOR_BRAKE_BRAKE);
 
     // chassis.moveToPoint(-7,40,4000,{.minSpeed=20,.earlyExitRange=20},false);
-    chassis.moveToPoint(-14,38,4000,{.minSpeed=20,.earlyExitRange=8});
-    // intake.move(-127);
-    set_intake_speed(-127);
-    pros::delay(100);
-    // intake.move(0);
-    set_intake_speed(0);
-    while(chassis.isInMotion()) pros::delay(10);
+    chassis.moveToPoint(-15,38,4000,{.minSpeed=1,.earlyExitRange=6},false);
+    left.brake();
+    right.brake();
     swiper.set_value(true);
-    left.move(-127);
-    right.move(-127);
     pros::delay(100);
     left.move(0);
     right.move(0);
@@ -190,6 +186,35 @@ void blue2(){
     left.move(0);
     right.move(0);
     swiper.set_value(false);
+    // intake.move(127);
+    set_intake_speed(127);
+    // intake.move(127;)
+    // chassi
+    //  pros::Task auton_task{[=]{
+    //     while(true){
+    //         if(vision.get_by_sig(0,BLUECOLOR).width>100 && distance.get_distance()<150){
+    //             pros::delay(1000);
+    //             set_intake_speed(0);
+    //             // ring_in_mutex.lock();
+    //             // ring_in = true;
+    //             // ring_in_mutex.unlock();
+    //             break;
+    //         }
+    //         pros::delay(10);
+    //     }
+    // }};
+    chassis.moveDistance(12,2000,{.maxSpeed=30,.minSpeed=30,.earlyExitRange=3});
+    chassis.turnToPoint(18,-12,3000);
+    // chassis.moveDistance(6,1000,{.forwards=false,.minSpeed=30,.earlyExitRange=3});
+    chassis.moveDistance(40,10000,{.maxSpeed=30,.minSpeed=30,.earlyExitRange=3},false);
+    pros::delay(1000);    
+
+
+
+    // chassis.moveDistance(15,2000,{.forwards=false},false);
+    // pros::delay(500);
+    // mogo.set_value(false);
+
     mogo.set_value(false);
 
 
