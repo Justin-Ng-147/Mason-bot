@@ -54,8 +54,8 @@ void initialize() {
 	}
 	else{
 		chooser(auton_status);
-		if (auton_status < 0) sort(REDCOLOR);
-		else sort(BLUECOLOR);
+		// if (auton_status < 0) sort(REDCOLOR);
+		// else sort(BLUECOLOR);
 		pros::lcd::set_text(1, "auton chosen");
 	}
 
@@ -259,6 +259,7 @@ void opcontrol() {
 		
 			target_mutex.lock();
 			global_target=100;
+			// global_target=5000;
 			target_mutex.unlock();
 			
 		}
