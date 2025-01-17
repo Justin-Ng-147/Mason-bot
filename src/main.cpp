@@ -7,10 +7,10 @@
 true: display odometry data and will run the test auton
 false: display competition screen to choose different autons
 */
-bool testing = false;
+bool testing = true;
 
 int auton_status = 0;
-int test_auton = -3;
+int test_auton = 5;
 
 
 
@@ -31,8 +31,9 @@ void initialize() {
 	chassis.setPose(0,0,0);
 	// chassis.setPose(0,0,-12);
 
+	arm_to_pos();
+	arm_control.set_position(0);
 	mogo.set_value(true);
-	pto.set_value(false);
 
 	// sort_thrower.set_value(true);
 
@@ -45,6 +46,7 @@ void initialize() {
 				pros::lcd::print(1, "X: %f", chassis.getPose().x); // x
 				pros::lcd::print(2, "Y: %f", chassis.getPose().y); // y
 				pros::lcd::print(3, "Theta: %f", chassis.getPose().theta); // heading
+				pros::lcd::print(4, "angle: %d", arm_control.get_position()); // heading
 				// delay to save resources
 				pros::delay(20);
 			}
@@ -52,8 +54,8 @@ void initialize() {
 	}
 	else{
 		chooser(auton_status);
-		if (auton_status < 0) sort(REDCOLOR);
-		else sort(BLUECOLOR);
+		// if (auton_status < 0) sort(REDCOLOR);
+		// else sort(BLUECOLOR);
 		pros::lcd::set_text(1, "auton chosen");
 	}
 
@@ -114,7 +116,11 @@ void autonomous() {
  */
 void opcontrol() {
 	// intake_task->remove();
-	pros::Controller master(pros::E_CONTROLLER_MASTER);
+	
+	arm.set_brake_mode_all(pros::motor_brake_mode_e::E_MOTOR_BRAKE_BRAKE);
+	left.set_brake_mode_all(pros::motor_brake_mode_e::E_MOTOR_BRAKE_BRAKE);
+    right.set_brake_mode_all(pros::motor_brake_mode_e::E_MOTOR_BRAKE_BRAKE);
+	
 
 	bool pto_flag = true;
 	bool pto_pressed = true;
@@ -129,9 +135,15 @@ void opcontrol() {
 	bool swiper_flag = false;
 	bool swiper_pressed = true;
 
+	bool b_pressed = true;
+	bool y_pressed = true;
+
+	bool arm_pressed = true;
+
 	if (intake_task != nullptr) {
 		intake_task->notify();
 	}
+	// init_driver_intake();
 
 	left.set_brake_mode_all(pros::motor_brake_mode_e::E_MOTOR_BRAKE_COAST);
 	right.set_brake_mode_all(pros::motor_brake_mode_e::E_MOTOR_BRAKE_COAST);
@@ -144,6 +156,38 @@ void opcontrol() {
 		left.move(dir+turn);
 		right.move(dir-turn);
 		#pragma endregion arcade
+
+		
+		if(master.get_digital(DIGITAL_L1)){
+			if(!arm_pressed){
+				intake.move(-127);
+				pros::delay(30);
+				intake.move(0);
+				arm_pressed = true;
+			}
+			arm_mutex.lock();
+			arm_move = true;
+			arm_mutex.unlock();
+			arm.move(127);
+		}
+		else if(master.get_digital(DIGITAL_L2)){
+			arm_mutex.lock();
+			arm_move = true;
+			arm_mutex.unlock();
+			arm.move(-127);
+		}
+		else if(master.get_digital(DIGITAL_L1) != 1 && arm_pressed){
+			arm_pressed = false;
+		}
+		else{
+			arm_mutex.lock();
+			if(arm_move){
+				arm.brake();
+			}
+			arm_mutex.unlock();
+		}
+
+
 
 		#pragma region intake r1
 		if(master.get_digital(DIGITAL_R1)){
@@ -160,74 +204,100 @@ void opcontrol() {
 		}
 		#pragma endregion intake
 
-		#pragma region pto a
-		if(master.get_digital(DIGITAL_L2) && !pto_pressed){
-			pto_flag = !pto_flag;
-			pto.set_value(pto_flag);
-			pto_pressed = true;
-		}
-		else if(master.get_digital(DIGITAL_L2) != 1 && pto_pressed){
-			pto_pressed = false;
-		}
-		#pragma endregion pto
 
 		#pragma region mogo x
-		if(master.get_digital(DIGITAL_L1) && !mogo_pressed){
+		if(master.get_digital(DIGITAL_DOWN) && !mogo_pressed){
 			mogo_flag = !mogo_flag;
 			mogo.set_value(mogo_flag);
 			mogo_pressed = true;
 		}
-		else if(master.get_digital(DIGITAL_L1) != 1 && mogo_pressed){
+		else if(master.get_digital(DIGITAL_DOWN) != 1 && mogo_pressed){
 			mogo_pressed = false;
 		}
+
+		
 		// else if(mogo_seated() && !mogo_flag && !mogo_pressed)
 		// {
 		// 	mogo.set_value(true);
 		// 	mogo_flag = true;
 		// }
 
-		if(master.get_digital(DIGITAL_Y) && !hang_pressed){
-			hang_flag = !hang_flag;
-			hang.set_value(hang_flag);
-			hang_pressed = true;
-		}
-		else if(master.get_digital(DIGITAL_Y) != 1 && hang_pressed){
-			hang_pressed = false;
-		}
+		// if(master.get_digital(DIGITAL_Y) && !hang_pressed){
+		// 	hang_flag = !hang_flag;
+		// 	hang.set_value(hang_flag);
+		// 	hang_pressed = true;
+		// }
+		// else if(master.get_digital(DIGITAL_Y) != 1 && hang_pressed){
+		// 	hang_pressed = false;
+		// }
 		
 		#pragma endregion mogo
 
-		#pragma region swiper b
-		if(master.get_digital(DIGITAL_B) && !swiper_pressed){
+		if(master.get_digital(DIGITAL_RIGHT) && !swiper_pressed){
 			swiper_flag = !swiper_flag;
 			swiper.set_value(swiper_flag);
 			swiper_pressed = true;
 		}
-		else if(master.get_digital(DIGITAL_B) != 1 && swiper_pressed){
+		else if(master.get_digital(DIGITAL_RIGHT) != 1 && swiper_pressed){
 			swiper_pressed = false;
 		}
 
-		if(master.get_digital(DIGITAL_RIGHT) && !claw_pressed){
-			claw_flag = !claw_flag;
-			claw.set_value(claw_flag);
-			claw_pressed = true;
+
+		#pragma region swiper b
+		// if(master.get_digital(DIGITAL_B) && !swiper_pressed){
+		// 	swiper_flag = !swiper_flag;
+		// 	swiper.set_value(swiper_flag);
+		// 	swiper_pressed = true;
+		// }
+		// else if(master.get_digital(DIGITAL_B) != 1 && swiper_pressed){
+		// 	swiper_pressed = false;
+		// }
+		if(master.get_digital(DIGITAL_B) && !b_pressed){
+			// swiper_flag = !swiper_flag;
+			b_pressed = true;
+			arm_mutex.lock();
+			arm_move=false;
+			arm_mutex.unlock();
+			
+		
+			target_mutex.lock();
+			global_target=100;
+			// global_target=5000;
+			target_mutex.unlock();
+			
 		}
-		else if(master.get_digital(DIGITAL_RIGHT) != 1 && claw_pressed){
-			claw_pressed = false;
+		else if(master.get_digital(DIGITAL_B) != 1 && b_pressed){
+			b_pressed = false;
 		}
 
-		if(master.get_digital(DIGITAL_DOWN) && !deploy_pressed){
-			deploy_flag = !deploy_flag;
-			deploy.set_value(deploy_flag);
-			deploy_pressed = true;
+		if(master.get_digital(DIGITAL_Y) && !y_pressed){
+			// hang_flag = !hang_flag;
+			y_pressed = true;
+			arm_mutex.lock();
+			arm_move=false;
+			arm_mutex.unlock();
+			
+
+			target_mutex.lock();
+			global_target=2600;
+			target_mutex.unlock();
 		}
-		else if(master.get_digital(DIGITAL_DOWN) != 1 && deploy_pressed){
-			deploy_pressed = false;
+		else if(master.get_digital(DIGITAL_Y) != 1 && y_pressed){
+			y_pressed = false;
 		}
+
+		
+
+		// if(master.get_digital(DIGITAL_DOWN) && !deploy_pressed){
+		// 	deploy_flag = !deploy_flag;
+		// 	deploy.set_value(deploy_flag);
+		// 	deploy_pressed = true;
+		// }
+		// else if(master.get_digital(DIGITAL_DOWN) != 1 && deploy_pressed){
+		// 	deploy_pressed = false;
+		// }
 		
 		#pragma endregion swiper
-
-
 		pros::delay(20);                               // Run for 20 ms then update
 	}
 }

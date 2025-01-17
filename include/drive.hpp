@@ -8,9 +8,9 @@
 #define RIGHTMOTOR2PORT 6
 #define RIGHTMOTOR3PORT 4
 
-#define IMUPORT 15
-#define VERTICALENCODERPORT 20
-#define HORIZONTALENCODERPORT 14
+#define IMUPORT 12
+#define VERTICALENCODERPORT 17
+#define HORIZONTALENCODERPORT 18
 
 extern lemlib::Chassis chassis;
 extern pros::MotorGroup left;
