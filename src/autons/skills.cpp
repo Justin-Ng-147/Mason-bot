@@ -212,7 +212,7 @@ void skills(){
     mogo.set_value(true);
     pros::delay(200);
     set_intake_speed(0);
-    chassis.moveDistance(6,1000,{.minSpeed=5,.earlyExitRange=3});
+    chassis.moveDistance(5,1000,{.minSpeed=5,.earlyExitRange=3});
 
     // -20 87
     //get 1st ring

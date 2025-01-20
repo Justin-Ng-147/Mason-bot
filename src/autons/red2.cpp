@@ -27,16 +27,20 @@
 // }
 
 void red2(){
+    left.set_brake_mode_all(pros::motor_brake_mode_e::E_MOTOR_BRAKE_BRAKE);
+    right.set_brake_mode_all(pros::motor_brake_mode_e::E_MOTOR_BRAKE_BRAKE);
     //get contested mogo
     chassis.setPose(0,0,12);
     mogo.set_value(false);
     chassis.moveToPoint(6,40,4000,{.minSpeed=20,.earlyExitRange=5},false);
     swiper.set_value(true);
-    left.move(-127);
-    right.move(-127);
+    left.brake();
+    right.brake();
     pros::delay(100);
     left.move(0);
     right.move(0);
+    chassis.turnToHeading(-45,1000,{.minSpeed=5,.earlyExitRange=3},false);
+    swiper.set_value(false);
     
 
     //get mogo
@@ -81,9 +85,9 @@ void red2(){
 
 
 
-    chassis.turnToPoint(-4,-5,2000,{.forwards=false,.minSpeed = 10,.earlyExitRange=5});
-    chassis.moveToPoint(-4,-5,2000,{.forwards=false},false);
-    chassis.turnToPoint(22,-12,2000,{},false);
+    chassis.turnToPoint(-5,-5,2000,{.forwards=false,.minSpeed = 5,.earlyExitRange=3});
+    chassis.moveToPoint(-5,-5,2000,{.forwards=false},false);
+    chassis.turnToPoint(22,-12,2000,{.minSpeed = 5,.earlyExitRange=3},false);
     swiper.set_value(true);
     chassis.moveToPoint(22,-12,2000,{},false);
     intake.move(0);
@@ -105,6 +109,17 @@ void red2(){
     chassis.moveDistance(15,2000,{.forwards=false},false);
     pros::delay(500);
     mogo.set_value(false);
+    pros::delay(500);
+    
+
+    chassis.turnToPoint(20,40,2000,{.forwards=false,.minSpeed=5,.earlyExitRange=3});
+    chassis.moveToPoint(20,40,2000,{.forwards = false,.maxSpeed=60});
+    if(mogo_seated()){
+        pros::delay(50);
+        mogo.set_value(true);
+        pros::delay(50);
+        // chassis.cancelMotion();
+    }
 
     chassis.turnToPoint(20,40,2000,{.forwards=false});
     chassis.moveToPoint(20,40,2000,{.forwards = false,.maxSpeed=60});

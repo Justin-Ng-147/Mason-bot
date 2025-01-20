@@ -60,14 +60,14 @@ void red3(){
 
 
     //28 -1
-    chassis.turnToPoint(20,12,1000,{.minSpeed=5,.earlyExitRange=3});
-    chassis.moveToPoint(20,12,2000,{.minSpeed=5,.earlyExitRange=35});
-    chassis.moveToPoint(20,12,2000,{.maxSpeed=30,.minSpeed=5,.earlyExitRange=25});
-    chassis.cancelMotion();
-    left.brake();
-    right.brake();
-    pros::delay(500);
-    // chassis.moveToPoint(16,16,2000);
+    chassis.turnToPoint(20,12,1000,{.maxSpeed=60,.minSpeed=5,.earlyExitRange=3});
+    // chassis.moveToPoint(20,12,2000,{.minSpeed=5,.earlyExitRange=35});
+    // chassis.moveToPoint(20,12,2000,{.maxSpeed=30,.minSpeed=5,.earlyExitRange=25});
+    // chassis.cancelMotion();
+    // left.brake();
+    // right.brake();
+    // pros::delay(500);
+    // // chassis.moveToPoint(16,16,2000);
     fast_move(20,12,2000,true);
     // mogo.set_value(false);
     // chassis.moveToPoint(28,-1,4000,{.maxSpeed = 40});
