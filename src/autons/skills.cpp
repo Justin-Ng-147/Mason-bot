@@ -216,13 +216,13 @@ void skills(){
 
     // -20 87
     //get 1st ring
-    chassis.turnToPoint(-21,88,1000);
-    set_intake_speed(50);
-    chassis.moveToPoint(-21,88,4000);
+    chassis.turnToPoint(-22,89,1000);
+    set_intake_speed(60);
+    chassis.moveToPoint(-22,89,4000);
     // fast_move(-21,87,4000,false);
-    while(distance.get_distance()>60 &&chassis.isInMotion()) pros::delay(10);
+    while(distance.get_distance()>100 &&chassis.isInMotion()) pros::delay(10);
     set_intake_speed(0);
-    while(chassis.getPose().y<86 &&chassis.isInMotion()) pros::delay(10);
+    while(chassis.getPose().y<85 &&chassis.isInMotion()) pros::delay(10);
     while(top_distance.get_distance()>100 &&chassis.isInMotion()){
         set_intake_speed(50);
         pros::delay(10);
@@ -231,8 +231,8 @@ void skills(){
 
     //12 120
     //get mogo
-    chassis.turnToPoint(4,116,1000,{.forwards=false});
-    chassis.moveToPoint(4,116,4000,{.forwards=false,.maxSpeed=60});
+    chassis.turnToPoint(4,118,1000,{.forwards=false});
+    chassis.moveToPoint(4,118,4000,{.forwards=false,.maxSpeed=60});
     while(!mogo_seated() && chassis.isInMotion()) pros::delay(10);
     pros::delay(100);
     mogo.set_value(false);
@@ -289,9 +289,12 @@ void skills(){
     swiper.set_value(true);
     pros::delay(500);
     set_intake_speed(0);
-    chassis.moveDistance(16,1000,{.minSpeed=5,.earlyExitRange=3});
+    chassis.moveDistance(15,1000,{.minSpeed=5,.earlyExitRange=3});
     set_intake_speed(-127);
-    chassis.turnToHeading(205,1000,{.direction=AngularDirection::CCW_COUNTERCLOCKWISE},false);
+    chassis.turnToHeading(210,1000,{.direction=AngularDirection::CCW_COUNTERCLOCKWISE});
+    left.move(127);
+    right.move(-127);
+    pros::delay(100);
     chassis.moveDistance(15,500,{.forwards=false});
     mogo.set_value(true);
     chassis.moveDistance(13,1000,{.minSpeed=5,.earlyExitRange=3});
