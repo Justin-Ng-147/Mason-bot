@@ -1,7 +1,7 @@
 #include "main.h"
 
 //new bot blue - finals 6 ring
-void blue1(){
+void blue3(){
 // setup
     chassis.setPose(0,0,-146);
     intake.set_encoder_units_all(MOTOR_ENCODER_ROTATIONS);

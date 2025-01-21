@@ -1,7 +1,7 @@
 #include "main.h"
 
 //new bot blue + finals 
-void blue1(){
+void blue5(){
     intake.set_encoder_units_all(MOTOR_ENCODER_ROTATIONS);
     chassis.setPose(0,0,146);
     left.set_brake_mode_all(pros::motor_brake_mode_e::E_MOTOR_BRAKE_BRAKE);
