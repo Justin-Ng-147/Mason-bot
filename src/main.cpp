@@ -10,7 +10,7 @@ false: display competition screen to choose different autons
 bool testing = false;
 
 int auton_status = 0;
-int test_auton = 1;
+int test_auton = -1;
 
 
 

@@ -37,11 +37,11 @@ void blue2(){
 
     //get 2 rings
     set_intake_speed(127);
-    chassis.swingToPoint(30,40.5,DriveSide::RIGHT,2000,{.maxSpeed=80, .minSpeed=5, .earlyExitRange = 10});
-    chassis.turnToPoint(30,40.5,1000,{.minSpeed=20,.earlyExitRange=3});
-    chassis.moveToPoint(30,40.5,1000,{.minSpeed=20,.earlyExitRange=3});
-    chassis.turnToPoint(46,40.5,1000,{.minSpeed=20,.earlyExitRange=3});
-    chassis.moveToPoint(46,40.5,1000,{.minSpeed=20,.earlyExitRange=3});
+    chassis.swingToPoint(30,41,DriveSide::RIGHT,2000,{.maxSpeed=80, .minSpeed=5, .earlyExitRange = 10});
+    chassis.turnToPoint(30,41,1000,{.minSpeed=20,.earlyExitRange=3});
+    chassis.moveToPoint(30,41,1000,{.minSpeed=20,.earlyExitRange=3});
+    chassis.turnToPoint(48,41,1000,{.minSpeed=20,.earlyExitRange=3});
+    chassis.moveToPoint(48,41,1000,{.minSpeed=20,.earlyExitRange=3});
 
     chassis.moveToPoint(14, 28,1000,{.forwards=false,.minSpeed=20,.earlyExitRange=3});
     chassis.turnToPoint(36,26,1000,{.minSpeed=20,.earlyExitRange=3});
