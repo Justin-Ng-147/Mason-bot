@@ -16,13 +16,9 @@ void blue4(){
 
     chassis.moveToPoint(-15, 31,4000,{.forwards = false,.maxSpeed=80});
     pros::delay(500);
-    arm_mutex.lock();
     arm_move=false;
-    arm_mutex.unlock();
 
-    target_mutex.lock();
     global_target=100;
-    target_mutex.unlock();
     while(!mogo_seated() && chassis.isInMotion()) pros::delay(10);
     pros::delay(50);
     mogo.set_value(false);
@@ -78,13 +74,9 @@ void blue4(){
     chassis.moveToPoint(-5,41,3000,{.forwards=false});
     chassis.waitUntil(25);
     set_intake_speed(0);
-    target_mutex.lock();
     global_target=6000;
-    target_mutex.unlock();
     while(chassis.isInMotion()) pros::delay(10);
-    arm_mutex.lock();
     arm_move=true;
-    arm_mutex.unlock();
     arm.move(0);
 
 

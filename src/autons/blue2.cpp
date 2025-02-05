@@ -18,13 +18,9 @@ void blue2(){
     // get mogo
     chassis.moveToPoint(16.5, 29,4000,{.forwards = false,.maxSpeed=80});
     pros::delay(500);
-    arm_mutex.lock();
     arm_move=false;
-    arm_mutex.unlock();
 
-    target_mutex.lock();
     global_target=100;
-    target_mutex.unlock();
     while(!mogo_seated() && chassis.isInMotion()) pros::delay(10);
     pros::delay(50);
     mogo.set_value(false);
@@ -53,10 +49,6 @@ void blue2(){
     chassis.moveDistance(10,1000,{.forwards=false,.minSpeed=5,.earlyExitRange=3});
 
 
-    //28 -1
-    // target_mutex.lock();
-    // global_target=20000;
-    // target_mutex.unlock();
     chassis.turnToPoint(-20,15,1000,{.minSpeed=5,.earlyExitRange=3});
     chassis.moveToPoint(-20,15,2000,{.minSpeed=5,.earlyExitRange=3});
     pros::Task skills_task2{[=]
@@ -65,12 +57,6 @@ void blue2(){
         pros::delay(500);
         set_intake_speed(0);
     }};
-    // chassis.moveToPoint(16,10,2000,{.forwards=false,.minSpeed=5,.earlyExitRange=3},false);
-    // arm_mutex.lock();
-    // arm_move=true;
-    // arm_mutex.unlock();
-    // arm.move(0);
-    // chassis.moveToPoint(4,35,2000);
 
     chassis.moveToPoint(-60,-6,2000);
 }

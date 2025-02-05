@@ -162,26 +162,20 @@ void opcontrol() {
 				intake.move(0);
 				arm_pressed = true;
 			}
-			arm_mutex.lock();
 			arm_move = true;
-			arm_mutex.unlock();
 			arm.move(127);
 		}
 		else if(master.get_digital(DIGITAL_L2)){
-			arm_mutex.lock();
 			arm_move = true;
-			arm_mutex.unlock();
 			arm.move(-127);
 		}
 		else if(master.get_digital(DIGITAL_L1) != 1 && arm_pressed){
 			arm_pressed = false;
 		}
 		else{
-			arm_mutex.lock();
 			if(arm_move){
 				arm.brake();
 			}
-			arm_mutex.unlock();
 		}
 
 
@@ -252,15 +246,11 @@ void opcontrol() {
 		if(master.get_digital(DIGITAL_B) && !b_pressed){
 			// swiper_flag = !swiper_flag;
 			b_pressed = true;
-			arm_mutex.lock();
 			arm_move=false;
-			arm_mutex.unlock();
 			
 		
-			target_mutex.lock();
 			global_target=100;
 			// global_target=5000;
-			target_mutex.unlock();
 			
 		}
 		else if(master.get_digital(DIGITAL_B) != 1 && b_pressed){
@@ -270,14 +260,10 @@ void opcontrol() {
 		if(master.get_digital(DIGITAL_Y) && !y_pressed){
 			// hang_flag = !hang_flag;
 			y_pressed = true;
-			arm_mutex.lock();
 			arm_move=false;
-			arm_mutex.unlock();
 			
 
-			target_mutex.lock();
 			global_target=2600;
-			target_mutex.unlock();
 		}
 		else if(master.get_digital(DIGITAL_Y) != 1 && y_pressed){
 			y_pressed = false;

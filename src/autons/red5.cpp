@@ -16,13 +16,9 @@ void red5(){
 
     chassis.moveToPoint(16, 32,4000,{.forwards = false,.maxSpeed=80});
     pros::delay(500);
-    arm_mutex.lock();
     arm_move=false;
-    arm_mutex.unlock();
 
-    target_mutex.lock();
     global_target=100;
-    target_mutex.unlock();
     while(!mogo_seated() && chassis.isInMotion()) pros::delay(10);
     pros::delay(50);
     mogo.set_value(false);
@@ -91,28 +87,7 @@ void red5(){
     mogo.set_value(true);
     chassis.turnToHeading(180,1000);
     
-    // chassis.moveToPoint(5,41,3000,{.forwards=false});
-    // chassis.waitUntil(20);
-    // set_intake_speed(0);
-    // target_mutex.lock();
-    // global_target=6000;
-    // target_mutex.unlock();
-    // while(chassis.isInMotion()) pros::delay(10);
-    // arm_mutex.lock();
-    // arm_move=true;
-    // arm_mutex.unlock();
-    // arm.move(0);
 
-    // target_mutex.lock();
-    // global_target=20000;
-    // target_mutex.unlock();
-    // chassis.moveToPoint(10,8,2000,{.forwards=false,.minSpeed=5,.earlyExitRange=3});
-    // chassis.turnToPoint(10,40,1000,{.minSpeed=5,.earlyExitRange=3});
-    // arm_mutex.lock();
-    // arm_move=true;
-    // arm_mutex.unlock();
-    // arm.move(0);
-    // chassis.moveToPoint(10,40,1000);
 }
 
 

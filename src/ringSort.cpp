@@ -1,7 +1,6 @@
 #include "main.h"
 
 pros::Task *sort_task = nullptr;
-pros::Mutex intake_control;
 
 pros::vision_signature_s_t RED_SIG =
     pros::Vision::signature_from_utility(1, 11049, 12603, 11826, -1625, -703, -1164, 5, 0);
@@ -71,7 +70,6 @@ bool mogo_seated()
   return mogo_distance.get_distance() < 25;
 }
 
-pros::Mutex intake_mutex;
 int intake_speed = 0;
 bool antijam = true;
 pros::Task *intake_task = nullptr;
@@ -86,10 +84,8 @@ void init_intake()
                                    int prev_speed = 0;
                                    while (!pros::Task::notify_take(true, 10))
                                    {
-                                     intake_mutex.lock();
                                      int speed = intake_speed;
                                      bool antijam_temp = antijam;
-                                     intake_mutex.unlock();
 
                                      intake.move(speed);
                                      if (speed != prev_speed)
@@ -117,10 +113,8 @@ void set_intake_speed(int speed, bool jam)
 {
   pros::Task intake_task2{[=]
                           {
-                            intake_mutex.lock();
                             intake_speed = speed;
                             antijam = jam;
-                            intake_mutex.unlock();
                           }};
   // intake_task2.remove();
   // delete &intake_task2;
@@ -158,40 +152,8 @@ void fast_move(float x, float y, int timeout, bool async = true)
 //     }};
 // }
 
-pros::Mutex arm_mutex;
-pros::Mutex target_mutex;
 int global_target = 0;
 bool arm_move = true;
-
-// void arm_to_pos(){
-// 	  pros::Task arm_task_0{[=]{
-// 		int target;
-// 		int pos = arm_control.get_position();
-// 		int error = target - pos;
-// 		int speed;
-// 		bool prevsgn = error>0;
-//         while(true){
-
-// 			target_mutex.lock();
-// 			target = global_target;
-// 			target_mutex.unlock();
-// 			pos = arm_control.get_position();
-// 			error = target - pos;
-// 			speed = error *.03;
-// 			if(speed>127) speed = 127;
-// 			if(speed<-127) speed = -127;
-// 			arm_mutex.lock();
-// 			if(!arm_move) arm.move(speed);
-// 			arm_mutex.unlock();
-
-// 			// if(prevsgn != (error>0)) break;
-// 			prevsgn = (error>=0);
-// 			pros::delay(10);
-// 		}
-// 		arm.brake();
-
-//     }};
-// }
 
 void arm_to_pos()
 {
@@ -199,16 +161,21 @@ void arm_to_pos()
     {
       lemlib::PID arm_pid(.07,0,.2);
       arm_pid.reset();
+      arm.set_brake_mode_all(pros::motor_brake_mode_e::E_MOTOR_BRAKE_HOLD);
       int target;
       int pos = arm_control.get_position();
       int error = target - pos;
       float speed;
+      int count = 0;
+      int prev_target;
       while (true)
       {
 
-        target_mutex.lock();
         target = global_target;
-        target_mutex.unlock();
+        if(prev_target!=target){
+          count = 0;
+        }
+        prev_target = target;
         pos = arm_control.get_position();
         error = target - pos;
         // if(abs(error)<100) error = 0;
@@ -217,10 +184,16 @@ void arm_to_pos()
           speed = 127;
         if (speed < -127)
           speed = -127;
-        arm_mutex.lock();
-        if (!arm_move)
-          arm.move(speed);
-        arm_mutex.unlock();
+        if(count < 50){
+          if (!arm_move)
+            arm.move(speed);
+          if(abs(error)<300)
+              count++;
+        }
+        else{
+          if (!arm_move)
+            arm.brake();
+        }
         pros::delay(10);
       }
     }};

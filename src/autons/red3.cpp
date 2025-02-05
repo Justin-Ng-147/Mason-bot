@@ -19,13 +19,9 @@ void red3(){
     // get mogo
     chassis.moveToPoint(-15, 31,4000,{.forwards = false,.maxSpeed=80});
     pros::delay(500);
-    arm_mutex.lock();
     arm_move=false;
-    arm_mutex.unlock();
 
-    target_mutex.lock();
     global_target=100;
-    target_mutex.unlock();
     while(!mogo_seated() && chassis.isInMotion()) pros::delay(10);
     pros::delay(50);
     mogo.set_value(false);
@@ -54,10 +50,6 @@ void red3(){
     chassis.moveDistance(10,1000,{.forwards=false,.minSpeed=5,.earlyExitRange=3});
 
 
-    //touch bar
-    // target_mutex.lock();
-    // global_target=20000;
-    // target_mutex.unlock();
 
     chassis.turnToPoint(30,15,1000,{.minSpeed=5,.earlyExitRange=3});
     chassis.moveToPoint(30,15,2000,{.minSpeed=5,.earlyExitRange=3});
@@ -68,13 +60,6 @@ void red3(){
         set_intake_speed(0);
     }};
 
-    //touch bar
-    // chassis.moveToPoint(-16,10,2000,{.forwards=false,.minSpeed=5,.earlyExitRange=3},false);
-    // arm_mutex.lock();
-    // arm_move=true;
-    // arm_mutex.unlock();
-    // arm.move(0);
-    // chassis.moveToPoint(-3,37,2000);
 
     //go to corner
     // chassis.moveToPoint(60,-5,2000);
