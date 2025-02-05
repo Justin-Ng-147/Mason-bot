@@ -10,12 +10,14 @@ pros::vision_signature_s_t BLUE_SIG =
 
 void setup()
 {
-  vision.set_signature(1, &RED_SIG);
-  vision.set_signature(2, &BLUE_SIG);
-  intake.set_encoder_units_all(pros::E_MOTOR_ENCODER_ROTATIONS);
-  vision.get_object_count();
-  pros::delay(100);
+  // vision.set_signature(1, &RED_SIG);
+  // vision.set_signature(2, &BLUE_SIG);
+  // intake.set_encoder_units_all(pros::E_MOTOR_ENCODER_ROTATIONS);
+  // vision.get_object_count();
+  // pros::delay(100);
   // sort_thrower.set_value(true);
+  color.set_led_pwm(100);
+  color.set_integration_time(20);
 }
 
 /*
