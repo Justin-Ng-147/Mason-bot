@@ -145,6 +145,9 @@ void opcontrol() {
 	}
 	// init_driver_intake();
 
+	left.set_brake_mode_all(pros::motor_brake_mode_e::E_MOTOR_BRAKE_COAST);
+	right.set_brake_mode_all(pros::motor_brake_mode_e::E_MOTOR_BRAKE_COAST);
+
 	while (true) {
 		#pragma region arcade
 		// Arcade control scheme

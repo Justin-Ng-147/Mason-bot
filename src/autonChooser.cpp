@@ -50,9 +50,22 @@ void chooser(int& status){
                 continue;
             }
         }
-        else if(status == -3){
+        else if(status == -4){
             if(!set_text){
                 pros::lcd::set_text(1, "    blue - finals 6 ring   ");
+                set_text = true;
+            }
+            if(selected != 0){
+                set_text=false;
+                if(selected == 100) return;
+                else status += selected;
+                pros::delay(500);
+                continue;
+            }
+        }
+        else if(status == -3){
+            if(!set_text){
+                pros::lcd::set_text(1, "    blue finals -   ");
                 set_text = true;
             }
             if(selected != 0){

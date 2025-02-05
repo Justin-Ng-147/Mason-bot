@@ -130,13 +130,13 @@ void blue2(){
 //     pros::delay(50);
 //     left.move(0);
 //     right.move(0);
-//     swiper.set_value(false);
-//     intake.move(127);
-//     chassis.moveDistance(12,2000,{.maxSpeed=30,.minSpeed=30,.earlyExitRange=3});
-//     chassis.turnToPoint(18,-12,3000);
-//     // chassis.moveDistance(6,1000,{.forwards=false,.minSpeed=30,.earlyExitRange=3});
-//     chassis.moveDistance(40,10000,{.maxSpeed=30,.minSpeed=30,.earlyExitRange=3},false);
-//     pros::delay(1000);    
+    // swiper.set_value(false);
+    // intake.move(127);
+    // chassis.moveDistance(12,2000,{.maxSpeed=30,.minSpeed=30,.earlyExitRange=3});
+    // chassis.turnToPoint(18,-12,3000);
+    // // chassis.moveDistance(6,1000,{.forwards=false,.minSpeed=30,.earlyExitRange=3});
+    // chassis.moveDistance(40,10000,{.maxSpeed=30,.minSpeed=30,.earlyExitRange=3},false);
+    // pros::delay(1000);    
 
 
 //     //touch hang
