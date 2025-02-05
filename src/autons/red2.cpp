@@ -1,5 +1,94 @@
 #include "main.h"
 
+//new bot red - finals 5 ring
+void red2(){
+ // setup
+    chassis.setPose(0,0,146);
+    intake.set_encoder_units_all(MOTOR_ENCODER_ROTATIONS);
+    left.set_brake_mode_all(pros::motor_brake_mode_e::E_MOTOR_BRAKE_BRAKE);
+    right.set_brake_mode_all(pros::motor_brake_mode_e::E_MOTOR_BRAKE_BRAKE);
+    mogo.set_value(true);
+
+    //score ring
+    chassis.moveDistance(7,1000);
+    arm.move(127);
+    pros::delay(700);
+    arm.brake();
+    
+
+    // get mogo
+    chassis.moveToPoint(-15, 31,4000,{.forwards = false,.maxSpeed=80});
+    pros::delay(500);
+    arm_mutex.lock();
+    arm_move=false;
+    arm_mutex.unlock();
+
+    target_mutex.lock();
+    global_target=100;
+    target_mutex.unlock();
+    while(!mogo_seated() && chassis.isInMotion()) pros::delay(10);
+    pros::delay(50);
+    mogo.set_value(false);
+    // pros::delay(50);
+    chassis.cancelMotion();
+    left.brake();
+    right.brake();
+    pros::delay(100);
+    
+
+    //get 2 rings
+    set_intake_speed(127);
+    chassis.swingToPoint(-30,43.5,DriveSide::LEFT,2000,{.maxSpeed=80,.minSpeed=5, .earlyExitRange = 10});
+    chassis.turnToPoint(-30,43.5,500,{.minSpeed=20,.earlyExitRange=3});
+    chassis.moveToPoint(-30,43.5,1000,{.minSpeed=20,.earlyExitRange=3});
+    chassis.turnToPoint(-48,43.5,1000,{.minSpeed=20,.earlyExitRange=3});
+    chassis.moveToPoint(-48,43.5,1000,{.minSpeed=20,.earlyExitRange=3});
+
+    chassis.moveToPoint(-14, 31,1000,{.forwards=false,.minSpeed=20,.earlyExitRange=3});
+    chassis.turnToPoint(-36,28,1000,{.minSpeed=20,.earlyExitRange=3});
+    fast_move(-36,28,2000,true);
+    
+    chassis.turnToPoint(-50,-10,1000,{.minSpeed=20,.earlyExitRange=3});
+    chassis.moveDistance(40,2000,{.minSpeed=5,.earlyExitRange=3});
+    chassis.moveDistance(40,700);
+    chassis.moveDistance(10,1000,{.forwards=false,.minSpeed=5,.earlyExitRange=3});
+
+
+    //touch bar
+    // target_mutex.lock();
+    // global_target=20000;
+    // target_mutex.unlock();
+
+    chassis.turnToPoint(30,15,1000,{.minSpeed=5,.earlyExitRange=3});
+    chassis.moveToPoint(30,15,2000,{.minSpeed=5,.earlyExitRange=3});
+    pros::Task skills_task2{[=]
+    {
+        while(top_distance.get_distance()>100) pros::delay(10);
+        pros::delay(500);
+        set_intake_speed(0);
+    }};
+    
+    //touch bar
+    // chassis.moveToPoint(-16,10,2000,{.forwards=false,.minSpeed=5,.earlyExitRange=3},false);
+    // arm_mutex.lock();
+    // arm_move=true;
+    // arm_mutex.unlock();
+    // arm.move(0);
+    // chassis.moveToPoint(-3,37,2000);
+
+    //go to corner
+    // chassis.moveToPoint(60,-5,2000);
+    chassis.moveToPoint(70,-13,2000);
+    swiper.set_value(true);
+    chassis.turnToHeading(-40,1000,{},false);
+    set_intake_speed(0);
+    // mogo.set_value(true);
+    swiper.set_value(false);
+    // set_intake_speed(-127);
+}
+
+
+
 // void red2(){
 //     chassis.setPose(0,0,12);
 //     mogo.set_value(true);
@@ -26,116 +115,101 @@
 //     chassis.cancelMotion();
 // }
 
-void red2(){
-    left.set_brake_mode_all(pros::motor_brake_mode_e::E_MOTOR_BRAKE_BRAKE);
-    right.set_brake_mode_all(pros::motor_brake_mode_e::E_MOTOR_BRAKE_BRAKE);
-    //get contested mogo
-    chassis.setPose(0,0,12);
-    mogo.set_value(false);
-    chassis.moveToPoint(6,40,4000,{.minSpeed=20,.earlyExitRange=5},false);
-    swiper.set_value(true);
-    left.brake();
-    right.brake();
-    pros::delay(100);
-    left.move(0);
-    right.move(0);
-    chassis.turnToHeading(-45,1000,{.minSpeed=5,.earlyExitRange=3},false);
-    swiper.set_value(false);
+// void red2(){
+//     //get contested mogo
+//     chassis.setPose(0,0,12);
+//     mogo.set_value(false);
+//     chassis.moveToPoint(6,40,4000,{.minSpeed=20,.earlyExitRange=5},false);
+//     swiper.set_value(true);
+//     left.move(-127);
+//     right.move(-127);
+//     pros::delay(100);
+//     left.move(0);
+//     right.move(0);
     
 
-    //get mogo
-    chassis.turnToPoint(-12,28,2000,{.forwards=false},false);
+//     //get mogo
+//     chassis.turnToPoint(-12,28,2000,{.forwards=false},false);
     
-    // chassis.moveToPoint(-12,28,2000,{.forwards=false});
-    chassis.moveDistance(40,3000,{.forwards=false,.maxSpeed=60});
-    swiper.set_value(false);
-    while(!mogo_seated() && chassis.isInMotion()) pros::delay(10);
-    pros::delay(100);
-    mogo.set_value(true);
-    pros::delay(100);
-    chassis.cancelMotion();
+//     // chassis.moveToPoint(-12,28,2000,{.forwards=false});
+//     chassis.moveDistance(40,3000,{.forwards=false,.maxSpeed=60});
+//     swiper.set_value(false);
+//     while(!mogo_seated() && chassis.isInMotion()) pros::delay(10);
+//     pros::delay(100);
+//     mogo.set_value(true);
+//     pros::delay(100);
+//     chassis.cancelMotion();
 
-    //20 36
-    //intake ring
-    chassis.moveToPoint(15,32,2000);
-    pros::delay(200);
-    intake.move(127);
-    // intake.move(0);
+//     //20 36
+//     //intake ring
+//     chassis.moveToPoint(15,32,2000);
+//     pros::delay(200);
+//     intake.move(127);
+//     // intake.move(0);
 
-    //start
-    // chassis.turnToPoint(5,-3,2000,{.forwards=false,.minSpeed = 10,.earlyExitRange=5});
-    // chassis.moveToPoint(5,-3,2000,{.forwards=false},false);
-    // chassis.turnToPoint(22,-9,2000,{},false);
-    // swiper.set_value(true);
-    // chassis.moveToPoint(22,-9,2000,{},false);
-    // intake.move(0);
-    // chassis.turnToHeading(35,3000,{.direction=AngularDirection::CCW_COUNTERCLOCKWISE, .minSpeed=127, .earlyExitRange = 3},false);
-    // left.move(127);
-    // right.move(-127);
-    // pros::delay(50);
-    // left.move(0);
-    // right.move(0);
-    // swiper.set_value(false);
-    // intake.move(127);
-    // chassis.moveDistance(12,2000,{.maxSpeed=30,.minSpeed=30,.earlyExitRange=3});
-    // chassis.turnToPoint(32,28,3000);
-    // chassis.moveDistance(40,10000,{.maxSpeed=30,.minSpeed=30,.earlyExitRange=3},false);
-    //end
-
-
+//     //start
+//     // chassis.turnToPoint(5,-3,2000,{.forwards=false,.minSpeed = 10,.earlyExitRange=5});
+//     // chassis.moveToPoint(5,-3,2000,{.forwards=false},false);
+//     // chassis.turnToPoint(22,-9,2000,{},false);
+//     // swiper.set_value(true);
+//     // chassis.moveToPoint(22,-9,2000,{},false);
+//     // intake.move(0);
+//     // chassis.turnToHeading(35,3000,{.direction=AngularDirection::CCW_COUNTERCLOCKWISE, .minSpeed=127, .earlyExitRange = 3},false);
+//     // left.move(127);
+//     // right.move(-127);
+//     // pros::delay(50);
+//     // left.move(0);
+//     // right.move(0);
+//     // swiper.set_value(false);
+//     // intake.move(127);
+//     // chassis.moveDistance(12,2000,{.maxSpeed=30,.minSpeed=30,.earlyExitRange=3});
+//     // chassis.turnToPoint(32,28,3000);
+//     // chassis.moveDistance(40,10000,{.maxSpeed=30,.minSpeed=30,.earlyExitRange=3},false);
+//     //end
 
 
-    chassis.turnToPoint(-5,-5,2000,{.forwards=false,.minSpeed = 5,.earlyExitRange=3});
-    chassis.moveToPoint(-5,-5,2000,{.forwards=false},false);
-    chassis.turnToPoint(22,-12,2000,{.minSpeed = 5,.earlyExitRange=3},false);
-    swiper.set_value(true);
-    chassis.moveToPoint(22,-12,2000,{},false);
-    intake.move(0);
-    chassis.turnToHeading(40,3000,{.direction=AngularDirection::CCW_COUNTERCLOCKWISE, .minSpeed=127, .earlyExitRange = 3},false);
-    left.move(127);
-    right.move(-127);
-    pros::delay(50);
-    left.move(0);
-    right.move(0);
-    swiper.set_value(false);
-    intake.move(127);
-    chassis.moveDistance(12,2000,{.maxSpeed=30,.minSpeed=30,.earlyExitRange=3});
-    chassis.turnToPoint(32,28,3000);
-    chassis.moveDistance(6,1000,{.forwards=false,.minSpeed=30,.earlyExitRange=3});
-    chassis.moveDistance(42,10000,{.maxSpeed=30,.minSpeed=30,.earlyExitRange=3},false);
+
+
+//     chassis.turnToPoint(-4,-5,2000,{.forwards=false,.minSpeed = 10,.earlyExitRange=5});
+//     chassis.moveToPoint(-4,-5,2000,{.forwards=false},false);
+//     chassis.turnToPoint(22,-12,2000,{},false);
+//     swiper.set_value(true);
+//     chassis.moveToPoint(22,-12,2000,{},false);
+//     intake.move(0);
+//     chassis.turnToHeading(40,3000,{.direction=AngularDirection::CCW_COUNTERCLOCKWISE, .minSpeed=127, .earlyExitRange = 3},false);
+//     left.move(127);
+//     right.move(-127);
+//     pros::delay(50);
+//     left.move(0);
+//     right.move(0);
+//     swiper.set_value(false);
+//     intake.move(127);
+//     chassis.moveDistance(12,2000,{.maxSpeed=30,.minSpeed=30,.earlyExitRange=3});
+//     chassis.turnToPoint(32,28,3000);
+//     chassis.moveDistance(6,1000,{.forwards=false,.minSpeed=30,.earlyExitRange=3});
+//     chassis.moveDistance(42,10000,{.maxSpeed=30,.minSpeed=30,.earlyExitRange=3},false);
 
     
 
-    chassis.moveDistance(15,2000,{.forwards=false},false);
-    pros::delay(500);
-    mogo.set_value(false);
-    pros::delay(500);
-    
+//     chassis.moveDistance(15,2000,{.forwards=false},false);
+//     pros::delay(500);
+//     mogo.set_value(false);
 
-    chassis.turnToPoint(20,40,2000,{.forwards=false,.minSpeed=5,.earlyExitRange=3});
-    chassis.moveToPoint(20,40,2000,{.forwards = false,.maxSpeed=60});
-    if(mogo_seated()){
-        pros::delay(50);
-        mogo.set_value(true);
-        pros::delay(50);
-        // chassis.cancelMotion();
-    }
+//     chassis.turnToPoint(20,40,2000,{.forwards=false});
+//     chassis.moveToPoint(20,40,2000,{.forwards = false,.maxSpeed=60});
+//     if(mogo_seated()){
+//         pros::delay(50);
+//         mogo.set_value(true);
+//         pros::delay(50);
+//         // chassis.cancelMotion();
+//     }
 
-    chassis.turnToPoint(20,40,2000,{.forwards=false});
-    chassis.moveToPoint(20,40,2000,{.forwards = false,.maxSpeed=60});
-    if(mogo_seated()){
-        pros::delay(50);
-        mogo.set_value(true);
-        pros::delay(50);
-        // chassis.cancelMotion();
-    }
-
-    // pros::delay(500);
-    // mogo.set_value(false);
-    // chassis.turnToPoint(-23,39,2000,{.minSpeed=30,.earlyExitRange=3},false);
-    // intake.move(0);
-    // chassis.moveToPoint(-23,39,2000);
-}
+//     // pros::delay(500);
+//     // mogo.set_value(false);
+//     // chassis.turnToPoint(-23,39,2000,{.minSpeed=30,.earlyExitRange=3},false);
+//     // intake.move(0);
+//     // chassis.moveToPoint(-23,39,2000);
+// }
 
 // //finals no suck
 // void red2(){

@@ -21,11 +21,12 @@ void chooser(int& status){
 
     while (true)
     {
+        if(master.get_digital(DIGITAL_LEFT)) break;
         selected = convert_bit(pros::lcd::read_buttons());
         // printf("%d , %d\n",pros::lcd::read_buttons(),status);
         if(status == -5){
             if(!set_text){
-                pros::lcd::set_text(1, "    blue + 3 goal   ");
+                pros::lcd::set_text(1, "    blue + finals   ");
                 set_text = true;
             }
             if(selected != 0){
@@ -38,7 +39,20 @@ void chooser(int& status){
         }
         else if(status == -4){
             if(!set_text){
-                pros::lcd::set_text(1, "    blue - 3 goal   ");
+                pros::lcd::set_text(1, "    blue + teamwork   ");
+                set_text = true;
+            }
+            if(selected != 0){
+                set_text=false;
+                if(selected == 100) return;
+                else status += selected;
+                pros::delay(500);
+                continue;
+            }
+        }
+        else if(status == -4){
+            if(!set_text){
+                pros::lcd::set_text(1, "    blue - finals 6 ring   ");
                 set_text = true;
             }
             if(selected != 0){
@@ -64,7 +78,7 @@ void chooser(int& status){
         }
         else if(status == -2){
             if(!set_text){
-                pros::lcd::set_text(1, "    blue finals +   ");
+                pros::lcd::set_text(1, "    blue - finals 5 ring   ");
                 set_text = true;
             }
             if(selected != 0){
@@ -77,7 +91,7 @@ void chooser(int& status){
         }
         else if(status == -1){
             if(!set_text){
-                pros::lcd::set_text(1, "    blue - ordinary   ");
+                pros::lcd::set_text(1, "    blue - teamwork   ");
                 set_text = true;
             }
             if(selected != 0){
@@ -102,7 +116,7 @@ void chooser(int& status){
         }
         else if(status == 1){
             if(!set_text){
-                pros::lcd::set_text(1, "    red - ordinary  ");
+                pros::lcd::set_text(1, "    red - teamwork  ");
                 set_text = true;
             }
             if(selected != 0){
@@ -115,7 +129,7 @@ void chooser(int& status){
         }
         else if(status == 2){
             if(!set_text){
-                pros::lcd::set_text(1, "    red finals +   ");
+                pros::lcd::set_text(1, "    red - finals 5 ring   ");
                 set_text = true;
             }
             if(selected != 0){
@@ -128,7 +142,7 @@ void chooser(int& status){
         }
         else if(status == 3){
             if(!set_text){
-                pros::lcd::set_text(1, "    red finals -   ");
+                pros::lcd::set_text(1, "    red - finals 6 ring   ");
                 set_text = true;
             }
             if(selected != 0){
@@ -141,7 +155,7 @@ void chooser(int& status){
         }
         else if(status == 4){
             if(!set_text){
-                pros::lcd::set_text(1, "    red - 3 goal   ");
+                pros::lcd::set_text(1, "    red + teamwork   ");
                 set_text = true;
             }
             if(selected != 0){
@@ -154,7 +168,7 @@ void chooser(int& status){
         }
         else if(status == 5){
             if(!set_text){
-                pros::lcd::set_text(1, "    red + 3 goal   ");
+                pros::lcd::set_text(1, "    red + finals   ");
                 set_text = true;
             }
             if(selected != 0){

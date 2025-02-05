@@ -100,7 +100,7 @@ void init_intake()
                                      {
                                        count += 1;
                                      }
-                                     if (count > 30 && antijam_temp)
+                                     if (count > 10 && antijam_temp)
                                      {
                                        intake.move(-127);
                                        pros::delay(500);
