@@ -38,17 +38,17 @@ void red2(){
 
     //get 2 rings
     set_intake_speed(127);
-    chassis.swingToPoint(-30,43,DriveSide::LEFT,2000,{.maxSpeed=80,.minSpeed=5, .earlyExitRange = 10});
-    chassis.turnToPoint(-30,43,500,{.minSpeed=20,.earlyExitRange=3});
-    chassis.moveToPoint(-30,43,1000,{.minSpeed=20,.earlyExitRange=3});
-    chassis.turnToPoint(-46,43,1000,{.minSpeed=20,.earlyExitRange=3});
-    chassis.moveToPoint(-46,43,1000,{.minSpeed=20,.earlyExitRange=3});
+    chassis.swingToPoint(-30,43.5,DriveSide::LEFT,2000,{.maxSpeed=80,.minSpeed=5, .earlyExitRange = 10});
+    chassis.turnToPoint(-30,43.5,500,{.minSpeed=20,.earlyExitRange=3});
+    chassis.moveToPoint(-30,43.5,1000,{.minSpeed=20,.earlyExitRange=3});
+    chassis.turnToPoint(-48,43.5,1000,{.minSpeed=20,.earlyExitRange=3});
+    chassis.moveToPoint(-48,43.5,1000,{.minSpeed=20,.earlyExitRange=3});
 
     chassis.moveToPoint(-14, 31,1000,{.forwards=false,.minSpeed=20,.earlyExitRange=3});
     chassis.turnToPoint(-36,28,1000,{.minSpeed=20,.earlyExitRange=3});
     fast_move(-36,28,2000,true);
     
-    chassis.turnToPoint(-48,-10,1000,{.minSpeed=20,.earlyExitRange=3});
+    chassis.turnToPoint(-50,-10,1000,{.minSpeed=20,.earlyExitRange=3});
     chassis.moveDistance(40,2000,{.minSpeed=5,.earlyExitRange=3});
     chassis.moveDistance(40,700);
     chassis.moveDistance(10,1000,{.forwards=false,.minSpeed=5,.earlyExitRange=3});
@@ -59,8 +59,15 @@ void red2(){
     // global_target=20000;
     // target_mutex.unlock();
 
-    chassis.turnToPoint(20,12,1000,{.minSpeed=5,.earlyExitRange=3});
-    chassis.moveToPoint(20,12,2000,{.minSpeed=5,.earlyExitRange=3});
+    chassis.turnToPoint(30,15,1000,{.minSpeed=5,.earlyExitRange=3});
+    chassis.moveToPoint(30,15,2000,{.minSpeed=5,.earlyExitRange=3});
+    pros::Task skills_task2{[=]
+    {
+        while(top_distance.get_distance()>100) pros::delay(10);
+        pros::delay(500);
+        set_intake_speed(0);
+    }};
+    
     //touch bar
     // chassis.moveToPoint(-16,10,2000,{.forwards=false,.minSpeed=5,.earlyExitRange=3},false);
     // arm_mutex.lock();

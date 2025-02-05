@@ -16,7 +16,7 @@ void blue2(){
     arm.brake();
 
     // get mogo
-    chassis.moveToPoint(16, 29,4000,{.forwards = false,.maxSpeed=80});
+    chassis.moveToPoint(16.5, 29,4000,{.forwards = false,.maxSpeed=80});
     pros::delay(500);
     arm_mutex.lock();
     arm_move=false;
@@ -47,7 +47,7 @@ void blue2(){
     chassis.turnToPoint(36,26,1000,{.minSpeed=20,.earlyExitRange=3});
     fast_move(36,26,2000,true);
 
-    chassis.turnToPoint(49,-10,1000,{.minSpeed=20,.earlyExitRange=3});
+    chassis.turnToPoint(48,-10,1000,{.minSpeed=20,.earlyExitRange=3});
     chassis.moveDistance(40,2000,{.minSpeed=5,.earlyExitRange=3});
     chassis.moveDistance(40,700);
     chassis.moveDistance(10,1000,{.forwards=false,.minSpeed=5,.earlyExitRange=3});
@@ -57,8 +57,14 @@ void blue2(){
     // target_mutex.lock();
     // global_target=20000;
     // target_mutex.unlock();
-    chassis.turnToPoint(-20,13,1000,{.minSpeed=5,.earlyExitRange=3});
-    chassis.moveToPoint(-20,13,2000,{.minSpeed=5,.earlyExitRange=3});
+    chassis.turnToPoint(-20,15,1000,{.minSpeed=5,.earlyExitRange=3});
+    chassis.moveToPoint(-20,15,2000,{.minSpeed=5,.earlyExitRange=3});
+    pros::Task skills_task2{[=]
+    {
+        while(top_distance.get_distance()>100) pros::delay(10);
+        pros::delay(500);
+        set_intake_speed(0);
+    }};
     // chassis.moveToPoint(16,10,2000,{.forwards=false,.minSpeed=5,.earlyExitRange=3},false);
     // arm_mutex.lock();
     // arm_move=true;

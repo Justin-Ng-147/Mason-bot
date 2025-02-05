@@ -103,7 +103,7 @@ void skills(){
     
 
     //mogo 1 score mogo
-    chassis.moveDistance(14,1000,{.forwards=false},false);
+    chassis.moveDistance(13,1000,{.forwards=false},false);
     set_intake_speed(-127);
     mogo.set_value(true);
     pros::delay(200);
@@ -267,12 +267,12 @@ void skills(){
     
 
     //mogo 3 get ring on far side
-    chassis.turnToPoint(-42,117,1000,{.minSpeed=3,.earlyExitRange=5});
-    fast_move(-42,117,3000,true);
+    // chassis.turnToPoint(-42,117,1000,{.minSpeed=3,.earlyExitRange=5});
+    // fast_move(-42,117,3000,true);
 
     //mogo 3 move to 4th ring
-    chassis.turnToPoint(8,107,1000,{.minSpeed=3,.earlyExitRange=5});
-    fast_move(8,107,2000,true);
+    chassis.turnToPoint(27,92,1000,{.minSpeed=3,.earlyExitRange=5});
+    // fast_move(8,107,2000,true);
     fast_move(27,92,2000,true);
 
     //mogo 3 get 5th ring
@@ -310,13 +310,13 @@ void skills(){
 
     
     //hang
-  chassis.turnToPoint(-20,92,1000,{.forwards=false,.minSpeed=5,.earlyExitRange=3});
+  chassis.turnToPoint(-20,92,1000,{.forwards=false,.minSpeed=20,.earlyExitRange=3});
     chassis.moveToPoint(-20,92,2000,{.forwards=false,.minSpeed=5,.earlyExitRange=3});
     target_mutex.lock();
     global_target=20000;
     target_mutex.unlock();
     set_intake_speed(0);
-    chassis.turnToHeading(313,1000,{.minSpeed=5,.earlyExitRange=3});
+    chassis.turnToHeading(313,1000,{.minSpeed=20,.earlyExitRange=3});
     chassis.moveDistance(50,1000,{.forwards=false,.maxSpeed=100});
 
 
