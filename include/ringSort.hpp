@@ -4,7 +4,7 @@
     #define REDCOLOR 1
     #define BLUECOLOR 2
 
-    void sort(int color);
+    void sort(int color_type);
     bool mogo_seated();
     void init_intake();
     void set_intake_speed(int speed, bool jam = true);

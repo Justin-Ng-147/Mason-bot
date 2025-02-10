@@ -7,10 +7,10 @@
 true: display odometry data and will run the test auton
 false: display competition screen to choose different autons
 */
-bool testing = false;
+bool testing = true;
 
 int auton_status = 0;
-int test_auton = -2;
+int test_auton = 1;
 
 
 
@@ -34,6 +34,12 @@ void initialize() {
 	arm_to_pos();
 	arm_control.set_position(0);
 	mogo.set_value(true);
+	// sort(1);
+	init_intake();
+	// while(true){
+    //     printf("%d\n",ring_color.get_proximity());
+    //     pros::delay(10);
+    //   }
 
 	// sort_thrower.set_value(true);
 
@@ -54,8 +60,8 @@ void initialize() {
 	}
 	else{
 		chooser(auton_status);
-		// if (auton_status < 0) sort(REDCOLOR);
-		// else sort(BLUECOLOR);
+		if (auton_status < 0) sort(REDCOLOR);
+		else sort(BLUECOLOR);
 		pros::lcd::set_text(1, "auton chosen");
 	}
 
@@ -96,7 +102,6 @@ void competition_initialize() {}
  * from where it left off.
  */
 void autonomous() {
-	init_intake();
 	if(testing) run_auton(test_auton);
 	else run_auton(auton_status);
 }
@@ -117,7 +122,7 @@ void autonomous() {
 void opcontrol() {
 	// intake_task->remove();
 	
-	arm.set_brake_mode_all(pros::motor_brake_mode_e::E_MOTOR_BRAKE_BRAKE);
+	arm.set_brake_mode_all(pros::motor_brake_mode_e::E_MOTOR_BRAKE_HOLD);
 	left.set_brake_mode_all(pros::motor_brake_mode_e::E_MOTOR_BRAKE_BRAKE);
     right.set_brake_mode_all(pros::motor_brake_mode_e::E_MOTOR_BRAKE_BRAKE);
 	
@@ -140,9 +145,9 @@ void opcontrol() {
 
 	bool arm_pressed = true;
 
-	if (intake_task != nullptr) {
-		intake_task->notify();
-	}
+	// if (intake_task != nullptr) {
+	// 	intake_task->notify();
+	// }
 	// init_driver_intake();
 
 	while (true) {
@@ -157,17 +162,22 @@ void opcontrol() {
 		
 		if(master.get_digital(DIGITAL_L1)){
 			if(!arm_pressed){
-				intake.move(-127);
-				pros::delay(30);
-				intake.move(0);
+				arm.move(127);
+				// intake.move(-127);
+				set_intake_speed(-40);
+				pros::delay(20);
+				// intake.move(0);
+				set_intake_speed(0);
 				arm_pressed = true;
 			}
 			arm_move = true;
 			arm.move(127);
+			global_target=1;
 		}
 		else if(master.get_digital(DIGITAL_L2)){
 			arm_move = true;
 			arm.move(-127);
+			global_target=1;
 		}
 		else if(master.get_digital(DIGITAL_L1) != 1 && arm_pressed){
 			arm_pressed = false;
@@ -175,6 +185,7 @@ void opcontrol() {
 		else{
 			if(arm_move){
 				arm.brake();
+				global_target=1;
 			}
 		}
 
@@ -182,16 +193,16 @@ void opcontrol() {
 
 		#pragma region intake r1
 		if(master.get_digital(DIGITAL_R1)){
-			intake.move(127);
-			// set_intake_speed(127);
+			// intake.move(127);
+			set_intake_speed(127,false);
 		}
 		else if(master.get_digital(DIGITAL_R2)){
-			intake.move(-127);
-			// set_intake_speed(-127);
+			// intake.move(-127);
+			set_intake_speed(-127,false);
 		}
 		else{
-			intake.move(0);
-			// set_intake_speed(0);
+			// intake.move(0);
+			set_intake_speed(0,false);
 		}
 		#pragma endregion intake
 
@@ -267,6 +278,17 @@ void opcontrol() {
 		}
 		else if(master.get_digital(DIGITAL_Y) != 1 && y_pressed){
 			y_pressed = false;
+		}
+
+		if(master.get_digital(DIGITAL_LEFT)){
+			chassis.moveDistance(8,1000,{.forwards=false});
+			chassis.waitUntil(4);
+			set_intake_speed(-50);
+			arm_move=true;
+			arm.move(127);
+			pros::delay(1000);
+			set_intake_speed(127);
+			arm.move(0);
 		}
 
 		

@@ -16,7 +16,7 @@ extern pros::ADIDigitalOut claw;
 extern pros::MotorGroup arm;
 extern pros::Rotation arm_control;
 extern pros::Distance top_distance;
-extern pros::Optical color;
+extern pros::Optical ring_color;
 extern pros::Controller master;
 
 extern pros::Distance ladybrown_dist;

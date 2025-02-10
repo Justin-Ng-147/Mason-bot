@@ -1,6 +1,8 @@
 #include "main.h"
 
 pros::Task *sort_task = nullptr;
+int intake_speed = 0;
+int sorting = 0;
 
 pros::vision_signature_s_t RED_SIG =
     pros::Vision::signature_from_utility(1, 11049, 12603, 11826, -1625, -703, -1164, 5, 0);
@@ -16,8 +18,9 @@ void setup()
   // vision.get_object_count();
   // pros::delay(100);
   // sort_thrower.set_value(true);
-  color.set_led_pwm(100);
-  color.set_integration_time(20);
+  ring_color.set_led_pwm(100);
+  ring_color.set_integration_time(20);
+  pros::delay(30);
 }
 
 /*
@@ -37,33 +40,42 @@ int ring_tossed(double start)
     return 0;
 }
 
-void sort(int color)
+void sort(int color_type)
 {
   if (sort_task == nullptr)
   {
     sort_task = new pros::Task{[=]
-                               {
-                                 // int count = 0;
-                                 int colors = 0;
-                                 bool sort = false;
-
-                                 setup();
-                                 // while(true){
-                                 //   pros::vision_object_s_t rtn = vision.get_by_sig(0,color);
-
-                                 //   if(rtn.width>100 && distance.get_distance()<60){
-                                 //     intake_control.lock();
-                                 //     pros::Task::notify_take(true,10);
-                                 //     while(top_distance.get_distance()>100  && !pros::Task::notify_take(true,10));
-                                 //     pros::delay(25);
-                                 //     intake.move(-60);
-                                 //     pros::delay(250);
-                                 //     intake.move(0);
-                                 //     intake_control.unlock();
-                                 //   }
-                                 //   pros::delay(10);
-                                 // }
-                               }};
+    {
+      ring_color.set_integration_time(20);
+      ring_color.set_led_pwm(100);
+      intake.set_brake_mode_all(MOTOR_BRAKE_HOLD);
+      bool color = false;
+      
+      while(true){
+        // printf("R:%f G:%f B:%f\ distance:%d \n",ring_color.get_rgb().red,ring_color.get_rgb().green,ring_color.get_rgb().blue,ring_color.get_proximity());
+        // printf("%f\n",ring_color.get_rgb().red-ring_color.get_rgb().blue);
+        // if(ring_color.get_rgb().red-ring_color.get_rgb().blue > 100 ) color = true;
+        if(color_type==1)
+          if(ring_color.get_hue()>330 || ring_color.get_hue()<30 ) color = true;
+        if(color_type==2)
+          if(ring_color.get_hue()>180 && ring_color.get_hue()<270 ) color = true;
+        if(top_distance.get_distance()<30 && color){
+          int prev_intake_speed = intake_speed;
+          // pros::delay(10);
+          sorting = 1;
+          // int start = intake.get_position();
+          // while(abs(intake.get_position()-start)<50) pros::delay(5);
+          sorting = 2;
+          // intake.brake();
+          pros::delay(1000);
+          sorting = 0;
+          pros::delay(100);
+          color = false;
+          // set_intake_speed(prev_intake_speed);
+        }
+        pros::delay(10);
+      }
+    }};
   }
 }
 
@@ -72,7 +84,7 @@ bool mogo_seated()
   return mogo_distance.get_distance() < 25;
 }
 
-int intake_speed = 0;
+
 bool antijam = true;
 pros::Task *intake_task = nullptr;
 
@@ -88,8 +100,13 @@ void init_intake()
                                    {
                                      int speed = intake_speed;
                                      bool antijam_temp = antijam;
-
-                                     intake.move(speed);
+                                     if(sorting == 0)
+                                      intake.move(speed);
+                                     else if(sorting == 1){
+                                      intake.move(0);
+                                     }
+                                     else if(sorting == 2)
+                                      intake.move(-60);
                                      if (speed != prev_speed)
                                        pros::delay(100);
                                      prev_speed = speed;
@@ -113,11 +130,8 @@ void init_intake()
 
 void set_intake_speed(int speed, bool jam)
 {
-  pros::Task intake_task2{[=]
-                          {
                             intake_speed = speed;
                             antijam = jam;
-                          }};
   // intake_task2.remove();
   // delete &intake_task2;
 }
@@ -167,6 +181,7 @@ void arm_to_pos()
       int target;
       int pos = arm_control.get_position();
       int error = target - pos;
+      int prev_error = error;
       float speed;
       int count = 0;
       int prev_target;
@@ -174,28 +189,31 @@ void arm_to_pos()
       {
 
         target = global_target;
-        if(prev_target!=target){
-          count = 0;
-        }
-        prev_target = target;
         pos = arm_control.get_position();
         error = target - pos;
+        if(prev_target!=target){
+          count = 0;
+          prev_error = error;
+        }
+        prev_target = target;
         // if(abs(error)<100) error = 0;
         speed = arm_pid.update(error);
         if (speed > 127)
           speed = 127;
         if (speed < -127)
           speed = -127;
-        if(count < 50){
+        if(count < 1){
           if (!arm_move)
             arm.move(speed);
-          if(abs(error)<300)
+          // if(abs(error)<300)
+          if(error*prev_error<0)
               count++;
         }
         else{
           if (!arm_move)
             arm.brake();
         }
+        prev_error = error;
         pros::delay(10);
       }
     }};
