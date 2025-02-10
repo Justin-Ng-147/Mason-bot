@@ -44,7 +44,7 @@ void red2(){
     chassis.turnToPoint(-36,28,1000,{.minSpeed=20,.earlyExitRange=3});
     fast_move(-36,28,2000,true);
     
-    chassis.turnToPoint(-50,-10,1000,{.minSpeed=20,.earlyExitRange=3});
+    chassis.turnToPoint(-50,-10,1000,{.minSpeed=5,.earlyExitRange=3});
     chassis.moveDistance(40,2000,{.minSpeed=5,.earlyExitRange=3});
     chassis.moveDistance(40,700);
     chassis.moveDistance(10,1000,{.forwards=false,.minSpeed=5,.earlyExitRange=3});
