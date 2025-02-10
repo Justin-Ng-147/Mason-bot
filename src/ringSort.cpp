@@ -48,7 +48,7 @@ void sort(int color_type)
     {
       ring_color.set_integration_time(20);
       ring_color.set_led_pwm(100);
-      intake.set_brake_mode_all(MOTOR_BRAKE_HOLD);
+      // intake.set_brake_mode_all(MOTOR_BRAKE_HOLD);
       bool color = false;
       
       while(true){
@@ -191,7 +191,7 @@ void arm_to_pos()
         target = global_target;
         pos = arm_control.get_position();
         error = target - pos;
-        if(prev_target!=target){
+        if(prev_target!=target || arm_move){
           count = 0;
           prev_error = error;
         }
