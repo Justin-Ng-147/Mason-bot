@@ -19,7 +19,7 @@ void red1(){
     
 
     // get mogo
-    chassis.moveToPoint(-18, 32.5,4000,{.forwards = false,.maxSpeed=80});
+    chassis.moveToPoint(-17, 34,4000,{.forwards = false,.maxSpeed=80});
     pros::delay(500);
     arm_move=false;
     global_target=100;
@@ -36,10 +36,10 @@ void red1(){
     //get 2 rings
     set_intake_speed(127);
     // chassis.swingToPoint(-30,43.5,DriveSide::LEFT,2000,{.maxSpeed=80,.minSpeed=5, .earlyExitRange = 10});
-    chassis.turnToPoint(-34,43,1000,{.minSpeed=5,.earlyExitRange=3});
-    chassis.moveToPoint(-34,43,1000,{.minSpeed=20,.earlyExitRange=3});
-    chassis.turnToPoint(-48,43,1000,{.minSpeed=20,.earlyExitRange=3});
-    chassis.moveToPoint(-48,43,1000,{.minSpeed=20,.earlyExitRange=3});
+    chassis.turnToPoint(-34,42.5,1000,{.minSpeed=5,.earlyExitRange=3});
+    chassis.moveToPoint(-34,42.5,1000,{.minSpeed=20,.earlyExitRange=3});
+    chassis.turnToPoint(-48,42.5,1000,{.minSpeed=20,.earlyExitRange=3});
+    chassis.moveToPoint(-48,42.5,1000,{.minSpeed=20,.earlyExitRange=3});
 
     chassis.moveToPoint(-14, 31,1000,{.forwards=false,.minSpeed=20,.earlyExitRange=3});
     chassis.turnToPoint(-36,28,1000,{.minSpeed=20,.earlyExitRange=3});
@@ -49,16 +49,14 @@ void red1(){
     set_intake_speed(127,false);
     chassis.moveDistance(40,2000);
     chassis.moveDistance(40,1000,{.maxSpeed = 60});
-    chassis.moveDistance(6,1000,{.forwards=false,.maxSpeed=60,.minSpeed=5,.earlyExitRange=3},false);
-    intake_lift.set_value(true);
-    chassis.moveDistance(40,1000,{.maxSpeed = 60});
+    chassis.moveDistance(20,1000,{.forwards=false,.maxSpeed=60,.minSpeed=5,.earlyExitRange=3},false);
+    chassis.moveDistance(15,1000);
     chassis.moveDistance(10,1000,{.forwards=false,.maxSpeed=60,.minSpeed=5,.earlyExitRange=3});
-    intake_lift.set_value(false);
 
 
     //touch bar
-    chassis.turnToPoint(20,12,1000,{.minSpeed=5,.earlyExitRange=3});
-    chassis.moveToPoint(20,12,2000,{.minSpeed=5,.earlyExitRange=3});
+    chassis.turnToPoint(20,13,1000,{.minSpeed=5,.earlyExitRange=3});
+    chassis.moveToPoint(20,13,2000,{.minSpeed=5,.earlyExitRange=3});
     pros::Task skills_task2{[=]
     {
         while(top_distance.get_distance()>100) pros::delay(10);
@@ -66,21 +64,7 @@ void red1(){
         set_intake_speed(0);
     }};
     //touch bar
-    chassis.moveToPoint(-16,10,2000,{.forwards=false,.minSpeed=5,.earlyExitRange=3});
-    global_target=20000;
-    chassis.moveToPoint(-3,37,2000);
-    arm_move=true;
-    arm.move(0);
-
-    //go to corner
-    // // chassis.moveToPoint(60,-5,2000);
-    // chassis.moveToPoint(70,-13,2000);
-    // swiper.set_value(true);
-    // chassis.turnToHeading(-40,1000,{},false);
-    // set_intake_speed(0);
-    // // mogo.set_value(true);
-    // swiper.set_value(false);
-    // // set_intake_speed(-127);
+    chassis.turnToHeading(0,500,{.maxSpeed=60});
 }
 
 //red finals code + for new bot
