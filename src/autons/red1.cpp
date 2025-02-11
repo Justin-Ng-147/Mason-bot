@@ -9,6 +9,7 @@ void red1(){
     left.set_brake_mode_all(pros::motor_brake_mode_e::E_MOTOR_BRAKE_BRAKE);
     right.set_brake_mode_all(pros::motor_brake_mode_e::E_MOTOR_BRAKE_BRAKE);
     mogo.set_value(true);
+    
 
     //score ring
     chassis.moveDistance(7,1000);
@@ -18,7 +19,7 @@ void red1(){
     
 
     // get mogo
-    chassis.moveToPoint(-15, 31,4000,{.forwards = false,.maxSpeed=80});
+    chassis.moveToPoint(-18, 32.5,4000,{.forwards = false,.maxSpeed=80});
     pros::delay(500);
     arm_move=false;
     global_target=100;
@@ -26,33 +27,36 @@ void red1(){
     pros::delay(50);
     mogo.set_value(false);
     // pros::delay(50);
-    chassis.cancelMotion();
-    left.brake();
-    right.brake();
-    pros::delay(100);
+    // chassis.cancelMotion();
+    // left.brake();
+    // right.brake();
+    // pros::delay(100);
     
 
     //get 2 rings
     set_intake_speed(127);
-    chassis.swingToPoint(-30,43.5,DriveSide::LEFT,2000,{.maxSpeed=80,.minSpeed=5, .earlyExitRange = 10});
-    chassis.turnToPoint(-30,43.5,500,{.minSpeed=20,.earlyExitRange=3});
-    chassis.moveToPoint(-30,43.5,1000,{.minSpeed=20,.earlyExitRange=3});
-    chassis.turnToPoint(-48,43.5,1000,{.minSpeed=20,.earlyExitRange=3});
-    chassis.moveToPoint(-48,43.5,1000,{.minSpeed=20,.earlyExitRange=3});
+    // chassis.swingToPoint(-30,43.5,DriveSide::LEFT,2000,{.maxSpeed=80,.minSpeed=5, .earlyExitRange = 10});
+    chassis.turnToPoint(-34,43,1000,{.minSpeed=5,.earlyExitRange=3});
+    chassis.moveToPoint(-34,43,1000,{.minSpeed=20,.earlyExitRange=3});
+    chassis.turnToPoint(-48,43,1000,{.minSpeed=20,.earlyExitRange=3});
+    chassis.moveToPoint(-48,43,1000,{.minSpeed=20,.earlyExitRange=3});
 
     chassis.moveToPoint(-14, 31,1000,{.forwards=false,.minSpeed=20,.earlyExitRange=3});
     chassis.turnToPoint(-36,28,1000,{.minSpeed=20,.earlyExitRange=3});
     fast_move(-36,28,2000,true);
     
-    chassis.turnToPoint(-50,-10,1000,{.minSpeed=5,.earlyExitRange=3});
-    chassis.moveDistance(40,2000,{.minSpeed=5,.earlyExitRange=3});
-    chassis.moveDistance(40,700);
-    chassis.moveDistance(10,1000,{.forwards=false,.minSpeed=5,.earlyExitRange=3});
+    chassis.turnToPoint(-51,-10,1000);
+    set_intake_speed(127,false);
+    chassis.moveDistance(40,2000);
+    chassis.moveDistance(40,1000,{.maxSpeed = 60});
+    chassis.moveDistance(6,1000,{.forwards=false,.maxSpeed=60,.minSpeed=5,.earlyExitRange=3},false);
+    intake_lift.set_value(true);
+    chassis.moveDistance(40,1000,{.maxSpeed = 60});
+    chassis.moveDistance(10,1000,{.forwards=false,.maxSpeed=60,.minSpeed=5,.earlyExitRange=3});
+    intake_lift.set_value(false);
 
 
     //touch bar
-    global_target=20000;
-
     chassis.turnToPoint(20,12,1000,{.minSpeed=5,.earlyExitRange=3});
     chassis.moveToPoint(20,12,2000,{.minSpeed=5,.earlyExitRange=3});
     pros::Task skills_task2{[=]
@@ -62,10 +66,11 @@ void red1(){
         set_intake_speed(0);
     }};
     //touch bar
-    chassis.moveToPoint(-16,10,2000,{.forwards=false,.minSpeed=5,.earlyExitRange=3},false);
+    chassis.moveToPoint(-16,10,2000,{.forwards=false,.minSpeed=5,.earlyExitRange=3});
+    global_target=20000;
+    chassis.moveToPoint(-3,37,2000);
     arm_move=true;
     arm.move(0);
-    chassis.moveToPoint(-3,37,2000);
 
     //go to corner
     // // chassis.moveToPoint(60,-5,2000);
