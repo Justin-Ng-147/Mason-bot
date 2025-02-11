@@ -70,27 +70,36 @@ void red5(){
     // set_intake_speed(-127);
     // chassis.moveDistance(7,1000,{.forwards=false,.minSpeed=80,.earlyExitRange=3});
     // fast_move(38,0,2000,true);
-    chassis.turnToPoint(49,-5,1000,{.minSpeed=5, .earlyExitRange=3},false);
-    chassis.moveToPoint(49,-5,2000,{.minSpeed=5, .earlyExitRange=3});
-    chassis.swingToHeading(135,lemlib::DriveSide::LEFT,1000,{.minSpeed=20,.earlyExitRange=10});
-    chassis.turnToHeading(136,100,{.minSpeed=20,.earlyExitRange=3});
-    
-    chassis.moveDistance(40,1000,{.maxSpeed = 60});
+    chassis.turnToPoint(47,-4,1000,{.minSpeed=5, .earlyExitRange=3},false);
+    chassis.moveToPoint(47,-4,2000,{.minSpeed=5, .earlyExitRange=3});
+    // chassis.swingToHeading(135,lemlib::DriveSide::LEFT,1000,{.minSpeed=20,.earlyExitRange=10});
+    chassis.turnToHeading(135,1000);
     set_intake_speed(127,false);
-    chassis.moveDistance(6,1000,{.forwards=false,.maxSpeed=60,.minSpeed=5,.earlyExitRange=3},false);
-    intake_lift.set_value(true);
     chassis.moveDistance(40,1000,{.maxSpeed = 60});
-    chassis.moveDistance(15,1000,{.forwards=false,.maxSpeed=60,.minSpeed=5,.earlyExitRange=3});
-    intake_lift.set_value(false);
+    chassis.moveDistance(20,1000,{.forwards=false,.maxSpeed=60,.minSpeed=5,.earlyExitRange=3},false);
+    // intake_lift.set_value(true);
+    // chassis.moveDistance(8,1000,{.maxSpeed = 60});
+    // chassis.moveDistance(15,1000,{.forwards=false,.maxSpeed=60,.minSpeed=5,.earlyExitRange=3});
+    // intake_lift.set_value(false);
     // chassis.moveDistance(10,1000,{.forwards=false,.minSpeed=80,.earlyExitRange=3},false);
 
     // chassis.moveDistance(15,1000,{.forwards=false, .minSpeed=5, .earlyExitRange=3},false);
-    pros::delay(1000);
-    set_intake_speed(0);
+    // pros::delay(1000);
+    // set_intake_speed(0);
     swiper.set_value(true);
-    chassis.moveDistance(10,1000,{.minSpeed=5, .earlyExitRange=3});
+    chassis.moveDistance(15,1000);
+    pros::Task red_pos_task2{[=]
+        {
+            while(top_distance.get_distance()>50) pros::delay(10);
+            pros::delay(500);
+            set_intake_speed(0);
+        }};
+    // chassis.moveDistance(10,500);
     chassis.turnToHeading(55,1000,{.minSpeed=5, .earlyExitRange=3},false);
+    set_intake_speed(0);
     swiper.set_value(false);
+    // chassis.moveDistance(10,1000,{.minSpeed=5, .earlyExitRange=3});
+    // chassis.turnToHeading(55,1000,{.minSpeed=5, .earlyExitRange=3});
     chassis.turnToPoint(42,35,1000,{.minSpeed=5,.earlyExitRange=3});
     chassis.moveToPoint(42,35,2000,{.minSpeed=5, .earlyExitRange=3});
     
