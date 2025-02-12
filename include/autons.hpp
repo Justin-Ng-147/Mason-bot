@@ -6,6 +6,8 @@ void blue2();
 void blue3();
 void blue4();
 void blue5();
+void blue6();
+void blue7();
 void red1();
 void red2();
 void red3();
