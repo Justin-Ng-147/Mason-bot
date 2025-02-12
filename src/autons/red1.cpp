@@ -9,14 +9,12 @@ void red1(){
     left.set_brake_mode_all(pros::motor_brake_mode_e::E_MOTOR_BRAKE_BRAKE);
     right.set_brake_mode_all(pros::motor_brake_mode_e::E_MOTOR_BRAKE_BRAKE);
     mogo.set_value(true);
-    
 
     //score ring
     chassis.moveDistance(7,1000);
     arm.move(127);
     pros::delay(700);
     arm.brake();
-    
 
     // get mogo
     chassis.moveToPoint(-17, 34,4000,{.forwards = false,.maxSpeed=80});
@@ -26,16 +24,9 @@ void red1(){
     while(!mogo_seated() && chassis.isInMotion()) pros::delay(10);
     pros::delay(50);
     mogo.set_value(false);
-    // pros::delay(50);
-    // chassis.cancelMotion();
-    // left.brake();
-    // right.brake();
-    // pros::delay(100);
-    
 
     //get 2 rings
     set_intake_speed(127);
-    // chassis.swingToPoint(-30,43.5,DriveSide::LEFT,2000,{.maxSpeed=80,.minSpeed=5, .earlyExitRange = 10});
     chassis.turnToPoint(-34,42.5,1000,{.minSpeed=5,.earlyExitRange=3});
     chassis.moveToPoint(-34,42.5,1000,{.minSpeed=20,.earlyExitRange=3});
     chassis.turnToPoint(-48,42,1000,{.minSpeed=20,.earlyExitRange=3});
@@ -52,7 +43,6 @@ void red1(){
     chassis.moveDistance(20,1000,{.forwards=false,.maxSpeed=60,.minSpeed=5,.earlyExitRange=3},false);
     chassis.moveDistance(15,1000);
     chassis.moveDistance(10,1000,{.forwards=false,.maxSpeed=60,.minSpeed=5,.earlyExitRange=3});
-
 
     //touch bar
     chassis.turnToPoint(20,13,1000,{.minSpeed=5,.earlyExitRange=3});
