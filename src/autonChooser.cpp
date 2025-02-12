@@ -24,9 +24,35 @@ void chooser(int& status){
         if(master.get_digital(DIGITAL_LEFT)) break;
         selected = convert_bit(pros::lcd::read_buttons());
         // printf("%d , %d\n",pros::lcd::read_buttons(),status);
-        if(status == -5){
+        if(status == -7){
             if(!set_text){
-                pros::lcd::set_text(1, "    blue + finals   ");
+                pros::lcd::set_text(1, "    blue + 3 goal   ");
+                set_text = true;
+            }
+            if(selected != 0){
+                set_text=false;
+                if(selected == 100) return;
+                else status += selected;
+                pros::delay(500);
+                continue;
+            }
+        }
+        else if(status == -6){
+            if(!set_text){
+                pros::lcd::set_text(1, "    blue + finals 5 ring   ");
+                set_text = true;
+            }
+            if(selected != 0){
+                set_text=false;
+                if(selected == 100) return;
+                else status += selected;
+                pros::delay(500);
+                continue;
+            }
+        }
+        else if(status == -5){
+            if(!set_text){
+                pros::lcd::set_text(1, "    blue + finals 4 ring   ");
                 set_text = true;
             }
             if(selected != 0){
@@ -215,6 +241,12 @@ void chooser(int& status){
 void run_auton(int selected){
     switch (selected)
     {
+    case -7:
+        blue7();
+        break;
+    case -6:
+        blue6();
+        break;
     case -5:
         blue5();
         break;
