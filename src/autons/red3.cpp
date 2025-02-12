@@ -48,7 +48,7 @@ void red3(){
 
     //go to corner
     // chassis.moveToPoint(60,-5,2000);
-    chassis.moveToPoint(70,-13,2000);
+    chassis.moveToPoint(72,-13,2000);
     swiper.set_value(true);
     chassis.turnToHeading(-40,1000,{},false);
     set_intake_speed(0);
