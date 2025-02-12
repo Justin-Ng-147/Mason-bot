@@ -10,9 +10,9 @@ void blue2(){
     mogo.set_value(true);
 
     //score ring
-    chassis.moveDistance(7,1000);
+    chassis.moveDistance(6.5,1000);
     arm.move(127);
-    pros::delay(700);
+    pros::delay(800);
     arm.brake();
 
     // get mogo
