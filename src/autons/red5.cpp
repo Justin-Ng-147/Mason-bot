@@ -34,12 +34,14 @@ void red5(){
     set_intake_speed(127);
     // chassis.moveToPoint(-23,-5,2000,{.minSpeed=5,.earlyExitRange=40});
     // chassis.moveToPoint(-23,-5,2000,{.maxSpeed=50,.minSpeed=5,.earlyExitRange=3},false);
-    chassis.moveToPoint(-10,12,2000,{.minSpeed=5,.earlyExitRange=3});
+    chassis.moveToPoint(-10,12,2000,{.minSpeed=5,.earlyExitRange=3},false);
+    set_intake_speed(0);
     // chassis.turnToPoint(39,28,1000,{.forwards=false,.minSpeed=20,.earlyExitRange=3});
     // chassis.moveDistance(15,1000,{.forwards=false,.minSpeed=5,.earlyExitRange=3});
     
 
-    chassis.turnToPoint(45,29,1000,{.direction=lemlib::AngularDirection::CW_CLOCKWISE,.minSpeed=5,.earlyExitRange=3});
+    chassis.turnToPoint(45,29,1000,{.direction=lemlib::AngularDirection::CW_CLOCKWISE,.minSpeed=5,.earlyExitRange=3},false);
+    set_intake_speed(127);
     // mogo.set_value(false);
     // set_intake_speed(127);
     chassis.moveToPoint(45,29,2000,{.minSpeed=5, .earlyExitRange=3});
@@ -75,7 +77,7 @@ void red5(){
     // chassis.swingToHeading(135,lemlib::DriveSide::LEFT,1000,{.minSpeed=20,.earlyExitRange=10});
     chassis.turnToHeading(135,1000);
     set_intake_speed(127,false);
-    chassis.moveDistance(40,1000,{.maxSpeed = 60});
+    chassis.moveDistance(40,1000,{.maxSpeed = 70});
     chassis.moveDistance(20,1000,{.forwards=false,.maxSpeed=60,.minSpeed=5,.earlyExitRange=3},false);
     // intake_lift.set_value(true);
     // chassis.moveDistance(8,1000,{.maxSpeed = 60});
