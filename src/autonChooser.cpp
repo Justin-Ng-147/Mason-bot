@@ -181,6 +181,19 @@ void chooser(int& status){
         }
         else if(status == 7){
             if(!set_text){
+                pros::lcd::set_text(1, "    red + 3 goal   ");
+                set_text = true;
+            }
+            if(selected != 0){
+                set_text=false;
+                if(selected == 100) return;
+                else status += selected;
+                pros::delay(500);
+                continue;
+            }
+        }
+        else if(status == 8){
+            if(!set_text){
                 pros::lcd::set_text(1, "    skills   ");
                 set_text = true;
             }
@@ -236,6 +249,9 @@ void run_auton(int selected){
         red6();
         break;
     case 7:
+        red7();
+    break;
+    case 8:
         skills();
     break;
     default:
