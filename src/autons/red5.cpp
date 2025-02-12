@@ -39,28 +39,28 @@ void red5(){
         }};
     
 
-    chassis.turnToPoint(47,-4,1000,{.minSpeed=5, .earlyExitRange=3},false);
-    chassis.moveToPoint(47,-4,2000,{.minSpeed=5, .earlyExitRange=3});
+    chassis.turnToPoint(47,-5,1000,{.minSpeed=5, .earlyExitRange=3},false);
+    chassis.moveToPoint(47,-5,2000,{.minSpeed=5, .earlyExitRange=3});
 
     chassis.turnToHeading(135,1000);
     set_intake_speed(127,false);
-    chassis.moveDistance(40,1000,{.maxSpeed = 70});
+    chassis.moveDistance(40,1000);
     chassis.moveDistance(20,1000,{.forwards=false,.maxSpeed=60,.minSpeed=5,.earlyExitRange=3},false);
     swiper.set_value(true);
     chassis.moveDistance(15,1000);
-    pros::Task red_pos_task2{[=]
-        {
-            while(top_distance.get_distance()>50) pros::delay(10);
-            pros::delay(500);
-            set_intake_speed(0);
-        }};
+    // pros::Task red_pos_task2{[=]
+    //     {
+    //         while(top_distance.get_distance()>50) pros::delay(10);
+    //         pros::delay(500);
+    //         set_intake_speed(0);
+    //     }};
     chassis.turnToHeading(55,1000,{.minSpeed=5, .earlyExitRange=3},false);
     set_intake_speed(0);
     swiper.set_value(false);
-    chassis.turnToPoint(42,35,1000,{.minSpeed=5,.earlyExitRange=3});
-    chassis.moveToPoint(42,35,2000,{.minSpeed=5, .earlyExitRange=3});
+    chassis.turnToPoint(42,30,1000,{.minSpeed=5,.earlyExitRange=3});
+    chassis.moveToPoint(42,30,2000,{.minSpeed=5, .earlyExitRange=3});
     
-    chassis.waitUntil(10);
+    chassis.waitUntil(8);
     mogo.set_value(true);
     chassis.turnToHeading(180,1000);
 }
