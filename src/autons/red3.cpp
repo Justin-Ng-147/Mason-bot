@@ -9,12 +9,6 @@ void red3(){
     right.set_brake_mode_all(pros::motor_brake_mode_e::E_MOTOR_BRAKE_BRAKE);
     mogo.set_value(true);
 
-    //score ring
-    chassis.moveDistance(7,1000);
-    arm.move(127);
-    pros::delay(700);
-    arm.brake();
-
     // get mogo
     chassis.moveToPoint(-17, 34,4000,{.forwards = false,.maxSpeed=80});
     pros::delay(500);
