@@ -11,6 +11,7 @@ void red2();
 void red3();
 void red4();
 void red5();
+void red6();
 void skills();
 
 #endif
