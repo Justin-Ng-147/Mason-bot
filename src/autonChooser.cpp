@@ -155,7 +155,7 @@ void chooser(int& status){
         }
         else if(status == 5){
             if(!set_text){
-                pros::lcd::set_text(1, "    red + finals   ");
+                pros::lcd::set_text(1, "    red + finals 4 ring ");
                 set_text = true;
             }
             if(selected != 0){
@@ -167,6 +167,19 @@ void chooser(int& status){
             }
         }
         else if(status == 6){
+            if(!set_text){
+                pros::lcd::set_text(1, "    red + finals 5 ring   ");
+                set_text = true;
+            }
+            if(selected != 0){
+                set_text=false;
+                if(selected == 100) return;
+                else status += selected;
+                pros::delay(500);
+                continue;
+            }
+        }
+        else if(status == 7){
             if(!set_text){
                 pros::lcd::set_text(1, "    skills   ");
                 set_text = true;
@@ -220,8 +233,11 @@ void run_auton(int selected){
         red5();
         break;
     case 6:
-        skills();
+        red6();
         break;
+    case 7:
+        skills();
+    break;
     default:
         break;
     }
