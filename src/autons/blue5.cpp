@@ -30,8 +30,7 @@ void blue5(){
 
     chassis.turnToPoint(-45,29,1000,{.direction=lemlib::AngularDirection::CW_CLOCKWISE,.minSpeed=5,.earlyExitRange=3},false);
     set_intake_speed(127);
-
-    chassis.moveToPoint(-45,29,2000);
+    chassis.moveToPoint(-45,29,2000,{.minSpeed=5, .earlyExitRange=3});
     chassis.waitUntil(20);
     pros::Task red_pos_task{[=]
         {
@@ -41,9 +40,10 @@ void blue5(){
    
     chassis.turnToPoint(-46,-3,1000,{.minSpeed=5, .earlyExitRange=3},false);
     chassis.moveToPoint(-46,-3,2000,{.minSpeed=5, .earlyExitRange=3});
+
     chassis.turnToHeading(-135,1000);
     set_intake_speed(127,false);
-    chassis.moveDistance(40,1000,{.maxSpeed = 70});
+    chassis.moveDistance(40,1000);
     chassis.moveDistance(20,1000,{.forwards=false,.maxSpeed=60,.minSpeed=5,.earlyExitRange=3},false);
     swiper.set_value(true);
     chassis.moveDistance(15,1000);
@@ -53,7 +53,6 @@ void blue5(){
     //         pros::delay(500);
     //         set_intake_speed(0);
     //     }};
-
     chassis.turnToHeading(-235,1000,{.minSpeed=5, .earlyExitRange=3},false);
     set_intake_speed(0);
     swiper.set_value(false);
