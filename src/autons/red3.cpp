@@ -2,7 +2,7 @@
 
 //new bot red - finals 6 ring
 void red3(){
- // setup
+    // setup
     chassis.setPose(0,0,146);
     intake.set_encoder_units_all(MOTOR_ENCODER_ROTATIONS);
     left.set_brake_mode_all(pros::motor_brake_mode_e::E_MOTOR_BRAKE_BRAKE);
@@ -10,41 +10,32 @@ void red3(){
     mogo.set_value(true);
 
     //score ring
-    // chassis.moveDistance(7,1000);
-    // arm.move(127);
-    // pros::delay(700);
-    // arm.brake();
-    
+    chassis.moveDistance(7,1000);
+    arm.move(127);
+    pros::delay(700);
+    arm.brake();
 
     // get mogo
-    chassis.moveToPoint(-15, 31,4000,{.forwards = false,.maxSpeed=80});
+    chassis.moveToPoint(-17, 34,4000,{.forwards = false,.maxSpeed=80});
     pros::delay(500);
     arm_move=false;
-
     global_target=100;
     while(!mogo_seated() && chassis.isInMotion()) pros::delay(10);
     pros::delay(50);
     mogo.set_value(false);
-    // pros::delay(50);
-    chassis.cancelMotion();
-    left.brake();
-    right.brake();
-    pros::delay(100);
-    
 
     //get 2 rings
     set_intake_speed(127);
-    chassis.swingToPoint(-30,43.5,DriveSide::LEFT,2000,{.maxSpeed=80,.minSpeed=5, .earlyExitRange = 10});
-    chassis.turnToPoint(-30,43.5,500,{.minSpeed=20,.earlyExitRange=3});
-    chassis.moveToPoint(-30,43.5,1000,{.minSpeed=20,.earlyExitRange=3});
-    chassis.turnToPoint(-48,43.5,1000,{.minSpeed=20,.earlyExitRange=3});
-    chassis.moveToPoint(-48,43.5,1000,{.minSpeed=20,.earlyExitRange=3});
+    chassis.turnToPoint(-34,42.5,1000,{.minSpeed=5,.earlyExitRange=3});
+    chassis.moveToPoint(-34,42.5,1000,{.minSpeed=20,.earlyExitRange=3});
+    chassis.turnToPoint(-48,42,1000,{.minSpeed=20,.earlyExitRange=3});
+    chassis.moveToPoint(-48,42,1000,{.minSpeed=20,.earlyExitRange=3});
 
     chassis.moveToPoint(-14, 31,1000,{.forwards=false,.minSpeed=20,.earlyExitRange=3});
     chassis.turnToPoint(-36,28,1000,{.minSpeed=20,.earlyExitRange=3});
     fast_move(-36,28,2000,true);
-    
-    chassis.turnToPoint(-50,-10,1000,{.minSpeed=5,.earlyExitRange=3});
+
+    chassis.turnToPoint(-51,-10,1000);
     chassis.moveDistance(40,2000,{.minSpeed=5,.earlyExitRange=3});
     chassis.moveDistance(40,700);
     chassis.moveDistance(10,1000,{.forwards=false,.minSpeed=5,.earlyExitRange=3});
