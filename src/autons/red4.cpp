@@ -54,15 +54,19 @@ void red4(){
     //         pros::delay(500);
     //         set_intake_speed(0);
     //     }};
-    chassis.turnToHeading(55,1000,{.minSpeed=5, .earlyExitRange=3},false);
+    chassis.turnToHeading(-45,2000,{.direction = lemlib::AngularDirection::CCW_COUNTERCLOCKWISE},false);
     set_intake_speed(0);
     swiper.set_value(false);
-    chassis.turnToPoint(42,30,1000,{.minSpeed=5,.earlyExitRange=3});
-    chassis.moveToPoint(42,30,2000,{.minSpeed=5, .earlyExitRange=3});
-    
-    chassis.waitUntil(8);
+    chassis.moveDistance(11,1000,{.forwards=false},false);
+    set_intake_speed(-127);
     mogo.set_value(true);
-    chassis.turnToHeading(180,1000);
+    pros::delay(200);
+
+    // chassis.turnToPoint(42,25,1000,{.minSpeed=5,.earlyExitRange=3});
+    global_target=21000;
+    chassis.moveToPoint(0,40.5,2000,{},false);
+    arm_move=true;
+    arm.move(0);
 }
 
 
