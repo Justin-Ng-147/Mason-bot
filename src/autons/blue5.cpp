@@ -9,9 +9,9 @@ void blue5(){
     mogo.set_value(true);
 
     //score ring
-    chassis.moveDistance(7,1000);
+    chassis.moveDistance(6.5,1000);
     arm.move(127);
-    pros::delay(700);
+    pros::delay(800);
     arm.brake();
 
     chassis.moveToPoint(-16, 32,4000,{.forwards = false,.maxSpeed=80});
@@ -38,8 +38,8 @@ void blue5(){
             set_intake_speed(0);
         }};
    
-    chassis.turnToPoint(-46,-3,1000,{.minSpeed=5, .earlyExitRange=3},false);
-    chassis.moveToPoint(-46,-3,2000,{.minSpeed=5, .earlyExitRange=3});
+    chassis.turnToPoint(-46,-4,1000,{.minSpeed=5, .earlyExitRange=3},false);
+    chassis.moveToPoint(-46,-4,2000,{.minSpeed=5, .earlyExitRange=3});
 
     chassis.turnToHeading(-135,1000);
     set_intake_speed(127,false);
