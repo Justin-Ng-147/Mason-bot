@@ -9,10 +9,10 @@ void blue6(){
     mogo.set_value(true);
 
     //score ring
-    chassis.moveDistance(6.5,1000);
-    arm.move(127);
-    pros::delay(800);
-    arm.brake();
+    // chassis.moveDistance(6.5,1000);
+    // arm.move(127);
+    // pros::delay(800);
+    // arm.brake();
 
     chassis.moveToPoint(-16, 32,4000,{.forwards = false,.maxSpeed=80});
     pros::delay(500);
