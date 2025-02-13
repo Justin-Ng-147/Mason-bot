@@ -14,7 +14,7 @@ void skills(){
     
     //score preload
     arm.move(127);
-    pros::delay(700);
+    pros::delay(800);
     arm.brake();
 
     //get mogo 1
