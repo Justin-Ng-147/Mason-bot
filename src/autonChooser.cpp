@@ -39,7 +39,7 @@ void chooser(int& status){
         }
         else if(status == -6){
             if(!set_text){
-                pros::lcd::set_text(1, "    blue + finals 5 ring   ");
+                pros::lcd::set_text(1, "    blue + finals without stake   ");
                 set_text = true;
             }
             if(selected != 0){
@@ -52,7 +52,7 @@ void chooser(int& status){
         }
         else if(status == -5){
             if(!set_text){
-                pros::lcd::set_text(1, "    blue + finals 4 ring   ");
+                pros::lcd::set_text(1, "    blue + finals with stake   ");
                 set_text = true;
             }
             if(selected != 0){
@@ -78,7 +78,7 @@ void chooser(int& status){
         }
         else if(status == -3){
             if(!set_text){
-                pros::lcd::set_text(1, "    blue - finals 6 ring   ");
+                pros::lcd::set_text(1, "    blue - finals without stake   ");
                 set_text = true;
             }
             if(selected != 0){
@@ -91,7 +91,7 @@ void chooser(int& status){
         }
         else if(status == -2){
             if(!set_text){
-                pros::lcd::set_text(1, "    blue - finals 5 ring   ");
+                pros::lcd::set_text(1, "    blue - finals with stake   ");
                 set_text = true;
             }
             if(selected != 0){
@@ -142,7 +142,7 @@ void chooser(int& status){
         }
         else if(status == 2){
             if(!set_text){
-                pros::lcd::set_text(1, "    red - finals 5 ring   ");
+                pros::lcd::set_text(1, "    red - finals with stake   ");
                 set_text = true;
             }
             if(selected != 0){
@@ -155,7 +155,7 @@ void chooser(int& status){
         }
         else if(status == 3){
             if(!set_text){
-                pros::lcd::set_text(1, "    red - finals 6 ring   ");
+                pros::lcd::set_text(1, "    red - finals without stake   ");
                 set_text = true;
             }
             if(selected != 0){
@@ -181,7 +181,7 @@ void chooser(int& status){
         }
         else if(status == 5){
             if(!set_text){
-                pros::lcd::set_text(1, "    red + finals 4 ring ");
+                pros::lcd::set_text(1, "    red + finals with stake ");
                 set_text = true;
             }
             if(selected != 0){
@@ -194,7 +194,7 @@ void chooser(int& status){
         }
         else if(status == 6){
             if(!set_text){
-                pros::lcd::set_text(1, "    red + finals 5 ring   ");
+                pros::lcd::set_text(1, "    red + finals without stake   ");
                 set_text = true;
             }
             if(selected != 0){
