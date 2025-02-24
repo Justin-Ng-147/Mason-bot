@@ -5,7 +5,7 @@ extern pros::MotorGroup intake;
 extern pros::ADIDigitalOut mogo;
 extern pros::ADIDigitalOut pto;
 extern pros::ADIDigitalOut swiper;
-extern pros::ADIDigitalOut hang;
+extern pros::ADIDigitalOut intake_lift;
 // extern pros::Vision vision;
 extern pros::Distance distance;
 extern pros::ADIDigitalOut sort_thrower;

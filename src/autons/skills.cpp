@@ -41,7 +41,7 @@ void skills(){
     fast_move(-46,66,1000,true);
     //mogo 1 move arm to load ring
     arm_move=false;
-    global_target=3000;
+    global_target=3200;
     //mogo 1 get ring 2 move to ring
     set_intake_speed(127,false);
     fast_move(-47,91,1000,true);
@@ -51,8 +51,8 @@ void skills(){
     {
         while(top_distance.get_distance()>100) pros::delay(10);
         pros::delay(800);
-        global_target=6000;
-        set_intake_speed(-40);
+        global_target=7000;
+        set_intake_speed(-25);
         pros::delay(500);
         set_intake_speed(127);
     }};
@@ -76,7 +76,7 @@ void skills(){
     
     //mogo 1 back away from stake and move arm back to start pos
     chassis.moveDistance(17,1000,{.forwards=false,.minSpeed=5,.earlyExitRange=3},false); 
-    global_target=6000;
+    global_target=7000;
     
     //mogo 1 get 3 rings in a line
     chassis.turnToPoint(-49,6,1000,{.minSpeed=3,.earlyExitRange=5});
@@ -102,7 +102,7 @@ void skills(){
     chassis.turnToPoint(33,15,1000,{.forwards=false});
     global_target=100;
     chassis.moveToPoint(33,15,4000,{.forwards=false,.minSpeed=5,.earlyExitRange=40});
-    chassis.moveToPoint(33,15,3000,{.forwards=false,.maxSpeed=70});
+    chassis.moveToPoint(33,15,3200,{.forwards=false,.maxSpeed=70});
     while(!mogo_seated() && chassis.isInMotion()) pros::delay(10);
     pros::delay(50);
     mogo.set_value(false);
@@ -115,21 +115,21 @@ void skills(){
 
     //mogo 2 get ring 2 move to half way point to avoid hang post
     chassis.turnToPoint(48,64,1000,{.minSpeed=5,.earlyExitRange=3},false);
-    fast_move(45,64,1000,true);
+    fast_move(48,64,1000,true);
     //mogo 2 move arm to load ring
     arm_move=false;
-    global_target=3000;
+    global_target=3200;
     //mogo 2 get ring 2 move to ring
     set_intake_speed(127,false);
-    fast_move(52,91,1000,true);
+    fast_move(53,91,1000,true);
 
     //mogo 2 task that when the ring is on the arm lift the arm up out of the way of other intaked rings
     pros::Task skills_task2{[=]
     {
         while(top_distance.get_distance()>100) pros::delay(10);
         pros::delay(800);
-        global_target=6000;
-        set_intake_speed(-40);
+        global_target=7000;
+        set_intake_speed(-25);
         pros::delay(500);
         set_intake_speed(127);
     }};
@@ -153,7 +153,7 @@ void skills(){
 
     //mogo 2 back away from stake and move arm back to start pos
     chassis.moveDistance(17,1000,{.forwards=false,.minSpeed=5,.earlyExitRange=3},false); 
-    global_target=6000;
+    global_target=7000;
     
 
     //mogo 2 get 3 rings in a line
@@ -163,34 +163,35 @@ void skills(){
     chassis.moveToPoint(51,5,2000,{.maxSpeed=40},false);
     
     //mogo 2 get last ring and set up to drop off mogo
-    chassis.moveToPose(64,25,-10,3000,{.lead=.5},false);
+    chassis.moveToPose(64,25,-10,3200,{.lead=.5},false);
 
     //mogo 2 score mogo
     chassis.moveDistance(15,1000,{.forwards=false},false);
     set_intake_speed(-127);
     mogo.set_value(true);
     pros::delay(200);
-    set_intake_speed(0);
     //mogo 2 move away from corner
     chassis.moveDistance(5,1000,{.minSpeed=5,.earlyExitRange=3});
     global_target=100;
 
     //mogo 3 go through center and get ring 1 & 2
     chassis.turnToPoint(-15,89,1000);
-    set_intake_speed(60,false);
     chassis.moveToPoint(-15,89,4000);
+    chassis.waitUntil(20);
+    set_intake_speed(60,false);
+
     while(distance.get_distance()>100 &&chassis.isInMotion()) pros::delay(10);
     set_intake_speed(0);
     // while(chassis.getPose().y<85 &&chassis.isInMotion()) pros::delay(10);
     // chassis.moveToPoint(-22,89,1000);
     chassis.moveDistance(6,1000);
     //put ring in arm
-    global_target=3000;
+    global_target=3200;
     set_intake_speed(127,false);
     while(top_distance.get_distance()>100) pros::delay(10);
     pros::delay(800);
-    global_target=6000;
-    set_intake_speed(-60);
+    global_target=7000;
+    set_intake_speed(-25);
     while(arm_control.get_position()<3600)pros::delay(10);
     //mogo 3 intake 2nd ring
     set_intake_speed(127,false);
@@ -221,7 +222,7 @@ void skills(){
     chassis.moveDistance(50,1000,{.maxSpeed = 70});
     chassis.moveDistance(8,1000,{.forwards=false});
     chassis.waitUntil(4);
-    set_intake_speed(-50);
+    set_intake_speed(-25);
     arm_move=true;
     arm.move(127);
     pros::delay(1000);
@@ -231,14 +232,14 @@ void skills(){
     //mogo 3 get 2nd ring that dropped in front of alliance stake
     chassis.moveDistance(10,1000,{.forwards=false,.minSpeed=60,.earlyExitRange=3},false);
     arm_move=false;
-    global_target=6000;
+    global_target=7000;
     // chassis.moveDistance(14,1000,{.minSpeed=60,.earlyExitRange=3});
     // chassis.moveDistance(22,1000,{.forwards=false,.minSpeed=5,.earlyExitRange=3});
     
 
     //mogo 3 get ring on far side
     // chassis.turnToPoint(-42,117,1000,{.minSpeed=3,.earlyExitRange=5});
-    // fast_move(-42,117,3000,true);
+    // fast_move(-42,117,3200,true);
 
     //mogo 3 move to 4th ring
     chassis.turnToPoint(27,95,1000,{.minSpeed=3,.earlyExitRange=5});

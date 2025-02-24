@@ -7,10 +7,10 @@
 true: display odometry data and will run the test auton
 false: display competition screen to choose different autons
 */
-bool testing = true;
+bool testing = false;
 
 int auton_status = 0;
-int test_auton = 6;
+int test_auton = 8;
 
 
 
@@ -34,6 +34,7 @@ void initialize() {
 	arm_to_pos();
 	arm_control.set_position(0);
 	mogo.set_value(true);
+	intake.set_brake_mode_all(pros::motor_brake_mode_e::E_MOTOR_BRAKE_COAST);
 	// sort(1);
 	init_intake();
 	// while(true){
@@ -125,7 +126,7 @@ void opcontrol() {
 	arm.set_brake_mode_all(pros::motor_brake_mode_e::E_MOTOR_BRAKE_HOLD);
 	left.set_brake_mode_all(pros::motor_brake_mode_e::E_MOTOR_BRAKE_BRAKE);
     right.set_brake_mode_all(pros::motor_brake_mode_e::E_MOTOR_BRAKE_BRAKE);
-	
+	// mogo.set_value(true);
 
 	bool pto_flag = true;
 	bool pto_pressed = true;
@@ -164,7 +165,7 @@ void opcontrol() {
 			if(!arm_pressed){
 				arm.move(127);
 				// intake.move(-127);
-				set_intake_speed(-40);
+				set_intake_speed(-25);
 				pros::delay(20);
 				// intake.move(0);
 				set_intake_speed(0);
@@ -224,14 +225,14 @@ void opcontrol() {
 		// 	mogo_flag = true;
 		// }
 
-		// if(master.get_digital(DIGITAL_Y) && !hang_pressed){
-		// 	hang_flag = !hang_flag;
-		// 	hang.set_value(hang_flag);
-		// 	hang_pressed = true;
-		// }
-		// else if(master.get_digital(DIGITAL_Y) != 1 && hang_pressed){
-		// 	hang_pressed = false;
-		// }
+		if(master.get_digital(DIGITAL_X) && !hang_pressed){
+			hang_flag = !hang_flag;
+			intake_lift.set_value(hang_flag);
+			hang_pressed = true;
+		}
+		else if(master.get_digital(DIGITAL_X) != 1 && hang_pressed){
+			hang_pressed = false;
+		}
 		
 		#pragma endregion mogo
 
@@ -274,7 +275,7 @@ void opcontrol() {
 			arm_move=false;
 			
 
-			global_target=2600;
+			global_target=3200;
 		}
 		else if(master.get_digital(DIGITAL_Y) != 1 && y_pressed){
 			y_pressed = false;
@@ -283,7 +284,7 @@ void opcontrol() {
 		if(master.get_digital(DIGITAL_LEFT)){
 			chassis.moveDistance(8,1000,{.forwards=false});
 			chassis.waitUntil(4);
-			set_intake_speed(-50);
+			set_intake_speed(-25);
 			arm_move=true;
 			arm.move(127);
 			pros::delay(1000);
