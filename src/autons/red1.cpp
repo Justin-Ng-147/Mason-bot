@@ -40,9 +40,7 @@ void red1(){
     set_intake_speed(127,false);
     chassis.moveDistance(40,2000);
     chassis.moveDistance(40,1000);
-    chassis.moveDistance(20,1000,{.forwards=false,.maxSpeed=60,.minSpeed=5,.earlyExitRange=3},false);
-    chassis.moveDistance(15,1000);
-    chassis.moveDistance(10,1000,{.forwards=false,.maxSpeed=60,.minSpeed=5,.earlyExitRange=3});
+    chassis.moveDistance(20,1000,{.forwards=false,.minSpeed=5,.earlyExitRange=3},false);
 
     //touch bar
     chassis.turnToPoint(20,13,1000,{.minSpeed=5,.earlyExitRange=3});
@@ -54,7 +52,8 @@ void red1(){
         set_intake_speed(0);
     }};
     //touch bar
-    chassis.turnToHeading(0,500,{.maxSpeed=60});
+    chassis.turnToHeading(0,1000,{.minSpeed=5,.earlyExitRange=3});
+    chassis.moveDistance(40,1000,{.maxSpeed=60});
 }
 
 //red finals code + for new bot
