@@ -7,7 +7,7 @@
 true: display odometry data and will run the test auton
 false: display competition screen to choose different autons
 */
-bool testing = false;
+bool testing = true;
 
 int auton_status = 0;
 int test_auton = 8;
@@ -53,7 +53,6 @@ void initialize() {
 				pros::lcd::print(1, "X: %f", chassis.getPose().x); // x
 				pros::lcd::print(2, "Y: %f", chassis.getPose().y); // y
 				pros::lcd::print(3, "Theta: %f", chassis.getPose().theta); // heading
-				pros::lcd::print(4, "angle: %d", arm_control.get_position()); // heading
 				// delay to save resources
 				pros::delay(20);
 			}
@@ -166,7 +165,7 @@ void opcontrol() {
 				arm.move(127);
 				// intake.move(-127);
 				set_intake_speed(-25);
-				pros::delay(20);
+				pros::delay(40);
 				// intake.move(0);
 				set_intake_speed(0);
 				arm_pressed = true;
