@@ -44,8 +44,8 @@ void blue1(){
     // chassis.moveDistance(10,1000,{.forwards=false,.maxSpeed=60,.minSpeed=5,.earlyExitRange=3});
 
     //touch bar
-    chassis.turnToPoint(-10,15,1000,{.minSpeed=5,.earlyExitRange=3});
-    chassis.moveToPoint(-10,15,2000,{.minSpeed=5,.earlyExitRange=3});
+    chassis.turnToPoint(-9,14,1000,{.minSpeed=5,.earlyExitRange=3});
+    chassis.moveToPoint(-9,14,2000,{.minSpeed=5,.earlyExitRange=3});
     pros::Task skills_task2{[=]
     {
         while(top_distance.get_distance()>100) pros::delay(10);
@@ -53,8 +53,8 @@ void blue1(){
         set_intake_speed(0);
     }};
     //touch bar
-    chassis.turnToHeading(0,1000,{.minSpeed=5,.earlyExitRange=3});
-    chassis.moveDistance(40,1000,{.maxSpeed=60});
+    chassis.turnToHeading(17,1000,{.minSpeed=5,.earlyExitRange=3});
+    chassis.moveDistance(40,1000,{.maxSpeed=40});
 
 }
 
