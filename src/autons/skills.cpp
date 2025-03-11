@@ -1,10 +1,5 @@
 #include "main.h"
 
-
-
-
-
-
 void skills(){
     //set up
     chassis.setPose(-12.5, 5, 134);
@@ -85,17 +80,18 @@ void skills(){
     chassis.moveToPoint(-49,6,2000,{.maxSpeed=40},false);
 
     //mogo 1 get last ring and set up to drop off mogo
-    chassis.moveToPose(-60,25,10,2000,{.lead=.5},false);
+    chassis.moveToPoint(-60,25,2000,{.minSpeed=5,.earlyExitRange=3},false);
+    chassis.turnToHeading(10,1000,{.minSpeed=5,.earlyExitRange=3});
     
 
     //mogo 1 score mogo
-    chassis.moveDistance(13,1000,{.forwards=false},false);
+    chassis.moveDistance(16,1000,{.forwards=false},false);
     set_intake_speed(-127);
     mogo.set_value(true);
     pros::delay(200);
     set_intake_speed(0);
     //mogo 1 move away from corner
-    chassis.moveDistance(9,1000,{.minSpeed=5,.earlyExitRange=3});
+    chassis.moveDistance(12,1000,{.minSpeed=5,.earlyExitRange=3});
     
 
     //get new mogo 2                             
@@ -163,7 +159,8 @@ void skills(){
     chassis.moveToPoint(51,5,2000,{.maxSpeed=40},false);
     
     //mogo 2 get last ring and set up to drop off mogo
-    chassis.moveToPose(64,25,-10,3200,{.lead=.5},false);
+    chassis.moveToPoint(64,25,2000,{.minSpeed=5,.earlyExitRange=3});
+    chassis.turnToHeading(-10,1000,{.minSpeed=5,.earlyExitRange=3});
 
     //mogo 2 score mogo
     chassis.moveDistance(15,1000,{.forwards=false},false);
@@ -308,13 +305,3 @@ void skills(){
     // -9 127 285
 }
 
-
-// void skills(){
-//     init_intake();
-//     pros::delay(1000);
-//     set_intake_speed(127);
-//     pros::delay(2000);
-//     set_intake_speed(0);
-//     pros::delay(2000);
-//     set_intake_speed(127);
-// }
