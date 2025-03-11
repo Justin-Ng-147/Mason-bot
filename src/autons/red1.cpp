@@ -33,8 +33,8 @@ void red1(){
     chassis.moveToPoint(-48,42.5,1000,{.minSpeed=20,.earlyExitRange=3});
 
     chassis.moveToPoint(-14, 31,1000,{.forwards=false,.minSpeed=20,.earlyExitRange=3});
-    chassis.turnToPoint(-36,28,1000,{.minSpeed=20,.earlyExitRange=3});
-    fast_move(-36,28,2000,true);
+    chassis.turnToPoint(-36,27,1000,{.minSpeed=20,.earlyExitRange=3});
+    fast_move(-36,27,2000,true);
     
     chassis.turnToPoint(-51,-10,1000);
     set_intake_speed(127,false);
@@ -43,8 +43,8 @@ void red1(){
     chassis.moveDistance(20,1000,{.forwards=false,.minSpeed=5,.earlyExitRange=3},false);
 
     //touch bar
-    chassis.turnToPoint(20,13,1000,{.minSpeed=5,.earlyExitRange=3});
-    chassis.moveToPoint(20,13,2000,{.minSpeed=5,.earlyExitRange=3});
+    chassis.turnToPoint(10,13,1000,{.minSpeed=5,.earlyExitRange=3});
+    chassis.moveToPoint(10,13,2000,{.minSpeed=5,.earlyExitRange=3});
     pros::Task skills_task2{[=]
     {
         while(top_distance.get_distance()>100) pros::delay(10);
@@ -52,8 +52,8 @@ void red1(){
         set_intake_speed(0);
     }};
     //touch bar
-    chassis.turnToHeading(0,1000,{.minSpeed=5,.earlyExitRange=3});
-    chassis.moveDistance(40,1000,{.maxSpeed=60});
+    chassis.turnToHeading(-15,1000,{.minSpeed=5,.earlyExitRange=3});
+    chassis.moveDistance(40,1000,{.maxSpeed=40});
 }
 
 //red finals code + for new bot
