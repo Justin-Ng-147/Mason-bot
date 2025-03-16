@@ -53,15 +53,28 @@ void blue5(){
     //         pros::delay(500);
     //         set_intake_speed(0);
     //     }};
-    chassis.turnToHeading(-235,1000,{.minSpeed=5, .earlyExitRange=3},false);
+    
+    chassis.turnToHeading(45,2000,{.direction=lemlib::AngularDirection::CCW_COUNTERCLOCKWISE},false);
     set_intake_speed(0);
     swiper.set_value(false);
-    chassis.turnToPoint(-35,30,1000,{.minSpeed=5,.earlyExitRange=3});
-    chassis.moveToPoint(-35,30,2000,{.minSpeed=5, .earlyExitRange=3});
-    
-    chassis.waitUntil(7);
+    // chassis.moveDistance(11,1000,{.forwards=false},false);
+    set_intake_speed(-127);
     mogo.set_value(true);
+    // pros::delay(200);
+
+    chassis.moveToPoint(-35,30,2000,{.minSpeed=5, .earlyExitRange=3});
     chassis.turnToHeading(180,1000);
+
+
+    // chassis.turnToHeading(-235,1000,{.minSpeed=5, .earlyExitRange=3},false);
+    // set_intake_speed(0);
+    // swiper.set_value(false);
+    // chassis.turnToPoint(-35,30,1000,{.minSpeed=5,.earlyExitRange=3});
+    // chassis.moveToPoint(-35,30,2000,{.minSpeed=5, .earlyExitRange=3});
+    
+    // chassis.waitUntil(7);
+    // mogo.set_value(true);
+    // chassis.turnToHeading(180,1000);
 }
 
 
